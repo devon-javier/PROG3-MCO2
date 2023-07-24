@@ -4,7 +4,12 @@ public class Main   {
     
     String devon;
 
-    System.out.println("what the hell");
+    System.out.println("HELLO KAT");
+
+
+    for(int i = 0; i < 5; i++)  {
+        System.out.println(i);
+    }
 
     
 
