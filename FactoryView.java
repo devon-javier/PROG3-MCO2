@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
-import javax.swint.JPanel;
+import javax.swing.JPanel;
 
-import java.awt.JButton;
+import javax.swing.JButton;
 
 public class FactoryView extends JFrame{
     
