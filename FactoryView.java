@@ -13,9 +13,6 @@ public class FactoryView extends JFrame{
     //misc.
     private GridBagConstraints gbc;
 
-    //listeners
-    private ActionListener btnListener;
-
     //for background image
     private JLabel displayField;
     private ImageIcon background_image;
@@ -68,13 +65,12 @@ public class FactoryView extends JFrame{
         this.setLocationRelativeTo(null);
     }
 
-    public void btnListener(){
-        btnListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
+    public void setRegularVMBtnListener(ActionListener actnListener)    {
+       this.RegularVM.addActionListener(actnListener);
+    }
 
-            }
-        };
+    public void setSpecialVMBtnListener(ActionListener actnListener)    {
+        this.SpecialVM.addActionListener(actnListener);
     }
 
 }
