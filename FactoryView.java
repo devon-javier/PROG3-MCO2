@@ -134,6 +134,8 @@ public class FactoryView extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
+
+        /*
         //action listeners idk how to implement them sa controller cuz di narread e
         createVM.addActionListener(new ActionListener() {
         @Override
@@ -142,6 +144,7 @@ public class FactoryView extends JFrame{
             
         }
     });
+        
         testVM.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -149,6 +152,7 @@ public class FactoryView extends JFrame{
             
         }
     });
+        */
     }
 
     //button listeners
@@ -159,10 +163,31 @@ public class FactoryView extends JFrame{
     // public void setTestVMListener(ActionListener actnListener)    {
     //    this.testVM.addActionListener(actnListener);
     // }
+
+    public void setCreateVMListener()    {
+        createVM.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "2"); // Show createPanel
+                
+            }
+        });
+    }
+
+    public void setTestVMListener()  {
+        testVM.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "3"); // Show testPanel
+                
+            }
+        });
+    }
     
     public void setRegularVMBtnListener(ActionListener actnListener)    {
        this.regularVM.addActionListener(actnListener);
     }
+
     public void setSpecialVMBtnListener(ActionListener actnListener)    {
         this.specialVM.addActionListener(actnListener);
     }
