@@ -17,10 +17,12 @@ public class FactoryController {
                 //VendingMachine rvm = factory.createVendingMachine();
     
                 // might need to pass rvm thru rvmview later
-                RVMView vRVM = new RVMView();
+                VendingMachine rvm = factory.createVendingMachine();
+                VMView vRVM = new VMView();
+                VMModel mRVM = new VMModel();
                 // not sure if need model ?
 
-                //VendingMachineController cRVM = new VendingMachineController(vRVM, rvm);
+                VMController cRVM = new VMController(vRVM, mRVM, rvm);
 
                 fView.dispose();
 
