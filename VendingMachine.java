@@ -82,10 +82,11 @@ public class VendingMachine {
                     ingredientsList.add(new Ham());
 
                     for(int j = 0; j < ingredientsList.size(); j++) {
-                        calories += ingredientsList.get(i).getCalories();
+                        calories += ingredientsList.get(j).getCalories();
                     }
                     
                     sandwich = new Sandwich(ingredientsList, calories);
+                    slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
                     for(int k = 0; k < slots[i].getinitialQuantity(); k++)  {
@@ -100,10 +101,11 @@ public class VendingMachine {
                     ingredientsList.add(new Mayonnaise());
 
                     for(int j = 0; j < ingredientsList.size(); j++) {
-                        calories += ingredientsList.get(i).getCalories();
+                        calories += ingredientsList.get(j).getCalories();
                     }
                     
                     sandwich = new Sandwich(ingredientsList, calories);
+                    slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
                     for(int k = 0; k < slots[i].getinitialQuantity(); k++)  {
@@ -118,10 +120,11 @@ public class VendingMachine {
                     ingredientsList.add(new Tuna());
                     
                     for(int j = 0; j < ingredientsList.size(); j++) {
-                        calories += ingredientsList.get(i).getCalories();
+                        calories += ingredientsList.get(j).getCalories();
                     }
 
                     sandwich = new Sandwich(ingredientsList, calories);
+                    slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
                     for(int k = 0; k < slots[i].getinitialQuantity(); k++)  {
@@ -135,10 +138,11 @@ public class VendingMachine {
                     ingredientsList.add(new Cheese());
 
                     for(int j = 0; j < ingredientsList.size(); j++) {
-                        calories += ingredientsList.get(i).getCalories();
+                        calories += ingredientsList.get(j).getCalories();
                     }
 
                     sandwich = new Sandwich(ingredientsList, calories);
+                    slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
                     for(int k = 0; k < slots[i].getinitialQuantity(); k++)  {
@@ -154,10 +158,11 @@ public class VendingMachine {
                     ingredientsList.add(new Mayonnaise());
 
                     for(int j = 0; j < ingredientsList.size(); j++) {
-                        calories += ingredientsList.get(i).getCalories();
+                        calories += ingredientsList.get(j).getCalories();
                     }
 
                     sandwich = new Sandwich(ingredientsList, calories);
+                    slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
                     for(int k = 0; k < slots[i].getinitialQuantity(); k++)  {
@@ -173,10 +178,11 @@ public class VendingMachine {
                     ingredientsList.add(new PeanutButter());
 
                     for(int j = 0; j < ingredientsList.size(); j++) {
-                        calories += ingredientsList.get(i).getCalories();
+                        calories += ingredientsList.get(j).getCalories();
                     }
 
                     sandwich = new Sandwich(ingredientsList, calories);
+                    slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
                     for(int k = 0; k < slots[i].getinitialQuantity(); k++)  {
@@ -190,10 +196,11 @@ public class VendingMachine {
                     ingredientsList.add(new StrawberryJam());
 
                     for(int j = 0; j < ingredientsList.size(); j++) {
-                        calories += ingredientsList.get(i).getCalories();
+                        calories += ingredientsList.get(j).getCalories();
                     }
 
                     sandwich = new Sandwich(ingredientsList, calories);
+                    slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
                     for(int k = 0; k < slots[i].getinitialQuantity(); k++)  {
@@ -207,10 +214,11 @@ public class VendingMachine {
                     ingredientsList.add(new Nutella());
 
                     for(int j = 0; j < ingredientsList.size(); j++) {
-                        calories += ingredientsList.get(i).getCalories();
+                        calories += ingredientsList.get(j).getCalories();
                     }
 
                     sandwich = new Sandwich(ingredientsList, calories);
+                    slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
                     for(int k = 0; k < slots[i].getinitialQuantity(); k++)  {
@@ -237,6 +245,7 @@ public class VendingMachine {
         this.userPayments.addPeso1000(userPayment.getPeso1000());
     }
 
+    /*
     public void reduceVMMoney(Money change) {
         this.vmMoney.reducePeso1(change.getPeso1());
         this.vmMoney.reducePeso5(change.getPeso5());
@@ -248,14 +257,20 @@ public class VendingMachine {
         this.vmMoney.reducePeso500(change.getPeso500());
         this.vmMoney.reducePeso1000(change.getPeso1000());
     }
+    */
 
-    /*
+    public void dispenseItem(int index)  {
+        slots[index].sellSandwich();
+    }
+
+    
     public Money produceChange(int index, Money userMoney) {
 
         int temp, curr; 
         Money change = new Money();
 
-        temp = (int)userMoney.computeTotal() - (int)slots[index].getItem().getPrice();
+        temp = 
+        (int)userMoney.computeTotal() - (int)slots[index].getsandwichList().get(slots[index].getsandwichList().size() - 1).computePrice();
 
         curr = temp / 1000;
         change.addPeso1000(curr);
@@ -304,6 +319,6 @@ public class VendingMachine {
         return change;
 
     }
-    */
+    
     
 }
