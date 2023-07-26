@@ -263,6 +263,10 @@ public class VendingMachine {
         slots[index].sellSandwich();
     }
 
+    public Slot getVendingMachineSlot(int index) {
+        return slots[index];
+    }
+
     
     public Money produceChange(int index, Money userMoney) {
 
