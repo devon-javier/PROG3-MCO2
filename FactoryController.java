@@ -1,19 +1,19 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Action;
-
 public class FactoryController {
 
     private FactoryView fView;
-    private Factory factory;
+    private FactoryModel fModel;
     private VendingMachine rvm;
     //private SpecialVendingMachine svm;
 
 
-    public FactoryController(FactoryView fView, Factory factory)    {
+    public FactoryController(FactoryView fView, FactoryModel fModel)    {
         this.fView = fView;
-        this.factory = factory;
+        this.fModel = fModel;
+
+        Factory factory = new Factory();
 
 
         this.fView.setCreateVMListener();
@@ -22,11 +22,7 @@ public class FactoryController {
             @Override
             public void actionPerformed(ActionEvent e)  {
                 
-                VendingMachine rvm = factory.createVendingMachine();
-
-                
-                // not sure if need model ?
-
+                fModel.setCurrentMachine(factory.createVendingMachine());   // Sets current machine to test
 
             }
 
@@ -35,6 +31,8 @@ public class FactoryController {
         this.fView.setSpecialVMBtnListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)  {
+
+                fModel.setCurrentMachine(factory.createSpecialVendingMachine());
                 
                 //SpecialVendingMachine svm = factory.createVendingMachine();
     
@@ -49,7 +47,16 @@ public class FactoryController {
 
         });
 
-        this.fView.setTestVMListener();
+        // this.fView.setTestVMListener(new ActionListener()   {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e)  {
+        //         if(fModel.getCurrentMachine() instanceof SpecialVendingMachine) {
+        //             // access the special vending machine panel + methods
+        //         } else  {
+        //             // access the regular vending machine panel + methods
+        //         }
+        //     }
+        // });
 
     }
     

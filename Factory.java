@@ -1,18 +1,15 @@
 public class Factory {
 
-    
     public VendingMachine createVendingMachine()   {
         VendingMachine vm;
         return vm = new VendingMachine();
     }
 
-    
-
-    /*
-    public void createSpecialVendingMachine() {
-
+     public SpecialVendingMachine createSpecialVendingMachine() {
+        SpecialVendingMachine svm;
+        return svm = new SpecialVendingMachine();
     }
-    */
+    
 
     
 }
