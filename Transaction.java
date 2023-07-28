@@ -17,6 +17,8 @@ public class Transaction {
         return this.date;
     }
 
+    // Count ingredients lost in the print method ( ? )
+
     public Item getItem()   {
         return this.item;
     }

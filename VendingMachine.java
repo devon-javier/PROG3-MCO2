@@ -2,23 +2,26 @@ import java.util.ArrayList;
 
 public class VendingMachine {
 
-    private Slot[] slots;
-    private Money vmMoney;
-    private Money userPayments;
+    protected Slot[] slots;
+    protected Money vmMoney;
+    protected Money userPayments;
 
-    private ArrayList<Bread> breadStock;
-    private ArrayList<Cheese> cheeseStock;
-    private ArrayList<Ham> hamStock;
-    private ArrayList<Egg> eggStock;
-    private ArrayList<Chicken> chickenStock;
-    private ArrayList<Lettuce> lettuceStock;
-    private ArrayList<Tuna> tunaStock;
-    private ArrayList<Tomato> tomatoStock;
-    private ArrayList<Pickle> pickleStock;
-    private ArrayList<Nutella> nutellaStock;
-    private ArrayList<PeanutButter> peanutbutterStock;
-    private ArrayList<StrawberryJam> strawberryjamStock;
-    private ArrayList<Mayonnaise> mayonnaiseStock;
+    protected ArrayList<Bread> breadStock;
+    protected ArrayList<Cheese> cheeseStock;
+    protected ArrayList<Ham> hamStock;
+    protected ArrayList<Egg> eggStock;
+    protected ArrayList<Chicken> chickenStock;
+    protected ArrayList<Lettuce> lettuceStock;
+    protected ArrayList<Tuna> tunaStock;
+    protected ArrayList<Tomato> tomatoStock;
+    protected ArrayList<Pickle> pickleStock;
+    protected ArrayList<Nutella> nutellaStock;
+    protected ArrayList<PeanutButter> peanutbutterStock;
+    protected ArrayList<StrawberryJam> strawberryjamStock;
+    protected ArrayList<Mayonnaise> mayonnaiseStock;
+
+
+    protected History history;
 
 
     public VendingMachine() {
@@ -28,6 +31,8 @@ public class VendingMachine {
 
         initIngredients();
         initSlots();
+
+        history = new History(this);
 
     }
 
@@ -78,6 +83,7 @@ public class VendingMachine {
 
             switch(i)   {
                 case 0:
+
                     ingredientsList.add(new Bread());
                     ingredientsList.add(new Ham());
 
@@ -115,6 +121,7 @@ public class VendingMachine {
                     }
 
                     break;
+
                 case 2:
                     ingredientsList.add(new Bread());
                     ingredientsList.add(new Tuna());
@@ -245,7 +252,7 @@ public class VendingMachine {
         this.userPayments.addPeso1000(userPayment.getPeso1000());
     }
 
-    /*
+    
     public void reduceVMMoney(Money change) {
         this.vmMoney.reducePeso1(change.getPeso1());
         this.vmMoney.reducePeso5(change.getPeso5());
@@ -257,16 +264,11 @@ public class VendingMachine {
         this.vmMoney.reducePeso500(change.getPeso500());
         this.vmMoney.reducePeso1000(change.getPeso1000());
     }
-    */
+    
 
     public void dispenseItem(int index)  {
         slots[index].sellSandwich();
     }
-
-    public Slot getVendingMachineSlot(int index) {
-        return slots[index];
-    }
-
     
     public Money produceChange(int index, Money userMoney) {
 
@@ -278,50 +280,174 @@ public class VendingMachine {
 
         curr = temp / 1000;
         change.addPeso1000(curr);
-        vmMoney.reducePeso1000(curr);
+        //vmMoney.reducePeso1000(curr);
         temp %= 1000;
 
         curr = temp / 500;
         change.addPeso500(curr);
-        vmMoney.reducePeso500(curr);
+        //vmMoney.reducePeso500(curr);
         temp %= 500;
 
         curr = temp / 200;
         change.addPeso200(curr);
-        vmMoney.reducePeso200(curr);
+        //vmMoney.reducePeso200(curr);
         temp %= 200;
 
         curr = temp / 100;
         change.addPeso100(curr);
-        vmMoney.reducePeso100(curr);
+        //vmMoney.reducePeso100(curr);
         temp %= 100;
 
         curr = temp / 50;
         change.addPeso50(curr);
-        vmMoney.reducePeso50(curr);
+        //vmMoney.reducePeso50(curr);
         temp %= 50;
 
         curr = temp / 20; 
         change.addPeso20(curr);
-        vmMoney.reducePeso20(curr);
+        //vmMoney.reducePeso20(curr);
         temp %= 20;
 
         curr = temp / 10;
         change.addPeso10(curr);
-        vmMoney.reducePeso10(curr);
+        //vmMoney.reducePeso10(curr);
         temp %= 10;
 
         curr = temp / 5;
         change.addPeso5(curr);
-        vmMoney.reducePeso5(curr);
+        //vmMoney.reducePeso5(curr);
         temp %= 5;
 
         curr = temp / 1;
         change.addPeso1(curr);
-        vmMoney.reducePeso1(curr);
+        //vmMoney.reducePeso1(curr);
+
+        this.reduceVMMoney(change);
 
         return change;
 
+    }
+
+    public void produceTransaction(Item item, Money payment, Money change) {
+        this.history.addTransaction(new Transaction(item, payment, change));
+    }
+
+    public void addStock(Item item) {
+        if(item instanceof Bread) {
+            breadStock.add((Bread)item);
+
+        } else if (item instanceof Cheese)    {
+            cheeseStock.add((Cheese)item);
+
+        } else if (item instanceof Ham)   {
+            hamStock.add((Ham)item);
+            
+        } else if (item instanceof Egg)   {
+            eggStock.add((Egg)item);
+
+        } else if (item instanceof Chicken)   {
+
+            chickenStock.add((Chicken)item);
+
+        } else if (item instanceof Lettuce)   {
+            lettuceStock.add((Lettuce)item);
+
+        } else if (item instanceof Tuna)  {
+            tunaStock.add((Tuna)item);
+
+        } else if (item instanceof Tomato)    {
+            tomatoStock.add((Tomato)item);
+
+        } else if (item instanceof Pickle)    {
+            pickleStock.add((Pickle)item);
+
+        } else if (item instanceof Nutella)   {
+            nutellaStock.add((Nutella)item);
+
+        } else if (item instanceof PeanutButter)  {
+            peanutbutterStock.add((PeanutButter)item);
+
+        } else if (item instanceof StrawberryJam) {
+            strawberryjamStock.add((StrawberryJam)item);
+            
+        } else if (item instanceof Mayonnaise)    {
+            mayonnaiseStock.add((Mayonnaise)item);
+        }
+    }
+
+    public void resetHistoryRecord() {
+        ArrayList<Transaction> temp = this.history.getTransactions();
+
+        history.setInitialStock(this);
+        history.setFinalStock(this);
+    }
+
+    public Slot getVendingMachineSlot(int index) {
+        return slots[index];
+    }
+
+    public Slot[] getSlots() {
+        return slots;
+    }
+
+    public Money getVmMoney() {
+        return vmMoney;
+    }
+
+    public Money getUserPayments() {
+        return userPayments;
+    }
+
+    public ArrayList<Bread> getBreadStock() {
+        return breadStock;
+    }
+
+    public ArrayList<Cheese> getCheeseStock() {
+        return cheeseStock;
+    }
+
+    public ArrayList<Ham> getHamStock() {
+        return hamStock;
+    }
+
+    public ArrayList<Egg> getEggStock() {
+        return eggStock;
+    }
+
+    public ArrayList<Chicken> getChickenStock() {
+        return chickenStock;
+    }
+
+    public ArrayList<Lettuce> getLettuceStock() {
+        return lettuceStock;
+    }
+
+    public ArrayList<Tuna> getTunaStock() {
+        return tunaStock;
+    }
+
+    public ArrayList<Tomato> getTomatoStock() {
+        return tomatoStock;
+    }
+
+    public ArrayList<Pickle> getPickleStock() {
+        return pickleStock;
+    }
+
+    public ArrayList<Nutella> getNutellaStock() {
+        return nutellaStock;
+    }
+
+    public ArrayList<PeanutButter> getPeanutbutterStock() {
+        return peanutbutterStock;
+    }
+
+    public ArrayList<StrawberryJam> getStrawberryjamStock() {
+        return strawberryjamStock;
+    }
+
+    public ArrayList<Mayonnaise> getMayonnaiseStock() {
+        return mayonnaiseStock;
     }
     
     

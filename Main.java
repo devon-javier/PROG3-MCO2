@@ -1,8 +1,8 @@
 public class Main{
     public static void main(String args[])  {
-        FactoryView vFactory = new FactoryView();
-        Factory factory = new Factory();
+        FactoryView fView = new FactoryView();
+        FactoryModel fModel = new FactoryModel();
 
-        FactoryController cFactory = new FactoryController(vFactory, factory);
+        FactoryController cFactory = new FactoryController(fView, fModel);
     }
 }

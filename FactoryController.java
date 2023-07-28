@@ -16,13 +16,35 @@ public class FactoryController {
         Factory factory = new Factory();
 
 
-        this.fView.setCreateVMListener();
+        this.fView.setCreateVMListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayCreateVM();
+            }
+        });
+
+        this.fView.setTestVMListener(new ActionListener()   {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                
+                if(fModel.getCurrentMachine() instanceof SpecialVendingMachine) {
+
+                } else if (fModel.getCurrentMachine() instanceof VendingMachine) {
+
+                } else {
+                    fView.dispErrorTestVM();
+                }
+            }
+        });
+
 
         this.fView.setRegularVMBtnListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)  {
                 
                 fModel.setCurrentMachine(factory.createVendingMachine());   // Sets current machine to test
+
+                fView.displayDisplayField();
 
             }
 
@@ -33,6 +55,8 @@ public class FactoryController {
             public void actionPerformed(ActionEvent e)  {
 
                 fModel.setCurrentMachine(factory.createSpecialVendingMachine());
+
+                fView.displayDisplayField();
                 
                 //SpecialVendingMachine svm = factory.createVendingMachine();
     

@@ -2,47 +2,88 @@ import java.time.*;
 import java.util.ArrayList;
 
 public class History {
-    LocalDate date;
-    int[] itemsSold = new int[8];
-    int[] initialItems = new int[8];
-    int[] currentItems = new int[8];
-    ArrayList<Transaction> transactionList;
+    private LocalDate date;
+    private ArrayList<Transaction> transactionList;
+
+    private int breadInitial;
+    private int cheeseInitial;
+    private int hamInitial;
+    private int eggInitial;
+    private int chickenInitial;
+    private int lettuceInitial;
+    private int tunaInitial;
+    private int tomatoInitial;
+    private int pickleInitial;
+    private int nutellaInitial;
+    private int peanutbutterInitial;
+    private int strawberryjamInitial;
+    private int mayonnaiseInitial;
+
+    private int breadFinal;
+    private int cheeseFinal;
+    private int hamFinal;
+    private int eggFinal;
+    private int chickenFinal;
+    private int lettuceFinal;
+    private int tunaFinal;
+    private int tomatoFinal;
+    private int pickleFinal;
+    private int nutellaFinal;
+    private int peanutbutterFinal;
+    private int strawberryjamFinal;
+    private int mayonnaiseFinal;
+
 
     public History(VendingMachine vm)    {
         date = LocalDate.now();
         transactionList = new ArrayList<Transaction>();
 
-        for(int i = 0; i < 8; i++){
-            this.itemsSold[i] = vm.getVendingMachineSlot(i).getSold();
-            this.initialItems[i] = vm.getVendingMachineSlot(i).getinitialQuantity();
-            this.currentItems[i] = vm.getVendingMachineSlot(i).getcurrentQuantity();
-        }
-    } 
+        this.setInitialStock(vm);
+        this.setFinalStock(vm);
+    }
+
+    public void setInitialStock(VendingMachine vm)  {
+        this.breadInitial = vm.getBreadStock().size();
+        this.cheeseInitial = vm.getCheeseStock().size();
+        this.hamInitial = vm.getHamStock().size();
+        this.eggInitial = vm.getEggStock().size();
+        this.chickenInitial = vm.getChickenStock().size();
+        this.lettuceInitial = vm.getLettuceStock().size();
+        this.tunaInitial = vm.getTunaStock().size();
+        this.tomatoInitial = vm.getTomatoStock().size();
+        this.pickleInitial = vm.getPickleStock().size();
+        this.nutellaInitial = vm.getNutellaStock().size();
+        this.peanutbutterInitial = vm.getPeanutbutterStock().size();
+        this.strawberryjamInitial = vm.getStrawberryjamStock().size();
+        this.mayonnaiseInitial = vm.getMayonnaiseStock().size();
+    }
+
+    public void setFinalStock(VendingMachine vm)    {
+        this.breadFinal = vm.getBreadStock().size();
+        this.cheeseFinal = vm.getCheeseStock().size();
+        this.hamFinal = vm.getHamStock().size();
+        this.eggFinal = vm.getEggStock().size();
+        this.chickenFinal = vm.getChickenStock().size();
+        this.lettuceFinal = vm.getLettuceStock().size();
+        this.tunaFinal = vm.getTunaStock().size();
+        this.tomatoFinal = vm.getTomatoStock().size();
+        this.pickleFinal = vm.getPickleStock().size();
+        this.nutellaFinal = vm.getNutellaStock().size();
+        this.peanutbutterFinal = vm.getPeanutbutterStock().size();
+        this.strawberryjamFinal = vm.getStrawberryjamStock().size();
+        this.mayonnaiseFinal = vm.getMayonnaiseStock().size();
+    }
+
+    public void addTransaction(Transaction transaction)    {
+        this.transactionList.add(transaction);
+    }
 
     public LocalDate getDate()  {
         return this.date;
-    }
-
-    public int[] getItemsSold() {
-        return this.itemsSold;
-    }
-
-    public int[] getInitialItems()  {
-        return this.initialItems;
-    }
-
-    public int[] getCurrentItems()  {
-        return this.currentItems;
     }
 
     public ArrayList<Transaction> getTransactions() {
         return this.transactionList;
     }
 
-
-    /*
-    public void setEndInv(ArrayList<transaction> transactionList)   {
-
-    }
-    */
 }
