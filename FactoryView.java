@@ -142,15 +142,6 @@ public class FactoryView extends JFrame{
         cl = new CardLayout();
         container.setLayout(cl);
 
-        //bg images + display fields
-        // background_image = new ImageIcon("phonemenu.png");
-        // Image img = background_image.getImage();
-        // Image temp_img = img.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
-        // background_image = new ImageIcon(temp_img);
-        // displayField = new JLabel("", background_image, JLabel.CENTER);
-        // dsp = new JLabel("", JLabel.CENTER);
-        // dsp.setLayout(new GridBagLayout());
-        // displayField.setLayout(new BoxLayout(displayField, BoxLayout.PAGE_AXIS));
         background_image = new ImageIcon("phonemenu.png");
         Image img = background_image.getImage();
         Image temp_img = img.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
@@ -523,7 +514,7 @@ public class FactoryView extends JFrame{
 
      public void buildRegularVM(){
 
-        background_image_RVM = new ImageIcon("bgtest.png");
+        background_image_RVM = new ImageIcon("selectitem.png");
         Image img4 = background_image_RVM.getImage();
         Image temp_img4 = img4.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
         background_image_RVM = new ImageIcon(temp_img4);
@@ -533,19 +524,50 @@ public class FactoryView extends JFrame{
 
         layoutRVM.setOpaque(false);
 
-        slot1R = new JButton("1"); // insert icon
-        slot2R = new JButton("2");
-        slot3R = new JButton("3");
-        slot4R = new JButton("4");
-        slot5R = new JButton("5");
-        slot6R = new JButton("6");
-        slot7R = new JButton("7");
-        slot8R = new JButton("8");
-        viewItemInfoR = new JButton("0");
-        cancelTransactionR = new JButton("9");
+        slot1R = new JButton(""); // insert icon
+        slot2R = new JButton("");
+        slot3R = new JButton("");
+        slot4R = new JButton("");
+        slot5R = new JButton("");
+        slot6R = new JButton("");
+        slot7R = new JButton("");
+        slot8R = new JButton("");
+        viewItemInfoR = new JButton("");
+        cancelTransactionR = new JButton("");
 
         //setting the size of just one button will set the size for all due to gridlayout
         slot1R.setPreferredSize(new Dimension(80, 80));
+
+        slot1R.setContentAreaFilled(false);
+        slot1R.setFocusPainted(false);
+        slot1R.setBorderPainted(false);
+        slot2R.setContentAreaFilled(false);
+        slot2R.setFocusPainted(false);
+        slot2R.setBorderPainted(false);
+        slot3R.setContentAreaFilled(false);
+        slot3R.setFocusPainted(false);
+        slot3R.setBorderPainted(false);
+        slot4R.setContentAreaFilled(false);
+        slot4R.setFocusPainted(false);
+        slot4R.setBorderPainted(false);
+        slot5R.setContentAreaFilled(false);
+        slot5R.setFocusPainted(false);
+        slot5R.setBorderPainted(false);
+        slot6R.setContentAreaFilled(false);
+        slot6R.setFocusPainted(false);
+        slot6R.setBorderPainted(false);
+        slot7R.setContentAreaFilled(false);
+        slot7R.setFocusPainted(false);
+        slot7R.setBorderPainted(false);
+        slot8R.setContentAreaFilled(false);
+        slot8R.setFocusPainted(false);
+        slot8R.setBorderPainted(false);
+        viewItemInfoR.setContentAreaFilled(false);
+        viewItemInfoR.setFocusPainted(false);
+        viewItemInfoR.setBorderPainted(false);
+        cancelTransactionR.setContentAreaFilled(false);
+        cancelTransactionR.setFocusPainted(false);
+        cancelTransactionR.setBorderPainted(false);
 
         layoutRVM.add(slot1R);
         layoutRVM.add(slot2R);
@@ -643,7 +665,7 @@ public class FactoryView extends JFrame{
      //for JOptionPanes
      public void dispSelectItem(){
         selectItemRVM = new JOptionPane();
-        JOptionPane.showConfirmDialog(null, "Purchase item?", "System Message", JOptionPane.YES_NO_CANCEL_OPTION);
+        JOptionPane.showConfirmDialog(null, "Purchase item?", "System Message", JOptionPane.YES_NO_OPTION);
      }
 
      public void dispCustomizeItem(){
