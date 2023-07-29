@@ -58,6 +58,19 @@ public class FactoryView extends JFrame{
     private JButton cancelPayment;
     private JTextField currentAmount;
 
+    //COMPONENTS FOR MAINTENANCE MODE WINDOW
+     private JButton restockItems;
+     private JButton setItemPrice;
+     private JButton collectPayments;
+     private JButton collectVMMoney;
+     private JButton replenishVMMoney;
+     private JButton viewTransactionHistory;
+     private JButton viewInventoryHistory;
+     private JPanel layoutMaintenance;
+     private JButton goBackTestVM;
+
+    //ADDITIONAL COMPONENTS FOR MAINTENANCE MODE WINDOW - SVM
+
     //COMPONENTS FOR REGULAR VM WINDOW
     private JButton slot1R;
     private JButton slot2R;
@@ -72,6 +85,19 @@ public class FactoryView extends JFrame{
     private JOptionPane selectItemRVM;  //when an item is selected
     private JPanel layoutRVM;
 
+    //COMPONENTS FOR SPECIAL VM WINDOW
+    private JButton slot1S;
+    private JButton slot2S;
+    private JButton slot3S;
+    private JButton slot4S;
+    private JButton slot5S;
+    private JButton slot6S;
+    private JButton slot7S;
+    private JButton slot8S;
+    private JButton cancelTransactionS;
+    private JButton viewItemInfoS;
+    private JOptionPane selectItemSVM;  //when an item is selected
+    private JPanel layoutSVM;
 
     //misc.
     private GridBagConstraints gbc;
@@ -91,6 +117,10 @@ public class FactoryView extends JFrame{
     private ImageIcon background_image_buy;
     private JLabel displayFieldRVM;
     private ImageIcon background_image_RVM;
+    private JLabel displayFieldSVM;
+    private ImageIcon background_image_SVM;
+    private JLabel displayFieldMaintenance;
+    private ImageIcon background_image_Maintenance;
 
     public FactoryView(){
         super("CCPROG3 MCO2");
@@ -145,7 +175,6 @@ public class FactoryView extends JFrame{
         createVM.setForeground(Color.decode("#B47EDE"));
         gbc.gridy = 0;
         gbc.gridx = 0;
-        //createVM.setAlignmentX(Component.CENTER_ALIGNMENT);
         displayField.add(createVM, gbc);
 
         testVM = new JButton("Test a Vending Machine");
@@ -157,7 +186,6 @@ public class FactoryView extends JFrame{
         testVM.setForeground(Color.decode("#B47EDE"));
         gbc.gridy = 1;
         gbc.gridx = 0;
-        //testVM.setAlignmentX(Component.CENTER_ALIGNMENT);
         displayField.add(testVM, gbc);
 
         //buttons + button adds -------------------------------------------- (FOR CREATING VENDING MACHINES)
@@ -183,11 +211,8 @@ public class FactoryView extends JFrame{
         gbc.gridx = 0;
         displayFieldCreate.add(specialVM, gbc);
         
-        //dsp.add(displayField);
         container.add(displayField, "1");
         container.add(displayFieldCreate, "2");
-        
-        
         cl.show(container, "1");
 
         //frame config
@@ -202,6 +227,7 @@ public class FactoryView extends JFrame{
         this.buildBuyItem();
         this.buildRegularVM();
         this.buildSpecialVM();
+        this.buildMaintenanceMode();
     }
 
     //button listeners
@@ -221,9 +247,18 @@ public class FactoryView extends JFrame{
         this.confirmPayment.addActionListener(actnListener);
     }
 
-    // public void setBackListener(ActionListener actnListener)    {
-    //    this.goBack.addActionListener(actnListener);
-    // }
+    public void setMaintenanceListener(ActionListener actnListener) {
+        this.accMain.addActionListener(actnListener);
+    }
+
+    public void setBackListener(ActionListener actnListener)    {
+       this.goBack.addActionListener(actnListener);
+    }
+
+    public void setBackTestVMListener(ActionListener actnListener)    {
+       this.goBackTestVM.addActionListener(actnListener);
+    }
+
     
     public void setRegularVMBtnListener(ActionListener actnListener)    {
        this.regularVM.addActionListener(actnListener);
@@ -232,7 +267,57 @@ public class FactoryView extends JFrame{
         this.specialVM.addActionListener(actnListener);
     }
 
-    //display methods
+    //button listeners for item slots in RVM and SVM
+    public void setSlot1RListener(ActionListener actnListener)    {
+        this.slot1R.addActionListener(actnListener);
+    }
+    public void setSlot2RListener(ActionListener actnListener)    {
+        this.slot2R.addActionListener(actnListener);
+    }
+    public void setSlot3RListener(ActionListener actnListener)    {
+        this.slot3R.addActionListener(actnListener);
+    }
+    public void setSlot4RListener(ActionListener actnListener)    {
+        this.slot4R.addActionListener(actnListener);
+    }
+    public void setSlot5RListener(ActionListener actnListener)    {
+        this.slot5R.addActionListener(actnListener);
+    }
+    public void setSlot6RListener(ActionListener actnListener)    {
+        this.slot6R.addActionListener(actnListener);
+    }
+    public void setSlot7RListener(ActionListener actnListener)    {
+        this.slot7R.addActionListener(actnListener);
+    }
+    public void setSlot8RListener(ActionListener actnListener)    {
+        this.slot8R.addActionListener(actnListener);
+    }
+    public void setSlot1SListener(ActionListener actnListener)    {
+        this.slot1S.addActionListener(actnListener);
+    }
+    public void setSlot2SListener(ActionListener actnListener)    {
+        this.slot2S.addActionListener(actnListener);
+    }
+    public void setSlot3SListener(ActionListener actnListener)    {
+        this.slot3S.addActionListener(actnListener);
+    }
+    public void setSlot4SListener(ActionListener actnListener)    {
+        this.slot4S.addActionListener(actnListener);
+    }
+    public void setSlot5SListener(ActionListener actnListener)    {
+        this.slot5S.addActionListener(actnListener);
+    }
+    public void setSlot6SListener(ActionListener actnListener)    {
+        this.slot6S.addActionListener(actnListener);
+    }
+    public void setSlot7SListener(ActionListener actnListener)    {
+        this.slot7S.addActionListener(actnListener);
+    }
+    public void setSlot8SListener(ActionListener actnListener)    {
+        this.slot8S.addActionListener(actnListener);
+    }
+
+    //display interface methods
     public void displayCreateVM() {
         cl.show(container, "2");
     }
@@ -249,7 +334,19 @@ public class FactoryView extends JFrame{
         cl.show(container, "4");
      }
 
+     public void displayRVMInterface(){
+        cl.show(container, "5");
+     }
 
+     public void displaySVMInterface(){
+        cl.show(container, "6");
+     }
+
+     public void displayMaintenanceInterface(){
+        cl.show(container, "7");
+     }
+
+    //build methods
     public void buildTestVM()   {
         background_image_test = new ImageIcon("bgtest.png");
         Image img2 = background_image_test.getImage();
@@ -258,7 +355,6 @@ public class FactoryView extends JFrame{
         displayFieldTest = new JLabel("", background_image_test, JLabel.CENTER);
         displayFieldTest.setLayout(new GridBagLayout());
 
-        //buttons + button adds -------------------------------------------- (FOR TESTING VENDING MACHINE)
         gbc3 = new GridBagConstraints();
         gbc3.insets = new Insets(8, 5, 20, 5);
 
@@ -427,8 +523,6 @@ public class FactoryView extends JFrame{
 
      public void buildRegularVM(){
 
-        //buildTestVM();
-
         background_image_RVM = new ImageIcon("bgtest.png");
         Image img4 = background_image_RVM.getImage();
         Image temp_img4 = img4.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
@@ -453,9 +547,6 @@ public class FactoryView extends JFrame{
         //setting the size of just one button will set the size for all due to gridlayout
         slot1R.setPreferredSize(new Dimension(80, 80));
 
-        selectItemRVM = new JOptionPane();
-        //selectItemRVM.showConfirmDialog(null, "Purchase item?", "System Message", JOptionPane.YES_NO_CANCEL_OPTION);
-
         layoutRVM.add(slot1R);
         layoutRVM.add(slot2R);
         layoutRVM.add(slot3R);
@@ -474,17 +565,90 @@ public class FactoryView extends JFrame{
      }
 
      public void buildSpecialVM(){
-        background_image_RVM = new ImageIcon("bgtest.png");
-        Image img4 = background_image_RVM.getImage();
-        Image temp_img4 = img4.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
-        background_image_RVM = new ImageIcon(temp_img4);
-        displayFieldRVM = new JLabel("", background_image_RVM, JLabel.CENTER);
-        displayFieldRVM.setLayout(new GridBagLayout());
-        layoutRVM = new JPanel(new GridLayout());
+        background_image_SVM = new ImageIcon("bgtest.png");
+        Image img5 = background_image_SVM.getImage();
+        Image temp_img5 = img5.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_SVM = new ImageIcon(temp_img5);
+        displayFieldSVM = new JLabel("", background_image_SVM, JLabel.CENTER);
+        displayFieldSVM.setLayout(new GridBagLayout());
+        layoutSVM = new JPanel(new GridLayout(4, 3, 10, 10));
+
+        layoutSVM.setOpaque(false);
+
+        slot1S = new JButton("1"); // insert icon
+        slot2S = new JButton("2");
+        slot3S = new JButton("3");
+        slot4S = new JButton("4");
+        slot5S = new JButton("5");
+        slot6S = new JButton("6");
+        slot7S = new JButton("7");
+        slot8S = new JButton("8");
+        viewItemInfoS = new JButton("0");
+        cancelTransactionS = new JButton("9");
+
+        //setting the size of just one button will set the size for all due to gridlayout
+        slot1S.setPreferredSize(new Dimension(80, 80));
+
+        layoutSVM.add(slot1S);
+        layoutSVM.add(slot2S);
+        layoutSVM.add(slot3S);
+        layoutSVM.add(slot4S);
+        layoutSVM.add(slot5S);
+        layoutSVM.add(slot6S);
+        layoutSVM.add(slot7S);
+        layoutSVM.add(slot8S);
+        layoutSVM.add(viewItemInfoS);
+        layoutSVM.add(cancelTransactionS);
+
+        //displayField.add(selectItemRVM);
+        displayFieldSVM.add(layoutSVM);
+
+        container.add(displayFieldSVM, "6");
      }
 
-     public void goBack(){
+     public void buildMaintenanceMode(){
+        background_image_Maintenance = new ImageIcon("bgtest.png");
+        Image img5 = background_image_Maintenance.getImage();
+        Image temp_img5 = img5.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_Maintenance = new ImageIcon(temp_img5);
+        displayFieldMaintenance = new JLabel("", background_image_Maintenance, JLabel.CENTER);
+        displayFieldMaintenance.setLayout(new GridBagLayout());
+        layoutMaintenance = new JPanel(new GridLayout(8, 1, 10, 15));
+        
+        layoutMaintenance.setOpaque(false);
 
+        restockItems = new JButton("Restock Items");
+        setItemPrice = new JButton("Set Item Price");
+        collectPayments = new JButton("Collect Payments");
+        collectVMMoney = new JButton("Collect Vending Machine Money");
+        replenishVMMoney = new JButton("Replenish Vending Machine Money");
+        viewTransactionHistory = new JButton("View Transaction History");
+        viewInventoryHistory = new JButton("View Inventory History");
+        goBackTestVM = new JButton("Go Back");
+
+        layoutMaintenance.add(restockItems);
+        layoutMaintenance.add(setItemPrice);
+        layoutMaintenance.add(collectPayments);
+        layoutMaintenance.add(collectVMMoney);
+        layoutMaintenance.add(replenishVMMoney);
+        layoutMaintenance.add(viewTransactionHistory);
+        layoutMaintenance.add(viewInventoryHistory);
+        layoutMaintenance.add(goBackTestVM);
+
+        displayFieldMaintenance.add(layoutMaintenance);
+
+        container.add(displayFieldMaintenance, "7");
+     }
+
+     //for JOptionPanes
+     public void dispSelectItem(){
+        selectItemRVM = new JOptionPane();
+        JOptionPane.showConfirmDialog(null, "Purchase item?", "System Message", JOptionPane.YES_NO_CANCEL_OPTION);
+     }
+
+     public void dispCustomizeItem(){
+        selectItemSVM = new JOptionPane();
+        JOptionPane.showConfirmDialog(null, "Customize item?", "System Message", JOptionPane.YES_NO_CANCEL_OPTION);
      }
 
      public void dispErrorTestVM(){

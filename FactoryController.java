@@ -28,7 +28,7 @@ public class FactoryController {
             public void actionPerformed(ActionEvent e)  {
                 
                 if(fModel.getCurrentMachine() instanceof SpecialVendingMachine) {
-
+                    fView.displayTestVM();
                 } else if (fModel.getCurrentMachine() instanceof VendingMachine) {
                     fView.displayTestVM();
                 } else {
@@ -44,13 +44,138 @@ public class FactoryController {
             }
         });
 
-        this.fView.setConfirmMoney(new ActionListener()  {
+        this.fView.setBackListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                //
+                fView.displayFactoryView();
             }
         });
 
+        this.fView.setConfirmMoney(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                
+                if(fModel.getCurrentMachine() instanceof SpecialVendingMachine) {
+                    fView.displaySVMInterface();
+                } else if (fModel.getCurrentMachine() instanceof VendingMachine) {
+                    fView.displayRVMInterface();
+                }
+            }
+        });
+
+        //for slot items - RVM
+        this.fView.setSlot1RListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispSelectItem();
+            }
+        });
+        this.fView.setSlot2RListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispSelectItem();
+            }
+        });
+        this.fView.setSlot3RListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispSelectItem();
+            }
+        });
+        this.fView.setSlot4RListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispSelectItem();
+            }
+        });
+        this.fView.setSlot5RListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispSelectItem();
+            }
+        });
+        this.fView.setSlot6RListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispSelectItem();
+            }
+        });
+        this.fView.setSlot7RListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispSelectItem();
+            }
+        });
+        this.fView.setSlot8RListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispSelectItem();
+            }
+        });
+
+        //for slot items - SVM
+        this.fView.setSlot1SListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispCustomizeItem();
+            }
+        });
+        this.fView.setSlot2SListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispCustomizeItem();
+            }
+        });
+        this.fView.setSlot3SListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispCustomizeItem();
+            }
+        });
+        this.fView.setSlot4SListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispCustomizeItem();
+            }
+        });
+        this.fView.setSlot5SListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispCustomizeItem();
+            }
+        });
+        this.fView.setSlot6SListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispCustomizeItem();
+            }
+        });
+        this.fView.setSlot7SListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispCustomizeItem();
+            }
+        });
+        this.fView.setSlot8SListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispCustomizeItem();
+            }
+        });
+
+        //Maintenance mode
+        this.fView.setMaintenanceListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayMaintenanceInterface();
+            }
+        });
+        this.fView.setBackTestVMListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayTestVM();
+            }
+        });
 
         this.fView.setRegularVMBtnListener(new ActionListener() {
             @Override
