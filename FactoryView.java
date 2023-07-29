@@ -67,8 +67,10 @@ public class FactoryView extends JFrame{
     private JButton slot6R;
     private JButton slot7R;
     private JButton slot8R;
-    private JOptionPane actionRVM;  //when an item is selected
-    private JPanel dspRVM;
+    private JButton cancelTransactionR;
+    private JButton viewItemInfoR;
+    private JOptionPane selectItemRVM;  //when an item is selected
+    private JPanel layoutRVM;
 
 
     //misc.
@@ -99,14 +101,8 @@ public class FactoryView extends JFrame{
         container = getContentPane();
         gbc2 = new GridBagConstraints();
         gbc2.insets = new Insets(0, 5, 10, 5);
-        gbc3 = new GridBagConstraints();
-        gbc3.insets = new Insets(8, 5, 20, 5);
-
+        
         //panels
-        // mainPanel = new JPanel();
-        // mainPanel.setLayout(new GridBagLayout());
-        // createPanel = new JPanel();
-        // createPanel.setLayout(new GridBagLayout());
         buyMainPanel = new JPanel();
         buyMainPanel.setLayout(new GridLayout(2, 1, 10, 25));
         buySubPanel1 = new JPanel();
@@ -138,13 +134,6 @@ public class FactoryView extends JFrame{
         background_image_create = new ImageIcon(temp_img1);
         displayFieldCreate = new JLabel("", background_image_create, JLabel.CENTER);
         displayFieldCreate.setLayout(new GridBagLayout());
-        
-        background_image_buy = new ImageIcon("moneymenu.png");
-        Image img3 = background_image_buy.getImage();
-        Image temp_img3 = img3.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
-        background_image_buy = new ImageIcon(temp_img3);
-        displayFieldBuy = new JLabel("", background_image_buy, JLabel.CENTER);
-        displayFieldBuy.setLayout(new GridBagLayout());
 
         //buttons + button adds -------------------------------------------- (FOR MAIN FACTORY MENU)
         createVM = new JButton("Create a Vending Machine");
@@ -193,9 +182,137 @@ public class FactoryView extends JFrame{
         gbc.gridy = 1;
         gbc.gridx = 0;
         displayFieldCreate.add(specialVM, gbc);
-
         
+        //dsp.add(displayField);
+        container.add(displayField, "1");
+        container.add(displayFieldCreate, "2");
+        
+        
+        cl.show(container, "1");
+
+        //frame config
+        this.setVisible(true);
+        this.setSize(550, 700);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+
+        //added methods
+        this.buildTestVM();
+        this.buildBuyItem();
+        this.buildRegularVM();
+        this.buildSpecialVM();
+    }
+
+    //button listeners
+    public void setCreateVMListener(ActionListener actnListener)    {
+        this.createVM.addActionListener(actnListener);
+    }
+    
+    public void setTestVMListener(ActionListener actnListener)    {
+        this.testVM.addActionListener(actnListener);
+    }
+
+    public void setBuyItemListener(ActionListener actnListener) {
+        this.buyItem.addActionListener(actnListener);
+    }
+
+    public void setConfirmMoney(ActionListener actnListener) {
+        this.confirmPayment.addActionListener(actnListener);
+    }
+
+    // public void setBackListener(ActionListener actnListener)    {
+    //    this.goBack.addActionListener(actnListener);
+    // }
+    
+    public void setRegularVMBtnListener(ActionListener actnListener)    {
+       this.regularVM.addActionListener(actnListener);
+    }
+    public void setSpecialVMBtnListener(ActionListener actnListener)    {
+        this.specialVM.addActionListener(actnListener);
+    }
+
+    //display methods
+    public void displayCreateVM() {
+        cl.show(container, "2");
+    }
+
+    public void displayTestVM(){
+        cl.show(container, "3");
+     }
+
+     public void displayFactoryView()  {
+        cl.show(container, "1");
+     }
+
+     public void displayBuyItemInterface(){
+        cl.show(container, "4");
+     }
+
+
+    public void buildTestVM()   {
+        background_image_test = new ImageIcon("bgtest.png");
+        Image img2 = background_image_test.getImage();
+        Image temp_img2 = img2.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_test = new ImageIcon(temp_img2);
+        displayFieldTest = new JLabel("", background_image_test, JLabel.CENTER);
+        displayFieldTest.setLayout(new GridBagLayout());
+
+        //buttons + button adds -------------------------------------------- (FOR TESTING VENDING MACHINE)
+        gbc3 = new GridBagConstraints();
+        gbc3.insets = new Insets(8, 5, 20, 5);
+
+        buyItem = new JButton("Buy Item");
+        buyItem.setPreferredSize(new Dimension(170, 65));
+        buyItem.setForeground(Color.decode("#6513B2"));
+        buyItem.setFont(new Font("TimesRoman", Font.BOLD, 23));
+        buyItem.setForeground(Color.WHITE);
+        buyItem.setOpaque(false);
+        buyItem.setContentAreaFilled(false);
+        buyItem.setFocusPainted(false);
+        buyItem.setBorderPainted(true);
+        gbc3.gridx = 0;
+        gbc3.gridy = 0;
+        displayFieldTest.add(buyItem, gbc3);
+
+        accMain = new JButton("Maintenace Mode");
+        accMain.setPreferredSize(new Dimension(170, 50));
+        accMain.setForeground(Color.decode("#6513B2"));
+        accMain.setFont(new Font("TimesRoman", Font.BOLD, 17));
+        accMain.setForeground(Color.WHITE);
+        accMain.setOpaque(false);
+        accMain.setContentAreaFilled(false);
+        accMain.setFocusPainted(false);
+        accMain.setBorderPainted(true);
+        gbc3.gridx = 0;
+        gbc3.gridy = 1;
+        displayFieldTest.add(accMain, gbc3);
+
+        goBack = new JButton("Go Back");
+        goBack.setPreferredSize(new Dimension(170, 50));
+        goBack.setForeground(Color.decode("#6513B2"));
+        goBack.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        goBack.setForeground(Color.WHITE);
+        goBack.setOpaque(false);
+        goBack.setContentAreaFilled(false);
+        goBack.setFocusPainted(false);
+        goBack.setBorderPainted(true);
+        gbc3.gridx = 0;
+        gbc3.gridy = 2;
+        displayFieldTest.add(goBack, gbc3);
+
+        container.add(displayFieldTest, "3");
+    }
+
+    public void buildBuyItem(){
         //interface for BUY ITEM
+        background_image_buy = new ImageIcon("moneymenu.png");
+        Image img3 = background_image_buy.getImage();
+        Image temp_img3 = img3.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_buy = new ImageIcon(temp_img3);
+        displayFieldBuy = new JLabel("", background_image_buy, JLabel.CENTER);
+        displayFieldBuy.setLayout(new GridBagLayout());
+
         peso1 = new JLabel("insert 1: ", SwingConstants.RIGHT);
         peso5 = new JLabel("insert 5: ", SwingConstants.RIGHT);
         peso10 = new JLabel("insert 10: ", SwingConstants.RIGHT);
@@ -304,141 +421,70 @@ public class FactoryView extends JFrame{
         buyMainPanel.add(buySubPanel1);
         buyMainPanel.add(buySubPanel2);
         displayFieldBuy.add(buyMainPanel);
-        
-        //dsp.add(displayField);
-        container.add(displayField, "1");
-        container.add(displayFieldCreate, "2");
-        
+
         container.add(displayFieldBuy, "4");
-        cl.show(container, "1");
-
-        //frame config
-        this.setVisible(true);
-        this.setSize(550, 700);
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-
-        this.buildTestVM();
-
     }
 
-    //button listeners
-    public void setCreateVMListener(ActionListener actnListener)    {
-        this.createVM.addActionListener(actnListener);
-    }
-    
-    public void setTestVMListener(ActionListener actnListener)    {
-        this.testVM.addActionListener(actnListener);
-    }
+     public void buildRegularVM(){
 
-    // public void setBackListener(ActionListener actnListener)    {
-    //    this.goBack.addActionListener(actnListener);
-    // }
-    
-    public void setRegularVMBtnListener(ActionListener actnListener)    {
-       this.regularVM.addActionListener(actnListener);
-    }
-    public void setSpecialVMBtnListener(ActionListener actnListener)    {
-        this.specialVM.addActionListener(actnListener);
-    }
+        //buildTestVM();
 
-    public void displayCreateVM() {
-        cl.show(container, "2");
-    }
-
-    public void displayTestVM(){
-        cl.show(container, "3");
-     }
-
-     public void displayDisplayField()  {
-        cl.show(container, "1");
-     }
-
-
-    public void buildTestVM()   {
-        background_image_test = new ImageIcon("bgtest.png");
-        Image img2 = background_image_test.getImage();
-        Image temp_img2 = img2.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
-        background_image_test = new ImageIcon(temp_img2);
-        displayFieldTest = new JLabel("", background_image_test, JLabel.CENTER);
-        displayFieldTest.setLayout(new GridBagLayout());
-
-        //buttons + button adds -------------------------------------------- (FOR TESTING VENDING MACHINE)
-        buyItem = new JButton("Buy Item");
-        buyItem.setPreferredSize(new Dimension(170, 65));
-        buyItem.setForeground(Color.decode("#6513B2"));
-        buyItem.setFont(new Font("TimesRoman", Font.BOLD, 23));
-        buyItem.setForeground(Color.WHITE);
-        buyItem.setOpaque(false);
-        buyItem.setContentAreaFilled(false);
-        buyItem.setFocusPainted(false);
-        buyItem.setBorderPainted(true);
-        gbc3.gridx = 0;
-        gbc3.gridy = 0;
-        displayFieldTest.add(buyItem, gbc3);
-
-        accMain = new JButton("Maintenace Mode");
-        accMain.setPreferredSize(new Dimension(170, 50));
-        accMain.setForeground(Color.decode("#6513B2"));
-        accMain.setFont(new Font("TimesRoman", Font.BOLD, 17));
-        accMain.setForeground(Color.WHITE);
-        accMain.setOpaque(false);
-        accMain.setContentAreaFilled(false);
-        accMain.setFocusPainted(false);
-        accMain.setBorderPainted(true);
-        gbc3.gridx = 0;
-        gbc3.gridy = 1;
-        displayFieldTest.add(accMain, gbc3);
-
-        goBack = new JButton("Go Back");
-        goBack.setPreferredSize(new Dimension(170, 50));
-        goBack.setForeground(Color.decode("#6513B2"));
-        goBack.setFont(new Font("TimesRoman", Font.BOLD, 20));
-        goBack.setForeground(Color.WHITE);
-        goBack.setOpaque(false);
-        goBack.setContentAreaFilled(false);
-        goBack.setFocusPainted(false);
-        goBack.setBorderPainted(true);
-        gbc3.gridx = 0;
-        gbc3.gridy = 2;
-        displayFieldTest.add(goBack, gbc3);
-
-        container.add(displayFieldTest, "3");
-    }
-
-
-
-
-     public void dispRegularVM(){
         background_image_RVM = new ImageIcon("bgtest.png");
         Image img4 = background_image_RVM.getImage();
         Image temp_img4 = img4.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
         background_image_RVM = new ImageIcon(temp_img4);
         displayFieldRVM = new JLabel("", background_image_RVM, JLabel.CENTER);
         displayFieldRVM.setLayout(new GridBagLayout());
-        dspRVM = new JPanel(new GridLayout());
+        layoutRVM = new JPanel(new GridLayout(4, 3, 10, 10));
 
+        layoutRVM.setOpaque(false);
 
+        slot1R = new JButton("1"); // insert icon
+        slot2R = new JButton("2");
+        slot3R = new JButton("3");
+        slot4R = new JButton("4");
+        slot5R = new JButton("5");
+        slot6R = new JButton("6");
+        slot7R = new JButton("7");
+        slot8R = new JButton("8");
+        viewItemInfoR = new JButton("0");
+        cancelTransactionR = new JButton("9");
 
-        slot1R = new JButton(); // insert icon
-        slot2R = new JButton();
-        slot3R = new JButton();
-        slot4R = new JButton();
-        slot5R = new JButton();
-        slot6R = new JButton();
-        slot7R = new JButton();
-        slot8R = new JButton();
+        //setting the size of just one button will set the size for all due to gridlayout
+        slot1R.setPreferredSize(new Dimension(80, 80));
+
+        selectItemRVM = new JOptionPane();
+        //selectItemRVM.showConfirmDialog(null, "Purchase item?", "System Message", JOptionPane.YES_NO_CANCEL_OPTION);
+
+        layoutRVM.add(slot1R);
+        layoutRVM.add(slot2R);
+        layoutRVM.add(slot3R);
+        layoutRVM.add(slot4R);
+        layoutRVM.add(slot5R);
+        layoutRVM.add(slot6R);
+        layoutRVM.add(slot7R);
+        layoutRVM.add(slot8R);
+        layoutRVM.add(viewItemInfoR);
+        layoutRVM.add(cancelTransactionR);
+
+        //displayField.add(selectItemRVM);
+        displayFieldRVM.add(layoutRVM);
+
+        container.add(displayFieldRVM, "5");
      }
 
-     public void dispSpecialVM(){
+     public void buildSpecialVM(){
         background_image_RVM = new ImageIcon("bgtest.png");
         Image img4 = background_image_RVM.getImage();
         Image temp_img4 = img4.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
         background_image_RVM = new ImageIcon(temp_img4);
         displayFieldRVM = new JLabel("", background_image_RVM, JLabel.CENTER);
         displayFieldRVM.setLayout(new GridBagLayout());
-        dspRVM = new JPanel(new GridLayout());
+        layoutRVM = new JPanel(new GridLayout());
+     }
+
+     public void goBack(){
+
      }
 
      public void dispErrorTestVM(){
@@ -447,19 +493,3 @@ public class FactoryView extends JFrame{
      }
 
 }
-
-
-//SCRAP LANG -------------------------------------------------------------------------------------
-
-//private ImageIcon[] backgroundImages;   // Array to store multiple background images
-//private int currentImageIndex;          // Index to keep track of the current background image
-// backgroundImages = new ImageIcon[2];
-//         backgroundImages[0] = new ImageIcon("phone4.png");
-//         backgroundImages[1] = new ImageIcon("phone3.png"); // Add more images if needed
-//         displayField = new JLabel("", backgroundImages[0], JLabel.CENTER);
-//         displayField.setBounds(0, 0, 550, 700);
-//currentImageIndex = 0; // Start with the first image
-// currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
-//             displayField.setIcon(backgroundImages[currentImageIndex]);
-// currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
-//             displayField.setIcon(backgroundImages[currentImageIndex]);

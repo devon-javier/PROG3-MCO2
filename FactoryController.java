@@ -30,10 +30,24 @@ public class FactoryController {
                 if(fModel.getCurrentMachine() instanceof SpecialVendingMachine) {
 
                 } else if (fModel.getCurrentMachine() instanceof VendingMachine) {
-
+                    fView.displayTestVM();
                 } else {
                     fView.dispErrorTestVM();
                 }
+            }
+        });
+
+        this.fView.setBuyItemListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayBuyItemInterface();
+            }
+        });
+
+        this.fView.setConfirmMoney(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                //
             }
         });
 
@@ -44,7 +58,7 @@ public class FactoryController {
                 
                 fModel.setCurrentMachine(factory.createVendingMachine());   // Sets current machine to test
 
-                fView.displayDisplayField();
+                fView.displayFactoryView();
 
             }
 
@@ -56,7 +70,7 @@ public class FactoryController {
 
                 fModel.setCurrentMachine(factory.createSpecialVendingMachine());
 
-                fView.displayDisplayField();
+                fView.displayFactoryView();
                 
                 //SpecialVendingMachine svm = factory.createVendingMachine();
     
