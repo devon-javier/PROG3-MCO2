@@ -36,15 +36,6 @@ public class FactoryView extends JFrame{
     private JButton plus200;
     private JButton plus500;
     private JButton plus1000;
-    private JButton minus1;
-    private JButton minus5;
-    private JButton minus10;
-    private JButton minus20;
-    private JButton minus50;
-    private JButton minus100;
-    private JButton minus200;
-    private JButton minus500;
-    private JButton minus1000;
     private JTextField quant1;
     private JTextField quant5;
     private JTextField quant10;
@@ -55,8 +46,10 @@ public class FactoryView extends JFrame{
     private JTextField quant500;
     private JTextField quant1000;
     private JButton confirmPayment;
-    private JButton cancelPayment;
+    private JButton viewPriceList;
     private JTextField currentAmount;
+    private JOptionPane displayPriceList;
+    private JTextArea containPriceList;
 
     //COMPONENTS FOR MAINTENANCE MODE WINDOW
      private JButton restockItems;
@@ -69,6 +62,8 @@ public class FactoryView extends JFrame{
      private JButton viewInventoryHistory;
      private JPanel layoutMaintenance;
      private JButton goBackTestVM;
+     private JButton backMaintenanceModeR;
+     private JButton backMaintenanceModeS;
 
      //MAINTENANCE MODE - RESTOCK ITEMS
      private JLabel restockBread;
@@ -112,9 +107,43 @@ public class FactoryView extends JFrame{
      private JButton plusLettuce;
      private JButton plusTomato;
      private JButton plusPickle;
-     private JButton confirmRestock;
+     private JButton confirmRestockItemsR;
+     private JButton confirmRestockItemsS;
 
-     private JPanel layoutRestock;
+     private JPanel layoutRestockItems;
+
+     //MAINTENANCE MODE - RESTOCK SANDWICHES
+     private JLabel restockHamSandwich;
+     private JLabel restockCheeseSandwich;
+     private JLabel restockChickenSandwich;
+     private JLabel restockTunaSandwich;
+     private JLabel restockEggSandwich;
+     private JLabel restockPeanutButterSandwich;
+     private JLabel restockStrawberryJamSandwich;
+     private JLabel restockNutellaSandwich;
+
+     private JTextField hamSandwichQuant;
+     private JTextField cheeseSandwichQuant;
+     private JTextField chickenSandwichQuant;
+     private JTextField tunaSandwichQuant;
+     private JTextField eggSandwichQuant;
+     private JTextField peanutBSandwichQuant;
+     private JTextField strawberryJSandwichQuant;
+     private JTextField nutellaSandwichQuant;
+
+     private JButton plusHamSandwich;
+     private JButton plusCheeseSandwich;
+     private JButton plusChickenSandwich;
+     private JButton plusTunaSandwich;
+     private JButton plusEggSandwich;
+     private JButton plusPeanutBSandwich;
+     private JButton plusStrawberryJSandwich;
+     private JButton plusNutellaSandwich;
+     private JButton confirmRestockSandwiches;
+     private JButton backMaintenanceModeFromSandwich;
+
+     private JPanel layoutRestockSandwiches;
+
 
     //ADDITIONAL COMPONENTS FOR MAINTENANCE MODE WINDOW - SVM
 
@@ -152,7 +181,8 @@ public class FactoryView extends JFrame{
     private Container container;    //uh lalagyan?
     private GridBagConstraints gbc2;
     private GridBagConstraints gbc3;
-    private JButton filler;
+    private JButton filler1;    //for pure aesthetic in restock view
+    private JButton filler2;    //for pure aesthetic in restock view
 
     //for background image
     private JLabel displayField;
@@ -183,17 +213,24 @@ public class FactoryView extends JFrame{
 
         //misc.
         gbc = new GridBagConstraints();
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(10, 0, 10, 0);
         container = getContentPane();
         gbc2 = new GridBagConstraints();
-        gbc2.insets = new Insets(0, 5, 10, 5);
-        filler = new JButton("");
+        gbc2.insets = new Insets(10, 5, 10, 5);
+        filler1 = new JButton("");
+        filler1.setContentAreaFilled(false);
+        filler1.setFocusPainted(false);
+        filler1.setBorderPainted(false);
+        filler2 = new JButton("");
+        filler2.setContentAreaFilled(false);
+        filler2.setFocusPainted(false);
+        filler2.setBorderPainted(false);
         
         //panels
         buyMainPanel = new JPanel();
         buyMainPanel.setLayout(new GridLayout(2, 1, 10, 25));
         buySubPanel1 = new JPanel();
-        buySubPanel1.setLayout(new GridLayout(9, 4, 5, 5));
+        buySubPanel1.setLayout(new GridLayout(9, 3, 5, 5));
         buySubPanel2 = new JPanel();
         buySubPanel2.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 40));
         cl = new CardLayout();
@@ -278,6 +315,7 @@ public class FactoryView extends JFrame{
         this.buildMaintenanceMode();
         this.buildRestockItemsRVM();
         this.buildRestockItemsSVM();
+        this.buildRestockSandwich();
     }
 
     //display interface methods
@@ -307,6 +345,9 @@ public class FactoryView extends JFrame{
      }
      public void displayRestockItemSVM(){
         cl.show(container, "9");
+     }
+     public void displayRestockSandwiches(){
+        cl.show(container, "10");
      }
 
     //build methods
@@ -372,15 +413,15 @@ public class FactoryView extends JFrame{
         displayFieldBuy = new JLabel("", background_image_buy, JLabel.CENTER);
         displayFieldBuy.setLayout(new GridBagLayout());
 
-        peso1 = new JLabel("insert 1: ", SwingConstants.RIGHT);
-        peso5 = new JLabel("insert 5: ", SwingConstants.RIGHT);
-        peso10 = new JLabel("insert 10: ", SwingConstants.RIGHT);
-        peso20 = new JLabel("insert 20: ", SwingConstants.RIGHT);
-        peso50 = new JLabel("insert 50: ", SwingConstants.RIGHT);
-        peso100 = new JLabel("insert 100: ", SwingConstants.RIGHT);
-        peso200 = new JLabel("insert 200: ", SwingConstants.RIGHT);
-        peso500 = new JLabel("insert 500: ", SwingConstants.RIGHT);
-        peso1000 = new JLabel("insert 1000: ", SwingConstants.RIGHT);
+        peso1 = new JLabel("insert 1:", SwingConstants.CENTER);
+        peso5 = new JLabel("insert 5:", SwingConstants.CENTER);
+        peso10 = new JLabel(" insert 10:", SwingConstants.CENTER);
+        peso20 = new JLabel(" insert 20:", SwingConstants.CENTER);
+        peso50 = new JLabel(" insert 50:", SwingConstants.CENTER);
+        peso100 = new JLabel("   insert 100:", SwingConstants.CENTER);
+        peso200 = new JLabel("   insert 200:", SwingConstants.CENTER);
+        peso500 = new JLabel("   insert 500:", SwingConstants.CENTER);
+        peso1000 = new JLabel("    insert 1000:", SwingConstants.CENTER);
 
         plus1 = new JButton("+");
         plus5 = new JButton("+");
@@ -391,15 +432,6 @@ public class FactoryView extends JFrame{
         plus200 = new JButton("+");
         plus500 = new JButton("+");
         plus1000 = new JButton("+");
-        minus1 = new JButton("-");
-        minus5 = new JButton("-");
-        minus10 = new JButton("-");
-        minus20 = new JButton("-");
-        minus50 = new JButton("-");
-        minus100 = new JButton("-");
-        minus200 = new JButton("-");
-        minus500 = new JButton("-");
-        minus1000 = new JButton("-");
 
         quant1 = new JTextField("0");
         quant1.setHorizontalAlignment(JTextField.CENTER);
@@ -431,51 +463,51 @@ public class FactoryView extends JFrame{
         quant1000.setEditable(false);
 
         buySubPanel1.add(peso1);
-        buySubPanel1.add(minus1);
         buySubPanel1.add(quant1);
         buySubPanel1.add(plus1);
         buySubPanel1.add(peso5);
-        buySubPanel1.add(minus5);
+        
         buySubPanel1.add(quant5);
         buySubPanel1.add(plus5);
         buySubPanel1.add(peso10);
-        buySubPanel1.add(minus10);
+       
         buySubPanel1.add(quant10);
         buySubPanel1.add(plus10);
         buySubPanel1.add(peso20);
-        buySubPanel1.add(minus20);
+        
         buySubPanel1.add(quant20);
         buySubPanel1.add(plus20);
         buySubPanel1.add(peso50);
-        buySubPanel1.add(minus50);
+        
         buySubPanel1.add(quant50);
         buySubPanel1.add(plus50);
         buySubPanel1.add(peso100);
-        buySubPanel1.add(minus100);
+        
         buySubPanel1.add(quant100);
         buySubPanel1.add(plus100);
         buySubPanel1.add(peso200);
-        buySubPanel1.add(minus200);
+        
         buySubPanel1.add(quant200);
         buySubPanel1.add(plus200);
         buySubPanel1.add(peso500);
-        buySubPanel1.add(minus500);
+        
         buySubPanel1.add(quant500);
         buySubPanel1.add(plus500);
         buySubPanel1.add(peso1000);
-        buySubPanel1.add(minus1000);
+        
         buySubPanel1.add(quant1000);
         buySubPanel1.add(plus1000);
 
         currentAmount = new JTextField();
         currentAmount.setHorizontalAlignment(JTextField.CENTER);
+        currentAmount.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         currentAmount.setEditable(false);
         currentAmount.setOpaque(false);
         currentAmount.setPreferredSize(new Dimension(300, 100));
         Font font = new Font(currentAmount.getFont().getName(), currentAmount.getFont().getSize(), 16);
         currentAmount.setFont(font);
         confirmPayment = new JButton("Confirm");
-        cancelPayment = new JButton("Cancel");
+        viewPriceList = new JButton("View Price List");
         // confirmPayment.setOpaque(false);
         // confirmPayment.setFocusPainted(false);
         // confirmPayment.setContentAreaFilled(false);
@@ -483,7 +515,7 @@ public class FactoryView extends JFrame{
         // confirmPayment.setBorder(BorderFactory.createEtchedBorder(0));
 
         buySubPanel2.add(confirmPayment);
-        buySubPanel2.add(cancelPayment);
+        buySubPanel2.add(viewPriceList);
         buySubPanel2.add(currentAmount);
 
         buySubPanel1.setOpaque(false);
@@ -687,9 +719,9 @@ public class FactoryView extends JFrame{
         background_image_plain = new ImageIcon(temp_img6);
         displayBlank1 = new JLabel("", background_image_plain, JLabel.CENTER);
         displayBlank1.setLayout(new GridBagLayout());
-        layoutRestock = new JPanel(new GridLayout(11, 3, 5, 5));
+        layoutRestockItems = new JPanel(new GridLayout(11, 3, 5, 5));
 
-        layoutRestock.setOpaque(false);
+        layoutRestockItems.setOpaque(false);
 
         restockBread = new JLabel("Bread");
         restockHam = new JLabel("Ham");
@@ -723,48 +755,46 @@ public class FactoryView extends JFrame{
         plusPeanutB = new JButton("+");
         plusStrawberryJ = new JButton("+");
         plusNutella = new JButton("+");
-        confirmRestock = new JButton("Confirm");
+        confirmRestockItemsR = new JButton("Confirm");
+        backMaintenanceModeR = new JButton("Go Back");
 
-        layoutRestock.add(restockBread);
-        layoutRestock.add(breadQuant);
-        layoutRestock.add(plusBread);
-        layoutRestock.add(restockHam);
-        layoutRestock.add(hamQuant);
-        layoutRestock.add(plusHam);
-        layoutRestock.add(restockCheese);
-        layoutRestock.add(cheeseQuant);
-        layoutRestock.add(plusCheese);
-        layoutRestock.add(restockChicken);
-        layoutRestock.add(chickenQuant);
-        layoutRestock.add(plusChicken);
-        layoutRestock.add(restockTuna);
-        layoutRestock.add(tunaQuant);
-        layoutRestock.add(plusTuna);
-        layoutRestock.add(restockEgg);
-        layoutRestock.add(eggQuant);
-        layoutRestock.add(plusEgg);
-        layoutRestock.add(restockMayo);
-        layoutRestock.add(mayoQuant);
-        layoutRestock.add(plusMayo);
-        layoutRestock.add(restockPeanutButter);
-        layoutRestock.add(peanutBQuant);
-        layoutRestock.add(plusPeanutB);
-        layoutRestock.add(restockStrawberryJam);
-        layoutRestock.add(strawberryJQuant);
-        layoutRestock.add(plusStrawberryJ);
-        layoutRestock.add(restockNutella);
-        layoutRestock.add(nutellaQuant);
-        layoutRestock.add(plusNutella);
+        layoutRestockItems.add(restockBread);
+        layoutRestockItems.add(breadQuant);
+        layoutRestockItems.add(plusBread);
+        layoutRestockItems.add(restockHam);
+        layoutRestockItems.add(hamQuant);
+        layoutRestockItems.add(plusHam);
+        layoutRestockItems.add(restockCheese);
+        layoutRestockItems.add(cheeseQuant);
+        layoutRestockItems.add(plusCheese);
+        layoutRestockItems.add(restockChicken);
+        layoutRestockItems.add(chickenQuant);
+        layoutRestockItems.add(plusChicken);
+        layoutRestockItems.add(restockTuna);
+        layoutRestockItems.add(tunaQuant);
+        layoutRestockItems.add(plusTuna);
+        layoutRestockItems.add(restockEgg);
+        layoutRestockItems.add(eggQuant);
+        layoutRestockItems.add(plusEgg);
+        layoutRestockItems.add(restockMayo);
+        layoutRestockItems.add(mayoQuant);
+        layoutRestockItems.add(plusMayo);
+        layoutRestockItems.add(restockPeanutButter);
+        layoutRestockItems.add(peanutBQuant);
+        layoutRestockItems.add(plusPeanutB);
+        layoutRestockItems.add(restockStrawberryJam);
+        layoutRestockItems.add(strawberryJQuant);
+        layoutRestockItems.add(plusStrawberryJ);
+        layoutRestockItems.add(restockNutella);
+        layoutRestockItems.add(nutellaQuant);
+        layoutRestockItems.add(plusNutella);
+        layoutRestockItems.add(backMaintenanceModeR);
 
-        // filler.setContentAreaFilled(false);
-        // filler.setFocusPainted(false);
-        // filler.setBorderPainted(false);
+        // layoutRestockItems.add(filler1);
 
-        // layoutRestock.add(filler);
+        layoutRestockItems.add(confirmRestockItemsR);
 
-        layoutRestock.add(confirmRestock);
-
-        displayBlank1.add(layoutRestock);
+        displayBlank1.add(layoutRestockItems);
 
         container.add(displayBlank1, "8");
      }
@@ -776,9 +806,9 @@ public class FactoryView extends JFrame{
         background_image_plain = new ImageIcon(temp_img6);
         displayBlank2 = new JLabel("", background_image_plain, JLabel.CENTER);
         displayBlank2.setLayout(new GridBagLayout());
-        layoutRestock = new JPanel(new GridLayout(14, 3, 5, 5));
+        layoutRestockItems = new JPanel(new GridLayout(14, 3, 5, 5));
 
-        layoutRestock.setOpaque(false);
+        layoutRestockItems.setOpaque(false);
 
         restockBread = new JLabel("Bread");
         restockHam = new JLabel("Ham");
@@ -821,59 +851,132 @@ public class FactoryView extends JFrame{
         plusLettuce = new JButton("+");
         plusTomato = new JButton("+");
         plusPickle = new JButton("+");
-        confirmRestock = new JButton("Confirm");
+        confirmRestockItemsS = new JButton("Confirm");
+        backMaintenanceModeS = new JButton("Go Back");
 
-        layoutRestock.add(restockBread);
-        layoutRestock.add(breadQuant);
-        layoutRestock.add(plusBread);
-        layoutRestock.add(restockHam);
-        layoutRestock.add(hamQuant);
-        layoutRestock.add(plusHam);
-        layoutRestock.add(restockCheese);
-        layoutRestock.add(cheeseQuant);
-        layoutRestock.add(plusCheese);
-        layoutRestock.add(restockChicken);
-        layoutRestock.add(chickenQuant);
-        layoutRestock.add(plusChicken);
-        layoutRestock.add(restockTuna);
-        layoutRestock.add(tunaQuant);
-        layoutRestock.add(plusTuna);
-        layoutRestock.add(restockEgg);
-        layoutRestock.add(eggQuant);
-        layoutRestock.add(plusEgg);
-        layoutRestock.add(restockMayo);
-        layoutRestock.add(mayoQuant);
-        layoutRestock.add(plusMayo);
-        layoutRestock.add(restockPeanutButter);
-        layoutRestock.add(peanutBQuant);
-        layoutRestock.add(plusPeanutB);
-        layoutRestock.add(restockStrawberryJam);
-        layoutRestock.add(strawberryJQuant);
-        layoutRestock.add(plusStrawberryJ);
-        layoutRestock.add(restockNutella);
-        layoutRestock.add(nutellaQuant);
-        layoutRestock.add(plusNutella);
-        layoutRestock.add(restockLettuce);
-        layoutRestock.add(lettuceQuant);
-        layoutRestock.add(plusLettuce);
-        layoutRestock.add(restockTomato);
-        layoutRestock.add(tomatoQuant);
-        layoutRestock.add(plusTomato);
-        layoutRestock.add(restockPickle);
-        layoutRestock.add(pickleQuant);
-        layoutRestock.add(plusPickle);
+        layoutRestockItems.add(restockBread);
+        layoutRestockItems.add(breadQuant);
+        layoutRestockItems.add(plusBread);
+        layoutRestockItems.add(restockHam);
+        layoutRestockItems.add(hamQuant);
+        layoutRestockItems.add(plusHam);
+        layoutRestockItems.add(restockCheese);
+        layoutRestockItems.add(cheeseQuant);
+        layoutRestockItems.add(plusCheese);
+        layoutRestockItems.add(restockChicken);
+        layoutRestockItems.add(chickenQuant);
+        layoutRestockItems.add(plusChicken);
+        layoutRestockItems.add(restockTuna);
+        layoutRestockItems.add(tunaQuant);
+        layoutRestockItems.add(plusTuna);
+        layoutRestockItems.add(restockEgg);
+        layoutRestockItems.add(eggQuant);
+        layoutRestockItems.add(plusEgg);
+        layoutRestockItems.add(restockMayo);
+        layoutRestockItems.add(mayoQuant);
+        layoutRestockItems.add(plusMayo);
+        layoutRestockItems.add(restockPeanutButter);
+        layoutRestockItems.add(peanutBQuant);
+        layoutRestockItems.add(plusPeanutB);
+        layoutRestockItems.add(restockStrawberryJam);
+        layoutRestockItems.add(strawberryJQuant);
+        layoutRestockItems.add(plusStrawberryJ);
+        layoutRestockItems.add(restockNutella);
+        layoutRestockItems.add(nutellaQuant);
+        layoutRestockItems.add(plusNutella);
+        layoutRestockItems.add(restockLettuce);
+        layoutRestockItems.add(lettuceQuant);
+        layoutRestockItems.add(plusLettuce);
+        layoutRestockItems.add(restockTomato);
+        layoutRestockItems.add(tomatoQuant);
+        layoutRestockItems.add(plusTomato);
+        layoutRestockItems.add(restockPickle);
+        layoutRestockItems.add(pickleQuant);
+        layoutRestockItems.add(plusPickle);
+        layoutRestockItems.add(backMaintenanceModeS);
 
-        // filler.setContentAreaFilled(false);
-        // filler.setFocusPainted(false);
-        // filler.setBorderPainted(false);
+        //layoutRestockItems.add(filler2);
 
-        // layoutRestock.add(filler);
+        layoutRestockItems.add(confirmRestockItemsS);
 
-        layoutRestock.add(confirmRestock);
-
-        displayBlank2.add(layoutRestock);
+        displayBlank2.add(layoutRestockItems);
 
         container.add(displayBlank2, "9");
+     }
+
+     public void buildRestockSandwich(){
+        background_image_plain = new ImageIcon("plainbg.png");
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayBlank3 = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayBlank3.setLayout(new GridBagLayout());
+        layoutRestockSandwiches = new JPanel(new GridLayout(10, 3, 5, 5));
+
+        layoutRestockSandwiches.setOpaque(false);
+
+        restockHamSandwich = new JLabel("Ham Sand.");
+        restockCheeseSandwich = new JLabel("Cheese Sand.");
+        restockChickenSandwich = new JLabel("Chicken Sand.");
+        restockTunaSandwich = new JLabel("Tuna Sand.");
+        restockEggSandwich = new JLabel("Egg Sand.");
+        restockPeanutButterSandwich = new JLabel("Peanut Butter Sand.");
+        restockStrawberryJamSandwich = new JLabel("Strawberry Jam Sand.");
+        restockNutellaSandwich = new JLabel("Nutella Sand.");
+
+        hamSandwichQuant = new JTextField();
+        cheeseSandwichQuant = new JTextField();
+        chickenSandwichQuant = new JTextField();
+        tunaSandwichQuant = new JTextField();
+        eggSandwichQuant = new JTextField();
+        peanutBSandwichQuant = new JTextField();
+        strawberryJSandwichQuant = new JTextField();
+        nutellaSandwichQuant = new JTextField();
+
+        plusHamSandwich = new JButton("+");
+        plusCheeseSandwich = new JButton("+");
+        plusChickenSandwich = new JButton("+");
+        plusTunaSandwich = new JButton("+");
+        plusEggSandwich = new JButton("+");
+        plusPeanutBSandwich = new JButton("+");
+        plusStrawberryJSandwich = new JButton("+");
+        plusNutellaSandwich = new JButton("+");
+        confirmRestockSandwiches = new JButton("Confirm");
+        backMaintenanceModeFromSandwich = new JButton("Go Back");
+
+        layoutRestockSandwiches.add(restockHamSandwich);
+        layoutRestockSandwiches.add(hamSandwichQuant);
+        layoutRestockSandwiches.add(plusHamSandwich);
+        layoutRestockSandwiches.add(restockCheeseSandwich);
+        layoutRestockSandwiches.add(cheeseSandwichQuant);
+        layoutRestockSandwiches.add(plusCheeseSandwich);
+        layoutRestockSandwiches.add(restockChickenSandwich);
+        layoutRestockSandwiches.add(chickenSandwichQuant);
+        layoutRestockSandwiches.add(plusChickenSandwich);
+        layoutRestockSandwiches.add(restockTunaSandwich);
+        layoutRestockSandwiches.add(tunaSandwichQuant);
+        layoutRestockSandwiches.add(plusTunaSandwich);
+        layoutRestockSandwiches.add(restockEggSandwich);
+        layoutRestockSandwiches.add(eggSandwichQuant);
+        layoutRestockSandwiches.add(plusEggSandwich);
+        layoutRestockSandwiches.add(restockPeanutButterSandwich);
+        layoutRestockSandwiches.add(peanutBSandwichQuant);
+        layoutRestockSandwiches.add(plusPeanutBSandwich);
+        layoutRestockSandwiches.add(restockStrawberryJamSandwich);
+        layoutRestockSandwiches.add(strawberryJSandwichQuant);
+        layoutRestockSandwiches.add(plusStrawberryJSandwich);
+        layoutRestockSandwiches.add(restockNutellaSandwich);
+        layoutRestockSandwiches.add(nutellaSandwichQuant);
+        layoutRestockSandwiches.add(plusNutellaSandwich);
+        layoutRestockSandwiches.add(backMaintenanceModeFromSandwich);
+
+        // layoutRestockSandwiches.add(filler1);
+
+        layoutRestockSandwiches.add(confirmRestockSandwiches);
+
+        displayBlank3.add(layoutRestockSandwiches);
+
+        container.add(displayBlank3, "10");
      }
 
      //for JOptionPanes
@@ -987,122 +1090,106 @@ public class FactoryView extends JFrame{
     public void setPlus1Listener(ActionListener actnListener)  {
         this.plus1.addActionListener(actnListener);
     }
-
     public void setPlus5Listener(ActionListener actnListener)  {
         this.plus5.addActionListener(actnListener);
     }
-
     public void setPlus10Listener(ActionListener actnListener) {
         this.plus10.addActionListener(actnListener);
     }
-
     public void setPlus20Listener(ActionListener actnListener) {
         this.plus20.addActionListener(actnListener);
     }
-
     public void setPlus50Listener(ActionListener actnListener) {
         this.plus50.addActionListener(actnListener);
     }
-
     public void setPlus100Listener(ActionListener actnListener)    {
         this.plus100.addActionListener(actnListener);
     }
-
     public void setPlus200Listener(ActionListener actnListener)    {
         this.plus200.addActionListener(actnListener);
     }
-
     public void setPlus500Listener(ActionListener actnListener)    {
         this.plus500.addActionListener(actnListener);
     }
-
     public void setPlus1000Listener(ActionListener actnListener)   {
         this.plus1000.addActionListener(actnListener);
     }
-
     public String getQuant1()   {
         return this.quant1.getText();
     }
-
     public String getQuant5()   {
         return this.quant5.getText();
     }
-
     public String getQuant10()   {
         return this.quant10.getText();
     }
-
     public String getQuant20()   {
         return this.quant20.getText();
     }
-
     public String getQuant50()   {
         return this.quant50.getText();
     }
-
     public String getQuant100()   {
         return this.quant100.getText();
     }
-
     public String getQuant200()   {
         return this.quant200.getText();
     }
-
     public String getQuant500()   {
         return this.quant500.getText();
     }
-
     public String getQuant1000()   {
         return this.quant1000.getText();
     }
-
     public String getCurrentAmount()    {
         return this.currentAmount.getText();
     }
-
     public void setQuant1(String quant1) {
         this.quant1.setText(quant1);
     }
-
     public void setQuant5(String quant5) {
         this.quant5.setText(quant5);
     }
-
     public void setQuant10(String quant10) {
         this.quant10.setText(quant10);
     }
-
     public void setQuant20(String quant20) {
         this.quant20.setText(quant20);
     }
-
     public void setQuant50(String quant50) {
         this.quant50.setText(quant50);
     }
-
     public void setQuant100(String quant100) {
         this.quant100.setText(quant100);
     }
-
     public void setQuant200(String quant200) {
         this.quant200.setText(quant200);
     }
-
     public void setQuant500(String quant500) {
         this.quant500.setText(quant500);
     }
-
     public void setQuant1000(String quant1000) {
         this.quant1000.setText(quant1000);
     }
-
     public void setCurrentAmount(String currentAmount)  {
         this.currentAmount.setText(currentAmount);
     }
 
     //button listeners for maintenance method
-    public void setRestockListener(ActionListener actnListener)    {
+    public void setRestockItemsListener(ActionListener actnListener)    {
         this.restockItems.addActionListener(actnListener);
+    }
+    public void setRestockSandwichesListener(ActionListener actnListener)    {
+        this.restockSandwich.addActionListener(actnListener);
+    }
+    public void setBackMaintenanceModeListenerR(ActionListener actnListener)    {
+        this.backMaintenanceModeR.addActionListener(actnListener);
+    }
+    public void setBackMaintenanceModeListenerS(ActionListener actnListener)    {
+        this.backMaintenanceModeS.addActionListener(actnListener);
+    }
+    public void setBackMaintenanceModeListenerFromSandwich(ActionListener actnListener)    {
+        this.backMaintenanceModeFromSandwich.addActionListener(actnListener);
     }
 
 

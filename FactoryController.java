@@ -320,7 +320,25 @@ public class FactoryController {
                 fView.displayTestVM();
             }
         });
-        this.fView.setRestockListener(new ActionListener() {
+        this.fView.setBackMaintenanceModeListenerR(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayMaintenanceInterface();
+            }
+        });
+        this.fView.setBackMaintenanceModeListenerS(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayMaintenanceInterface();
+            }
+        });
+        this.fView.setBackMaintenanceModeListenerFromSandwich(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayMaintenanceInterface();
+            }
+        });
+        this.fView.setRestockItemsListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)  {
                 // fView.displayRestockItemRVM();
@@ -329,6 +347,13 @@ public class FactoryController {
                 } else if (fModel.getCurrentMachine() instanceof VendingMachine) {
                     fView.displayRestockItemRVM();
                 }
+            }
+        });
+        this.fView.setRestockSandwichesListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                // fView.displayRestockItemRVM();
+                fView.displayRestockSandwiches();
             }
         });
 
