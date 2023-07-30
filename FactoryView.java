@@ -60,6 +60,7 @@ public class FactoryView extends JFrame{
 
     //COMPONENTS FOR MAINTENANCE MODE WINDOW
      private JButton restockItems;
+     private JButton restockSandwich;
      private JButton setItemPrice;
      private JButton collectPayments;
      private JButton collectVMMoney;
@@ -68,6 +69,52 @@ public class FactoryView extends JFrame{
      private JButton viewInventoryHistory;
      private JPanel layoutMaintenance;
      private JButton goBackTestVM;
+
+     //MAINTENANCE MODE - RESTOCK ITEMS
+     private JLabel restockBread;
+     private JLabel restockHam;
+     private JLabel restockCheese;
+     private JLabel restockChicken;
+     private JLabel restockTuna;
+     private JLabel restockEgg;
+     private JLabel restockMayo;
+     private JLabel restockPeanutButter;
+     private JLabel restockStrawberryJam;
+     private JLabel restockNutella;
+     private JLabel restockLettuce;
+     private JLabel restockTomato;
+     private JLabel restockPickle;
+
+     private JTextField breadQuant;
+     private JTextField hamQuant;
+     private JTextField cheeseQuant;
+     private JTextField chickenQuant;
+     private JTextField tunaQuant;
+     private JTextField eggQuant;
+     private JTextField mayoQuant;
+     private JTextField peanutBQuant;
+     private JTextField strawberryJQuant;
+     private JTextField nutellaQuant;
+     private JTextField lettuceQuant;
+     private JTextField tomatoQuant;
+     private JTextField pickleQuant;
+
+     private JButton plusBread;
+     private JButton plusHam;
+     private JButton plusCheese;
+     private JButton plusChicken;
+     private JButton plusTuna;
+     private JButton plusEgg;
+     private JButton plusMayo;
+     private JButton plusPeanutB;
+     private JButton plusStrawberryJ;
+     private JButton plusNutella;
+     private JButton plusLettuce;
+     private JButton plusTomato;
+     private JButton plusPickle;
+     private JButton confirmRestock;
+
+     private JPanel layoutRestock;
 
     //ADDITIONAL COMPONENTS FOR MAINTENANCE MODE WINDOW - SVM
 
@@ -105,6 +152,7 @@ public class FactoryView extends JFrame{
     private Container container;    //uh lalagyan?
     private GridBagConstraints gbc2;
     private GridBagConstraints gbc3;
+    private JButton filler;
 
     //for background image
     private JLabel displayField;
@@ -121,6 +169,14 @@ public class FactoryView extends JFrame{
     private ImageIcon background_image_SVM;
     private JLabel displayFieldMaintenance;
     private ImageIcon background_image_Maintenance;
+    private JLabel displayBlank1;
+    private JLabel displayBlank2;
+    private JLabel displayBlank3;
+    private JLabel displayBlank4;
+    private JLabel displayBlank5;
+    private JLabel displayBlank6;
+    private JLabel displayBlank7;
+    private ImageIcon background_image_plain;
 
     public FactoryView(){
         super("CCPROG3 MCO2");
@@ -131,6 +187,7 @@ public class FactoryView extends JFrame{
         container = getContentPane();
         gbc2 = new GridBagConstraints();
         gbc2.insets = new Insets(0, 5, 10, 5);
+        filler = new JButton("");
         
         //panels
         buyMainPanel = new JPanel();
@@ -219,122 +276,37 @@ public class FactoryView extends JFrame{
         this.buildRegularVM();
         this.buildSpecialVM();
         this.buildMaintenanceMode();
-    }
-
-    //button listeners
-    public void setCreateVMListener(ActionListener actnListener)    {
-        this.createVM.addActionListener(actnListener);
-    }
-    
-    public void setTestVMListener(ActionListener actnListener)    {
-        this.testVM.addActionListener(actnListener);
-    }
-
-    public void setBuyItemListener(ActionListener actnListener) {
-        this.buyItem.addActionListener(actnListener);
-    }
-
-    public void setConfirmMoney(ActionListener actnListener) {
-        this.confirmPayment.addActionListener(actnListener);
-    }
-
-    public void setMaintenanceListener(ActionListener actnListener) {
-        this.accMain.addActionListener(actnListener);
-    }
-
-    public void setBackListener(ActionListener actnListener)    {
-       this.goBack.addActionListener(actnListener);
-    }
-
-    public void setBackTestVMListener(ActionListener actnListener)    {
-       this.goBackTestVM.addActionListener(actnListener);
-    }
-
-    
-    public void setRegularVMBtnListener(ActionListener actnListener)    {
-       this.regularVM.addActionListener(actnListener);
-    }
-    public void setSpecialVMBtnListener(ActionListener actnListener)    {
-        this.specialVM.addActionListener(actnListener);
-    }
-
-    //button listeners for item slots in RVM and SVM
-    public void setSlot1RListener(ActionListener actnListener)    {
-        this.slot1R.addActionListener(actnListener);
-    }
-    public void setSlot2RListener(ActionListener actnListener)    {
-        this.slot2R.addActionListener(actnListener);
-    }
-    public void setSlot3RListener(ActionListener actnListener)    {
-        this.slot3R.addActionListener(actnListener);
-    }
-    public void setSlot4RListener(ActionListener actnListener)    {
-        this.slot4R.addActionListener(actnListener);
-    }
-    public void setSlot5RListener(ActionListener actnListener)    {
-        this.slot5R.addActionListener(actnListener);
-    }
-    public void setSlot6RListener(ActionListener actnListener)    {
-        this.slot6R.addActionListener(actnListener);
-    }
-    public void setSlot7RListener(ActionListener actnListener)    {
-        this.slot7R.addActionListener(actnListener);
-    }
-    public void setSlot8RListener(ActionListener actnListener)    {
-        this.slot8R.addActionListener(actnListener);
-    }
-    public void setSlot1SListener(ActionListener actnListener)    {
-        this.slot1S.addActionListener(actnListener);
-    }
-    public void setSlot2SListener(ActionListener actnListener)    {
-        this.slot2S.addActionListener(actnListener);
-    }
-    public void setSlot3SListener(ActionListener actnListener)    {
-        this.slot3S.addActionListener(actnListener);
-    }
-    public void setSlot4SListener(ActionListener actnListener)    {
-        this.slot4S.addActionListener(actnListener);
-    }
-    public void setSlot5SListener(ActionListener actnListener)    {
-        this.slot5S.addActionListener(actnListener);
-    }
-    public void setSlot6SListener(ActionListener actnListener)    {
-        this.slot6S.addActionListener(actnListener);
-    }
-    public void setSlot7SListener(ActionListener actnListener)    {
-        this.slot7S.addActionListener(actnListener);
-    }
-    public void setSlot8SListener(ActionListener actnListener)    {
-        this.slot8S.addActionListener(actnListener);
+        this.buildRestockItemsRVM();
+        this.buildRestockItemsSVM();
     }
 
     //display interface methods
     public void displayCreateVM() {
         cl.show(container, "2");
     }
-
     public void displayTestVM(){
         cl.show(container, "3");
      }
-
      public void displayFactoryView()  {
         cl.show(container, "1");
      }
-
      public void displayBuyItemInterface(){
         cl.show(container, "4");
      }
-
      public void displayRVMInterface(){
         cl.show(container, "5");
      }
-
      public void displaySVMInterface(){
         cl.show(container, "6");
      }
-
      public void displayMaintenanceInterface(){
         cl.show(container, "7");
+     }
+     public void displayRestockItemRVM(){
+        cl.show(container, "8");
+     }
+     public void displayRestockItemSVM(){
+        cl.show(container, "9");
      }
 
     //build methods
@@ -429,15 +401,25 @@ public class FactoryView extends JFrame{
         minus500 = new JButton("-");
         minus1000 = new JButton("-");
 
-        quant1 = new JTextField();
-        quant5 = new JTextField();
-        quant10 = new JTextField();
-        quant20 = new JTextField();
-        quant50 = new JTextField();
-        quant100 = new JTextField();
-        quant200 = new JTextField();
-        quant500 = new JTextField();
-        quant1000 = new JTextField();
+        quant1 = new JTextField("0");
+        quant1.setHorizontalAlignment(JTextField.CENTER);
+        quant5 = new JTextField("0");
+        quant5.setHorizontalAlignment(JTextField.CENTER);
+        quant10 = new JTextField("0");
+        quant10.setHorizontalAlignment(JTextField.CENTER);
+        quant20 = new JTextField("0");
+        quant20.setHorizontalAlignment(JTextField.CENTER);
+        quant50 = new JTextField("0");
+        quant50.setHorizontalAlignment(JTextField.CENTER);
+        quant100 = new JTextField("0");
+        quant100.setHorizontalAlignment(JTextField.CENTER);
+        quant200 = new JTextField("0");
+        quant200.setHorizontalAlignment(JTextField.CENTER);
+        quant500 = new JTextField("0");
+        quant500.setHorizontalAlignment(JTextField.CENTER);
+        quant1000 = new JTextField("0");
+        quant1000.setHorizontalAlignment(JTextField.CENTER);
+
         quant1.setEditable(false);
         quant5.setEditable(false);
         quant10.setEditable(false);
@@ -486,9 +468,12 @@ public class FactoryView extends JFrame{
         buySubPanel1.add(plus1000);
 
         currentAmount = new JTextField();
+        currentAmount.setHorizontalAlignment(JTextField.CENTER);
         currentAmount.setEditable(false);
         currentAmount.setOpaque(false);
         currentAmount.setPreferredSize(new Dimension(300, 100));
+        Font font = new Font(currentAmount.getFont().getName(), currentAmount.getFont().getSize(), 16);
+        currentAmount.setFont(font);
         confirmPayment = new JButton("Confirm");
         cancelPayment = new JButton("Cancel");
         // confirmPayment.setOpaque(false);
@@ -580,14 +565,13 @@ public class FactoryView extends JFrame{
         layoutRVM.add(viewItemInfoR);
         layoutRVM.add(cancelTransactionR);
 
-        //displayField.add(selectItemRVM);
         displayFieldRVM.add(layoutRVM);
 
         container.add(displayFieldRVM, "5");
      }
 
      public void buildSpecialVM(){
-        background_image_SVM = new ImageIcon("bgtest.png");
+        background_image_SVM = new ImageIcon("selectitem.png");
         Image img5 = background_image_SVM.getImage();
         Image temp_img5 = img5.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
         background_image_SVM = new ImageIcon(temp_img5);
@@ -597,19 +581,50 @@ public class FactoryView extends JFrame{
 
         layoutSVM.setOpaque(false);
 
-        slot1S = new JButton("1"); // insert icon
-        slot2S = new JButton("2");
-        slot3S = new JButton("3");
-        slot4S = new JButton("4");
-        slot5S = new JButton("5");
-        slot6S = new JButton("6");
-        slot7S = new JButton("7");
-        slot8S = new JButton("8");
-        viewItemInfoS = new JButton("0");
-        cancelTransactionS = new JButton("9");
+        slot1S = new JButton(""); // insert icon
+        slot2S = new JButton("");
+        slot3S = new JButton("");
+        slot4S = new JButton("");
+        slot5S = new JButton("");
+        slot6S = new JButton("");
+        slot7S = new JButton("");
+        slot8S = new JButton("");
+        viewItemInfoS = new JButton("");
+        cancelTransactionS = new JButton("");
 
         //setting the size of just one button will set the size for all due to gridlayout
         slot1S.setPreferredSize(new Dimension(80, 80));
+
+        slot1S.setContentAreaFilled(false);
+        slot1S.setFocusPainted(false);
+        slot1S.setBorderPainted(false);
+        slot2S.setContentAreaFilled(false);
+        slot2S.setFocusPainted(false);
+        slot2S.setBorderPainted(false);
+        slot3S.setContentAreaFilled(false);
+        slot3S.setFocusPainted(false);
+        slot3S.setBorderPainted(false);
+        slot4S.setContentAreaFilled(false);
+        slot4S.setFocusPainted(false);
+        slot4S.setBorderPainted(false);
+        slot5S.setContentAreaFilled(false);
+        slot5S.setFocusPainted(false);
+        slot5S.setBorderPainted(false);
+        slot6S.setContentAreaFilled(false);
+        slot6S.setFocusPainted(false);
+        slot6S.setBorderPainted(false);
+        slot7S.setContentAreaFilled(false);
+        slot7S.setFocusPainted(false);
+        slot7S.setBorderPainted(false);
+        slot8S.setContentAreaFilled(false);
+        slot8S.setFocusPainted(false);
+        slot8S.setBorderPainted(false);
+        viewItemInfoS.setContentAreaFilled(false);
+        viewItemInfoS.setFocusPainted(false);
+        viewItemInfoS.setBorderPainted(false);
+        cancelTransactionS.setContentAreaFilled(false);
+        cancelTransactionS.setFocusPainted(false);
+        cancelTransactionS.setBorderPainted(false);
 
         layoutSVM.add(slot1S);
         layoutSVM.add(slot2S);
@@ -622,33 +637,36 @@ public class FactoryView extends JFrame{
         layoutSVM.add(viewItemInfoS);
         layoutSVM.add(cancelTransactionS);
 
-        //displayField.add(selectItemRVM);
         displayFieldSVM.add(layoutSVM);
 
         container.add(displayFieldSVM, "6");
      }
 
      public void buildMaintenanceMode(){
-        background_image_Maintenance = new ImageIcon("bgtest.png");
+        background_image_Maintenance = new ImageIcon("maintenancemodemenu.png");
         Image img5 = background_image_Maintenance.getImage();
         Image temp_img5 = img5.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
         background_image_Maintenance = new ImageIcon(temp_img5);
         displayFieldMaintenance = new JLabel("", background_image_Maintenance, JLabel.CENTER);
         displayFieldMaintenance.setLayout(new GridBagLayout());
-        layoutMaintenance = new JPanel(new GridLayout(8, 1, 10, 15));
+        layoutMaintenance = new JPanel(new GridLayout(5, 2, 10, 15));
         
         layoutMaintenance.setOpaque(false);
 
         restockItems = new JButton("Restock Items");
+        restockSandwich = new JButton("Restock Sandwiches");
         setItemPrice = new JButton("Set Item Price");
         collectPayments = new JButton("Collect Payments");
-        collectVMMoney = new JButton("Collect Vending Machine Money");
-        replenishVMMoney = new JButton("Replenish Vending Machine Money");
-        viewTransactionHistory = new JButton("View Transaction History");
-        viewInventoryHistory = new JButton("View Inventory History");
+        collectVMMoney = new JButton("Collect Machine Money");
+        replenishVMMoney = new JButton("Replenish Machine Money");
+        viewTransactionHistory = new JButton("Transaction History");
+        viewInventoryHistory = new JButton("Inventory History");
         goBackTestVM = new JButton("Go Back");
 
+        restockItems.setPreferredSize(new Dimension(150, 65));
+
         layoutMaintenance.add(restockItems);
+        layoutMaintenance.add(restockSandwich);
         layoutMaintenance.add(setItemPrice);
         layoutMaintenance.add(collectPayments);
         layoutMaintenance.add(collectVMMoney);
@@ -662,20 +680,430 @@ public class FactoryView extends JFrame{
         container.add(displayFieldMaintenance, "7");
      }
 
+     public void buildRestockItemsRVM(){
+        background_image_plain = new ImageIcon("plainbg.png");
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayBlank1 = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayBlank1.setLayout(new GridBagLayout());
+        layoutRestock = new JPanel(new GridLayout(11, 3, 5, 5));
+
+        layoutRestock.setOpaque(false);
+
+        restockBread = new JLabel("Bread");
+        restockHam = new JLabel("Ham");
+        restockCheese = new JLabel("Cheese");
+        restockChicken = new JLabel("Chicken");
+        restockTuna = new JLabel("Tuna");
+        restockEgg = new JLabel("Egg");
+        restockMayo = new JLabel("Mayo");
+        restockPeanutButter = new JLabel("Peanut Butter");
+        restockStrawberryJam = new JLabel("Strawberry Jam");
+        restockNutella = new JLabel("Nutella");
+
+        breadQuant = new JTextField();
+        hamQuant = new JTextField();
+        cheeseQuant = new JTextField();
+        chickenQuant = new JTextField();
+        tunaQuant = new JTextField();
+        eggQuant = new JTextField();
+        mayoQuant = new JTextField();
+        peanutBQuant = new JTextField();
+        strawberryJQuant = new JTextField();
+        nutellaQuant = new JTextField();
+
+        plusBread = new JButton("+");
+        plusHam = new JButton("+");
+        plusCheese = new JButton("+");
+        plusChicken = new JButton("+");
+        plusTuna = new JButton("+");
+        plusEgg = new JButton("+");
+        plusMayo = new JButton("+");
+        plusPeanutB = new JButton("+");
+        plusStrawberryJ = new JButton("+");
+        plusNutella = new JButton("+");
+        confirmRestock = new JButton("Confirm");
+
+        layoutRestock.add(restockBread);
+        layoutRestock.add(breadQuant);
+        layoutRestock.add(plusBread);
+        layoutRestock.add(restockHam);
+        layoutRestock.add(hamQuant);
+        layoutRestock.add(plusHam);
+        layoutRestock.add(restockCheese);
+        layoutRestock.add(cheeseQuant);
+        layoutRestock.add(plusCheese);
+        layoutRestock.add(restockChicken);
+        layoutRestock.add(chickenQuant);
+        layoutRestock.add(plusChicken);
+        layoutRestock.add(restockTuna);
+        layoutRestock.add(tunaQuant);
+        layoutRestock.add(plusTuna);
+        layoutRestock.add(restockEgg);
+        layoutRestock.add(eggQuant);
+        layoutRestock.add(plusEgg);
+        layoutRestock.add(restockMayo);
+        layoutRestock.add(mayoQuant);
+        layoutRestock.add(plusMayo);
+        layoutRestock.add(restockPeanutButter);
+        layoutRestock.add(peanutBQuant);
+        layoutRestock.add(plusPeanutB);
+        layoutRestock.add(restockStrawberryJam);
+        layoutRestock.add(strawberryJQuant);
+        layoutRestock.add(plusStrawberryJ);
+        layoutRestock.add(restockNutella);
+        layoutRestock.add(nutellaQuant);
+        layoutRestock.add(plusNutella);
+
+        // filler.setContentAreaFilled(false);
+        // filler.setFocusPainted(false);
+        // filler.setBorderPainted(false);
+
+        // layoutRestock.add(filler);
+
+        layoutRestock.add(confirmRestock);
+
+        displayBlank1.add(layoutRestock);
+
+        container.add(displayBlank1, "8");
+     }
+
+     public void buildRestockItemsSVM(){
+        background_image_plain = new ImageIcon("plainbg.png");
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayBlank2 = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayBlank2.setLayout(new GridBagLayout());
+        layoutRestock = new JPanel(new GridLayout(14, 3, 5, 5));
+
+        layoutRestock.setOpaque(false);
+
+        restockBread = new JLabel("Bread");
+        restockHam = new JLabel("Ham");
+        restockCheese = new JLabel("Cheese");
+        restockChicken = new JLabel("Chicken");
+        restockTuna = new JLabel("Tuna");
+        restockEgg = new JLabel("Egg");
+        restockMayo = new JLabel("Mayo");
+        restockPeanutButter = new JLabel("Peanut Butter");
+        restockStrawberryJam = new JLabel("Strawberry Jam");
+        restockNutella = new JLabel("Nutella");
+        restockLettuce = new JLabel("Lettuce");
+        restockTomato = new JLabel("Tomato");
+        restockPickle = new JLabel("Pickle");
+
+        breadQuant = new JTextField();
+        hamQuant = new JTextField();
+        cheeseQuant = new JTextField();
+        chickenQuant = new JTextField();
+        tunaQuant = new JTextField();
+        eggQuant = new JTextField();
+        mayoQuant = new JTextField();
+        peanutBQuant = new JTextField();
+        strawberryJQuant = new JTextField();
+        nutellaQuant = new JTextField();
+        lettuceQuant = new JTextField();
+        tomatoQuant = new JTextField();
+        pickleQuant = new JTextField();
+
+        plusBread = new JButton("+");
+        plusHam = new JButton("+");
+        plusCheese = new JButton("+");
+        plusChicken = new JButton("+");
+        plusTuna = new JButton("+");
+        plusEgg = new JButton("+");
+        plusMayo = new JButton("+");
+        plusPeanutB = new JButton("+");
+        plusStrawberryJ = new JButton("+");
+        plusNutella = new JButton("+");
+        plusLettuce = new JButton("+");
+        plusTomato = new JButton("+");
+        plusPickle = new JButton("+");
+        confirmRestock = new JButton("Confirm");
+
+        layoutRestock.add(restockBread);
+        layoutRestock.add(breadQuant);
+        layoutRestock.add(plusBread);
+        layoutRestock.add(restockHam);
+        layoutRestock.add(hamQuant);
+        layoutRestock.add(plusHam);
+        layoutRestock.add(restockCheese);
+        layoutRestock.add(cheeseQuant);
+        layoutRestock.add(plusCheese);
+        layoutRestock.add(restockChicken);
+        layoutRestock.add(chickenQuant);
+        layoutRestock.add(plusChicken);
+        layoutRestock.add(restockTuna);
+        layoutRestock.add(tunaQuant);
+        layoutRestock.add(plusTuna);
+        layoutRestock.add(restockEgg);
+        layoutRestock.add(eggQuant);
+        layoutRestock.add(plusEgg);
+        layoutRestock.add(restockMayo);
+        layoutRestock.add(mayoQuant);
+        layoutRestock.add(plusMayo);
+        layoutRestock.add(restockPeanutButter);
+        layoutRestock.add(peanutBQuant);
+        layoutRestock.add(plusPeanutB);
+        layoutRestock.add(restockStrawberryJam);
+        layoutRestock.add(strawberryJQuant);
+        layoutRestock.add(plusStrawberryJ);
+        layoutRestock.add(restockNutella);
+        layoutRestock.add(nutellaQuant);
+        layoutRestock.add(plusNutella);
+        layoutRestock.add(restockLettuce);
+        layoutRestock.add(lettuceQuant);
+        layoutRestock.add(plusLettuce);
+        layoutRestock.add(restockTomato);
+        layoutRestock.add(tomatoQuant);
+        layoutRestock.add(plusTomato);
+        layoutRestock.add(restockPickle);
+        layoutRestock.add(pickleQuant);
+        layoutRestock.add(plusPickle);
+
+        // filler.setContentAreaFilled(false);
+        // filler.setFocusPainted(false);
+        // filler.setBorderPainted(false);
+
+        // layoutRestock.add(filler);
+
+        layoutRestock.add(confirmRestock);
+
+        displayBlank2.add(layoutRestock);
+
+        container.add(displayBlank2, "9");
+     }
+
      //for JOptionPanes
      public void dispSelectItem(){
         selectItemRVM = new JOptionPane();
-        JOptionPane.showConfirmDialog(null, "Purchase item?", "System Message", JOptionPane.YES_NO_OPTION);
+        int resultSelectItem = JOptionPane.showConfirmDialog(null, "Purchase item?", "System Message", JOptionPane.YES_NO_OPTION);
+
+        if(resultSelectItem == JOptionPane.YES_OPTION){
+            
+        }
      }
 
      public void dispCustomizeItem(){
         selectItemSVM = new JOptionPane();
-        JOptionPane.showConfirmDialog(null, "Customize item?", "System Message", JOptionPane.YES_NO_CANCEL_OPTION);
+        int resultCustomizeItem = JOptionPane.showConfirmDialog(null, "Customize item?", "System Message", JOptionPane.YES_NO_CANCEL_OPTION);
      }
 
      public void dispErrorTestVM(){
         JOptionPane.showMessageDialog(null, "No Vending Machine Created!", "Error", JOptionPane.ERROR_MESSAGE);
         
      }
+
+    //button listeners
+    public void setCreateVMListener(ActionListener actnListener)    {
+        this.createVM.addActionListener(actnListener);
+    }
+    
+    public void setTestVMListener(ActionListener actnListener)    {
+        this.testVM.addActionListener(actnListener);
+    }
+
+    public void setBuyItemListener(ActionListener actnListener) {
+        this.buyItem.addActionListener(actnListener);
+    }
+
+    public void setConfirmMoney(ActionListener actnListener) {
+        this.confirmPayment.addActionListener(actnListener);
+    }
+
+    public void setMaintenanceListener(ActionListener actnListener) {
+        this.accMain.addActionListener(actnListener);
+    }
+
+    public void setBackListener(ActionListener actnListener)    {
+       this.goBack.addActionListener(actnListener);
+    }
+
+    public void setBackTestVMListener(ActionListener actnListener)    {
+       this.goBackTestVM.addActionListener(actnListener);
+    }
+
+    
+    public void setRegularVMBtnListener(ActionListener actnListener)    {
+       this.regularVM.addActionListener(actnListener);
+    }
+    public void setSpecialVMBtnListener(ActionListener actnListener)    {
+        this.specialVM.addActionListener(actnListener);
+    }
+
+    //button listeners for item slots in RVM and SVM
+    public void setSlot1RListener(ActionListener actnListener)    {
+        this.slot1R.addActionListener(actnListener);
+    }
+    public void setSlot2RListener(ActionListener actnListener)    {
+        this.slot2R.addActionListener(actnListener);
+    }
+    public void setSlot3RListener(ActionListener actnListener)    {
+        this.slot3R.addActionListener(actnListener);
+    }
+    public void setSlot4RListener(ActionListener actnListener)    {
+        this.slot4R.addActionListener(actnListener);
+    }
+    public void setSlot5RListener(ActionListener actnListener)    {
+        this.slot5R.addActionListener(actnListener);
+    }
+    public void setSlot6RListener(ActionListener actnListener)    {
+        this.slot6R.addActionListener(actnListener);
+    }
+    public void setSlot7RListener(ActionListener actnListener)    {
+        this.slot7R.addActionListener(actnListener);
+    }
+    public void setSlot8RListener(ActionListener actnListener)    {
+        this.slot8R.addActionListener(actnListener);
+    }
+    public void setSlot1SListener(ActionListener actnListener)    {
+        this.slot1S.addActionListener(actnListener);
+    }
+    public void setSlot2SListener(ActionListener actnListener)    {
+        this.slot2S.addActionListener(actnListener);
+    }
+    public void setSlot3SListener(ActionListener actnListener)    {
+        this.slot3S.addActionListener(actnListener);
+    }
+    public void setSlot4SListener(ActionListener actnListener)    {
+        this.slot4S.addActionListener(actnListener);
+    }
+    public void setSlot5SListener(ActionListener actnListener)    {
+        this.slot5S.addActionListener(actnListener);
+    }
+    public void setSlot6SListener(ActionListener actnListener)    {
+        this.slot6S.addActionListener(actnListener);
+    }
+    public void setSlot7SListener(ActionListener actnListener)    {
+        this.slot7S.addActionListener(actnListener);
+    }
+    public void setSlot8SListener(ActionListener actnListener)    {
+        this.slot8S.addActionListener(actnListener);
+    }
+
+    //button listeners for insert money interface
+    public void setPlus1Listener(ActionListener actnListener)  {
+        this.plus1.addActionListener(actnListener);
+    }
+
+    public void setPlus5Listener(ActionListener actnListener)  {
+        this.plus5.addActionListener(actnListener);
+    }
+
+    public void setPlus10Listener(ActionListener actnListener) {
+        this.plus10.addActionListener(actnListener);
+    }
+
+    public void setPlus20Listener(ActionListener actnListener) {
+        this.plus20.addActionListener(actnListener);
+    }
+
+    public void setPlus50Listener(ActionListener actnListener) {
+        this.plus50.addActionListener(actnListener);
+    }
+
+    public void setPlus100Listener(ActionListener actnListener)    {
+        this.plus100.addActionListener(actnListener);
+    }
+
+    public void setPlus200Listener(ActionListener actnListener)    {
+        this.plus200.addActionListener(actnListener);
+    }
+
+    public void setPlus500Listener(ActionListener actnListener)    {
+        this.plus500.addActionListener(actnListener);
+    }
+
+    public void setPlus1000Listener(ActionListener actnListener)   {
+        this.plus1000.addActionListener(actnListener);
+    }
+
+    public String getQuant1()   {
+        return this.quant1.getText();
+    }
+
+    public String getQuant5()   {
+        return this.quant5.getText();
+    }
+
+    public String getQuant10()   {
+        return this.quant10.getText();
+    }
+
+    public String getQuant20()   {
+        return this.quant20.getText();
+    }
+
+    public String getQuant50()   {
+        return this.quant50.getText();
+    }
+
+    public String getQuant100()   {
+        return this.quant100.getText();
+    }
+
+    public String getQuant200()   {
+        return this.quant200.getText();
+    }
+
+    public String getQuant500()   {
+        return this.quant500.getText();
+    }
+
+    public String getQuant1000()   {
+        return this.quant1000.getText();
+    }
+
+    public String getCurrentAmount()    {
+        return this.currentAmount.getText();
+    }
+
+    public void setQuant1(String quant1) {
+        this.quant1.setText(quant1);
+    }
+
+    public void setQuant5(String quant5) {
+        this.quant5.setText(quant5);
+    }
+
+    public void setQuant10(String quant10) {
+        this.quant10.setText(quant10);
+    }
+
+    public void setQuant20(String quant20) {
+        this.quant20.setText(quant20);
+    }
+
+    public void setQuant50(String quant50) {
+        this.quant50.setText(quant50);
+    }
+
+    public void setQuant100(String quant100) {
+        this.quant100.setText(quant100);
+    }
+
+    public void setQuant200(String quant200) {
+        this.quant200.setText(quant200);
+    }
+
+    public void setQuant500(String quant500) {
+        this.quant500.setText(quant500);
+    }
+
+    public void setQuant1000(String quant1000) {
+        this.quant1000.setText(quant1000);
+    }
+
+    public void setCurrentAmount(String currentAmount)  {
+        this.currentAmount.setText(currentAmount);
+    }
+
+    //button listeners for maintenance method
+    public void setRestockListener(ActionListener actnListener)    {
+        this.restockItems.addActionListener(actnListener);
+    }
+
 
 }
