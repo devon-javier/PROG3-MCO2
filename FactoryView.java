@@ -261,7 +261,20 @@ public class FactoryView extends JFrame{
     private JButton viewItemInfoR;
     private JOptionPane selectItemRVM;  //when an item is selected
     private JPanel layoutRVM;
-    private JTextArea containItemInfoR;
+    private JTextArea containItemPriceR;
+
+    private JPanel layoutViewItemInfoR;
+    private JLabel displayViewItemInfoR;
+    private JButton goBackFromViewInfoR;
+
+    private JTextField hamSandAvailabilityR;
+    private JTextField cheeseSandAvailabilityR;
+    private JTextField chickenSandAvailabilityR;
+    private JTextField tunaSandAvailabilityR;
+    private JTextField eggSandAvailabilityR;
+    private JTextField peanutBSandAvailabilityR;
+    private JTextField strawberryJSandAvailabilityR;
+    private JTextField nutellaSandAvailabilityR;
 
     //COMPONENTS FOR SPECIAL VM WINDOW
     private JButton slot1S;
@@ -276,7 +289,20 @@ public class FactoryView extends JFrame{
     private JButton viewItemInfoS;
     private JOptionPane selectItemSVM;  //when an item is selected
     private JPanel layoutSVM;
-    private JTextArea containItemInfoS;
+    private JTextArea containItemPriceS;
+
+    private JPanel layoutViewItemInfoS;
+    private JLabel displayViewItemInfoS;
+    private JButton goBackFromViewInfoS;
+
+    private JTextField hamSandAvailabilityS;
+    private JTextField cheeseSandAvailabilityS;
+    private JTextField chickenSandAvailabilityS;
+    private JTextField tunaSandAvailabilityS;
+    private JTextField eggSandAvailabilityS;
+    private JTextField peanutBSandAvailabilityS;
+    private JTextField strawberryJSandAvailabilityS;
+    private JTextField nutellaSandAvailabilityS;
 
     //misc.
     private GridBagConstraints gbc;
@@ -421,6 +447,7 @@ public class FactoryView extends JFrame{
         this.buildRestockSandwich();
         this.buildSetItemPrice(); 
         this.buildReplenishMoney();
+        this.buildViewItemInfoR();
     }
 
     //display interface methods
@@ -639,6 +666,41 @@ public class FactoryView extends JFrame{
 
         container.add(displayFieldBuy, "4");
     }
+
+    public void buildViewItemInfoR(){                                                  //START~~~~~~~~~~~~~~~~~~~~
+        background_image_plain = new ImageIcon("maintenancemodemenu.png");
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayViewItemInfoR = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayViewItemInfoR.setLayout(new GridBagLayout());
+        layoutViewItemInfoR = new JPanel(new GridLayout(9, 1, 10, 30));
+
+        hamSandAvailabilityR = new JTextField();
+        cheeseSandAvailabilityR = new JTextField();
+        chickenSandAvailabilityR = new JTextField();
+        tunaSandAvailabilityR = new JTextField();
+        eggSandAvailabilityR = new JTextField();
+        peanutBSandAvailabilityR = new JTextField();
+        strawberryJSandAvailabilityR = new JTextField();
+        nutellaSandAvailabilityR = new JTextField();
+
+        goBackFromViewInfoR = new JButton("Go Back");
+
+        layoutViewItemInfoR.add(hamSandAvailabilityR);
+        layoutViewItemInfoR.add(cheeseSandAvailabilityR);
+        layoutViewItemInfoR.add(chickenSandAvailabilityR);
+        layoutViewItemInfoR.add(tunaSandAvailabilityR);
+        layoutViewItemInfoR.add(eggSandAvailabilityR);
+        layoutViewItemInfoR.add(peanutBSandAvailabilityR);
+        layoutViewItemInfoR.add(strawberryJSandAvailabilityR);
+        layoutViewItemInfoR.add(nutellaSandAvailabilityR);
+        layoutViewItemInfoR.add(goBackFromViewInfoR);
+
+        displayViewItemInfoR.add(layoutViewItemInfoR);
+
+        container.add(displayViewItemInfoR, "13");
+     }             
 
      public void buildRegularVM(){
 
@@ -1139,13 +1201,21 @@ public class FactoryView extends JFrame{
         setNutellaSandwichPrice = new JLabel("Nutella Sand. Price:");
 
         curHamSandwichPrice = new JTextField();
+        curHamSandwichPrice.setHorizontalAlignment(JTextField.CENTER);
         curCheeseSandwichPrice = new JTextField();
+        curCheeseSandwichPrice.setHorizontalAlignment(JTextField.CENTER);
         curChickenSandwichPrice = new JTextField();
+        curChickenSandwichPrice.setHorizontalAlignment(JTextField.CENTER);
         curTunaSandwichPrice = new JTextField();
+        curTunaSandwichPrice.setHorizontalAlignment(JTextField.CENTER);
         curEggSandwichPrice = new JTextField();
+        curEggSandwichPrice.setHorizontalAlignment(JTextField.CENTER);
         curPeanutBSandwichPrice = new JTextField();
+        curPeanutBSandwichPrice.setHorizontalAlignment(JTextField.CENTER);
         curStrawberryJSandwichPrice = new JTextField();
+        curStrawberryJSandwichPrice.setHorizontalAlignment(JTextField.CENTER);
         curNutellaSandwichPrice = new JTextField();
+        curNutellaSandwichPrice.setHorizontalAlignment(JTextField.CENTER);
 
         confirmItemPrice = new JButton("Confirm");
         backMaintenanceModeFromSetPrice = new JButton("Go Back");
@@ -1174,13 +1244,34 @@ public class FactoryView extends JFrame{
         container.add(displayBlank4, "11");
      }
 
-     public void buildCollectPayment(){
-        //joptionpane so baka di to kailanganin
+     public boolean buildCollectPayment(String message){
+        int resultSelectItem = JOptionPane.showConfirmDialog(null, message, "Collect Payment", JOptionPane.YES_NO_OPTION);
+
+        if(resultSelectItem == JOptionPane.YES_OPTION)   {
+            return true;
+        }
+
+        return false;
      }
 
-     public void buildCollectMachineMoney(){
-        //joptionpane so baka di ko kailanganin
+     public void confirmCollectPayment(String message)  {
+        JOptionPane.showMessageDialog(null, message, "Payment Collected", JOptionPane.INFORMATION_MESSAGE);
      }
+
+     public boolean buildCollectMachineMoney(String message){
+        int resultSelectItem = JOptionPane.showConfirmDialog(null, message, "Collect Vending Machine Money", JOptionPane.YES_NO_OPTION);
+
+        if(resultSelectItem == JOptionPane.YES_OPTION)   {
+            return true;
+        }
+
+        return false;
+     }
+
+     public void confirmCollectVMMoney(String message)  {
+        JOptionPane.showMessageDialog(null, message, "Vending Machine Money Collected", JOptionPane.INFORMATION_MESSAGE);
+     }
+
 
      public void buildReplenishMoney(){
         Image img6 = background_image_plain.getImage();
@@ -1192,6 +1283,7 @@ public class FactoryView extends JFrame{
 
         curVMMoney = new JLabel("Current Money:");
         showCurVMMoney = new JTextField();
+        showCurVMMoney.setHorizontalAlignment(JTextField.CENTER);
 
         curPeso1 = new JLabel("insert 1:");
         curPeso5 = new JLabel("insert 5:");
@@ -1204,14 +1296,23 @@ public class FactoryView extends JFrame{
         curPeso1000 = new JLabel("insert 1000:");
 
         cur1 = new JTextField();
+        cur1.setHorizontalAlignment(JTextField.CENTER);
         cur5 = new JTextField();
+        cur5.setHorizontalAlignment(JTextField.CENTER);
         cur10 = new JTextField();
+        cur10.setHorizontalAlignment(JTextField.CENTER);
         cur20 = new JTextField();
+        cur20.setHorizontalAlignment(JTextField.CENTER);
         cur50 = new JTextField();
+        cur50.setHorizontalAlignment(JTextField.CENTER);
         cur100 = new JTextField();
+        cur100.setHorizontalAlignment(JTextField.CENTER);
         cur200 = new JTextField();
+        cur200.setHorizontalAlignment(JTextField.CENTER);
         cur500 = new JTextField();
+        cur500.setHorizontalAlignment(JTextField.CENTER);
         cur1000 = new JTextField();
+        cur1000.setHorizontalAlignment(JTextField.CENTER);
 
         replenish1 = new JButton("+");
         replenish5 = new JButton("+");
@@ -1294,6 +1395,10 @@ public class FactoryView extends JFrame{
         JOptionPane.showMessageDialog(null, "Lack of Ingredients!", "Error", JOptionPane.ERROR_MESSAGE);
      }
 
+     public void dispErrorNotEnoughMoney(){
+        JOptionPane.showMessageDialog(null, "Not Enough Money", "Error", JOptionPane.ERROR_MESSAGE);
+     }
+
      public void dispViewPriceList(){
         containPriceList = new JTextArea(1, 1);
         String longText = "Ham Sandwich\nP\n\nCheese Sandwich\nP\n\nChicken Sandwich\nP\n\nTuna Sandwich\nP\n\nEgg Salad Sandwich\nP\n\nPeanut Butter Sandwich\nP\n\nStrawberry Jam Sandwich\nP\n\nNutella Sandwich\nP";
@@ -1304,7 +1409,7 @@ public class FactoryView extends JFrame{
      }
 
      public void dispViewItemInfo(){
-        containItemInfoR = new JTextArea(1, 1);
+        containItemPriceR = new JTextArea(1, 1);
         String longText2 = "Ham Sandwich\nP\n\nCheese Sandwich\nP\n\nChicken Sandwich\nP\n\nTuna Sandwich\nP\n\nEgg Salad Sandwich\nP\n\nPeanut Butter Sandwich\nP\n\nStrawberry Jam Sandwich\nP\n\nNutella Sandwich\nP";
 
      }
@@ -1898,11 +2003,91 @@ public class FactoryView extends JFrame{
     public void setPlusNutellaSandwichListener(ActionListener actnListener) {
         this.plusNutellaSandwich.addActionListener(actnListener);
     }
+
+    // 
     
-    // Set Item Price Listeners
+    public void setCollectPaymentsListener(ActionListener actnListener)  {
+        this.collectPayments.addActionListener(actnListener);
+    }
+
+    public void setCollectVMMoneyListener(ActionListener actnListener)  {
+        this.collectVMMoney.addActionListener(actnListener);
+    }
+
+    // Set Item Price Getters and Setters
     public void setSetItemPriceListener(ActionListener actnListener)    {                      
         this.setItemPrice.addActionListener(actnListener);
     }        
+
+    public String getCurHamSandwichPrice() {
+        return this.curHamSandwichPrice.getText();
+    }
+
+    public void setCurHamSandwichPrice(String curHamSandwichPrice) {
+        this.curHamSandwichPrice.setText(curHamSandwichPrice);
+    }
+
+    public String getCurCheeseSandwichPrice()   {
+        return this.curCheeseSandwichPrice.getText();
+    }
+
+    public void setCurCheeseSandwichPrice(String curCheeseSandwichPrice) {
+        this.curCheeseSandwichPrice.setText(curCheeseSandwichPrice);
+    }
+
+    public String getCurChickenSandwichPrice()  {
+        return this.curChickenSandwichPrice.getText();
+    }
+
+    public void setCurChickenSandwichPrice(String curChickenSandwichPrice) {
+        this.curChickenSandwichPrice.setText(curChickenSandwichPrice);
+    }
+
+    public String getCurTunaSandwichPrice() {
+        return this.curTunaSandwichPrice.getText();
+    }
+
+    public void setCurTunaSandwichPrice(String curTunaSandwichPrice) {
+        this.curTunaSandwichPrice.setText(curTunaSandwichPrice);
+    }
+
+    public String getCurEggSandwichPrice()  {
+        return this.curEggSandwichPrice.getText();
+    }
+
+    public void setCurEggSandwichPrice(String curEggSandwichPrice) {
+        this.curEggSandwichPrice.setText(curEggSandwichPrice);
+    }
+
+    public String getCurPeanutBSandwichPrice()  {
+        return this.curPeanutBSandwichPrice.getText();
+    }
+
+    public void setCurPeanutBSandwichPrice(String curPeanutBSandwichPrice) {
+        this.curPeanutBSandwichPrice.setText(curPeanutBSandwichPrice);
+    }
+
+    public String getCurStrawberryJSandwichPrice() {
+        return this.curStrawberryJSandwichPrice.getText();
+    }
+
+    public void setCurStrawberryJSandwichPrice(String curStrawberryJSandwichPrice) {
+        this.curStrawberryJSandwichPrice.setText(curStrawberryJSandwichPrice);
+    }
+
+    public String getCurNutellaSandwichPrice()  {
+        return this.curNutellaSandwichPrice.getText();
+    }
+
+    public void setCurNutellaSandwichPrice(String curNutellaSandwichPrice) {
+        this.curNutellaSandwichPrice.setText(curNutellaSandwichPrice);
+    }
+
+    // Set Item Price Listeners
+
+    public void setConfirmItemPrice(ActionListener actnListener)   {
+        this.confirmItemPrice.addActionListener(actnListener);
+    }
     
     public void setBackMaintenanceModeListenerFromSetPrice(ActionListener actnListener)    {    
         this.backMaintenanceModeFromSetPrice.addActionListener(actnListener);
@@ -1911,5 +2096,119 @@ public class FactoryView extends JFrame{
     //Replenish Money Listener
     public void setReplenishVMMoneyListener(ActionListener actnListener)    {    
         this.replenishVMMoney.addActionListener(actnListener);
+    }
+
+    public void setShowCurVMMoney(String curVMMoney)  {
+        this.showCurVMMoney.setText(curVMMoney);
+    }
+
+    public String getCur1() {
+        return cur1.getText();
+    }
+
+    public void setCur1(String cur1) {
+        this.cur1.setText(cur1);;
+    }
+
+    public String getCur5() {
+        return cur5.getText();
+    }
+
+    public void setCur5(String cur5) {
+        this.cur5.setText(cur5);;
+    }
+
+    public String getCur10() {
+        return cur10.getText();
+    }
+
+    public void setCur10(String cur10) {
+        this.cur10.setText(cur10);;
+    }
+
+    public String getCur20() {
+        return cur20.getText();
+    }
+
+    public void setCur20(String cur20) {
+        this.cur20.setText(cur20);;
+    }
+
+    public String getCur50() {
+        return cur50.getText();
+    }
+
+    public void setCur50(String cur50) {
+        this.cur50.setText(cur50);;
+    }
+
+    public String getCur100() {
+        return cur100.getText();
+    }
+
+    public void setCur100(String cur100) {
+        this.cur100.setText(cur100);;
+    }
+
+    public String getCur200() {
+        return cur200.getText();
+    }
+
+    public void setCur200(String cur200) {
+        this.cur200.setText(cur200);;
+    }
+
+    public String getCur500() {
+        return cur500.getText();
+    }
+
+    public void setCur500(String cur500) {
+        this.cur500.setText(cur500);;
+    }
+
+    public String getCur1000() {
+        return cur1000.getText();
+    }
+
+    public void setCur1000(String cur1000) {
+        this.cur1000.setText(cur1000);;
+    }
+
+    // Listeners for Replenish Money
+
+    public void setReplenish1Listener(ActionListener actnListener)  {
+        this.replenish1.addActionListener(actnListener);
+    }
+
+    public void setReplenish5Listener(ActionListener actnListener)  {
+        this.replenish5.addActionListener(actnListener);
+    }
+
+    public void setReplenish10Listener(ActionListener actnListener)  {
+        this.replenish10.addActionListener(actnListener);
+    }
+
+    public void setReplenish20Listener(ActionListener actnListener)  {
+        this.replenish20.addActionListener(actnListener);
+    }
+
+    public void setReplenish50Listener(ActionListener actnListener)  {
+        this.replenish50.addActionListener(actnListener);
+    }
+
+    public void setReplenish100Listener(ActionListener actnListener)  {
+        this.replenish100.addActionListener(actnListener);
+    }
+
+    public void setReplenish200Listener(ActionListener actnListener)  {
+        this.replenish200.addActionListener(actnListener);
+    }
+
+    public void setReplenish500Listener(ActionListener actnListener)  {
+        this.replenish500.addActionListener(actnListener);
+    }
+
+    public void setReplenish1000Listener(ActionListener actnListener)  {
+        this.replenish1000.addActionListener(actnListener);
     }
 }

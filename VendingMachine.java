@@ -28,12 +28,13 @@ public class VendingMachine {
 
         initIngredients();
         initSlots();
+        initVMMoney();
 
         history = new History(this);
 
     }
 
-    public void initIngredients()   {
+    protected void initIngredients()   {
         breadStock = new ArrayList<Bread>();
         cheeseStock = new ArrayList<Cheese>();
         hamStock = new ArrayList<Ham>();
@@ -62,7 +63,7 @@ public class VendingMachine {
 
     }
 
-    public void initSlots() {
+    private void initSlots() {
 
         ArrayList<Item> ingredientsList = new ArrayList<Item>();
         int calories;
@@ -83,6 +84,7 @@ public class VendingMachine {
                     }
                     
                     sandwich = new Sandwich(ingredientsList, calories);
+                    sandwich.computePrice();
                     slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
@@ -102,6 +104,7 @@ public class VendingMachine {
                     }
                     
                     sandwich = new Sandwich(ingredientsList, calories);
+                    sandwich.computePrice();
                     slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
@@ -122,6 +125,7 @@ public class VendingMachine {
                     }
 
                     sandwich = new Sandwich(ingredientsList, calories);
+                    sandwich.computePrice();
                     slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
@@ -140,6 +144,7 @@ public class VendingMachine {
                     }
 
                     sandwich = new Sandwich(ingredientsList, calories);
+                    sandwich.computePrice();
                     slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
@@ -159,6 +164,7 @@ public class VendingMachine {
                     }
 
                     sandwich = new Sandwich(ingredientsList, calories);
+                    sandwich.computePrice();
                     slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
@@ -178,6 +184,7 @@ public class VendingMachine {
                     }
 
                     sandwich = new Sandwich(ingredientsList, calories);
+                    sandwich.computePrice();
                     slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
@@ -196,6 +203,7 @@ public class VendingMachine {
                     }
 
                     sandwich = new Sandwich(ingredientsList, calories);
+                    sandwich.computePrice();
                     slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
@@ -214,6 +222,7 @@ public class VendingMachine {
                     }
 
                     sandwich = new Sandwich(ingredientsList, calories);
+                    sandwich.computePrice();
                     slots[i] = new Slot(sandwich);
                     slots[i].fillSlots(sandwich);
 
@@ -225,8 +234,20 @@ public class VendingMachine {
                     break;
             }
 
-            
         }
+    }
+
+    private void initVMMoney()  {
+        this.vmMoney.addPeso1(20);
+        this.vmMoney.addPeso5(10);
+        this.vmMoney.addPeso10(10);
+        this.vmMoney.addPeso20(10);
+        this.vmMoney.addPeso50(10);
+        this.vmMoney.addPeso100(10);
+        this.vmMoney.addPeso200(10);
+        this.vmMoney.addPeso500(5);
+        this.vmMoney.addPeso1000(5);
+
     }
 
     public void receiveMoney(Money userPayment)    {

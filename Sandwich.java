@@ -25,6 +25,10 @@ public class Sandwich extends Item implements Sellable  {
         return this.ingredientsList;
     }
 
+    public void setPrice(double price)  {
+        this.price = price;
+    }
+
 
     
 }
