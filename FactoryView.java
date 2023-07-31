@@ -487,6 +487,9 @@ public class FactoryView extends JFrame{
      public void displayReplenishMoney(){
         cl.show(container, "12");
      }
+     public void displayViewItemInfoR(){
+        cl.show(container, "13");
+     }
 
     //build methods
     public void buildTestVM()   {
@@ -668,7 +671,7 @@ public class FactoryView extends JFrame{
     }
 
     public void buildViewItemInfoR(){                                                  //START~~~~~~~~~~~~~~~~~~~~
-        background_image_plain = new ImageIcon("maintenancemodemenu.png");
+        background_image_plain = new ImageIcon("viewiteminfomenu.png");
         Image img6 = background_image_plain.getImage();
         Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
         background_image_plain = new ImageIcon(temp_img6);
@@ -696,6 +699,7 @@ public class FactoryView extends JFrame{
         layoutViewItemInfoR.add(strawberryJSandAvailabilityR);
         layoutViewItemInfoR.add(nutellaSandAvailabilityR);
         layoutViewItemInfoR.add(goBackFromViewInfoR);
+        layoutViewItemInfoR.setOpaque(false);
 
         displayViewItemInfoR.add(layoutViewItemInfoR);
 
@@ -1503,6 +1507,9 @@ public class FactoryView extends JFrame{
     }
     public void setSlot8SListener(ActionListener actnListener)    {
         this.slot8S.addActionListener(actnListener);
+    }
+    public void setViewItemInfoRListener(ActionListener actnListener)    {
+        this.viewItemInfoR.addActionListener(actnListener);
     }
 
     //button listeners for insert money interface

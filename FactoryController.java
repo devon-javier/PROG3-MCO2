@@ -264,6 +264,13 @@ public class FactoryController {
                 fView.setCurrentAmount(dispAmount);
             }
         });
+        this.fView.setViewItemInfoRListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayViewItemInfoR();
+            }
+        });
+
 
        //for slot items ------------------------------------------- RVM
         this.fView.setSlot1RListener(new ActionListener()  {
