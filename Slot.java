@@ -16,7 +16,7 @@ public class Slot {
 
     public void fillSlots(Sandwich sandwich)  {
         resetSlots();
-        for(int i = 0; i < initialQuantity; i++)   {
+        for(int i = 0; i < this.initialQuantity; i++)   {
             sandwichList.add(sandwich);
         }
     }
@@ -25,10 +25,6 @@ public class Slot {
         sandwichList.remove(sandwichList.size() - 1);
         this.currentQuantity--;
         this.sold++;
-    }
-
-    public void addSandwich(int quantity)   {
-        this.currentQuantity += quantity;
     }
 
     public ArrayList<Sandwich> getsandwichList()    {
@@ -49,6 +45,7 @@ public class Slot {
 
     public void setinitialQuantity(int initialQuantity)   {
         this.initialQuantity = initialQuantity;
+        this.currentQuantity = initialQuantity;
     }
 
     public void resetSold() {

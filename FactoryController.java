@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class FactoryController {
 
@@ -647,8 +648,262 @@ public class FactoryController {
         this.fView.setRestockSandwichesListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                // fView.displayRestockItemRVM();
+                fView.setHamSandwichQuant(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(0).getcurrentQuantity()));
+                fView.setEggSandwichQuant(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(1).getcurrentQuantity()));
+                fView.setTunaSandwichQuant(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(2).getcurrentQuantity()));
+                fView.setCheeseSandwichQuant(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(3).getcurrentQuantity()));
+                fView.setChickenSandwichQuant(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(4).getcurrentQuantity()));
+                fView.setPeanutBSandwichQuant(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(5).getcurrentQuantity()));
+                fView.setStrawberryJSandwichQuant(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(6).getcurrentQuantity()));
+                fView.setNutellaSandwichQuant(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(7).getcurrentQuantity()));
                 fView.displayRestockSandwiches();
+            }
+        });
+
+        this.fView.setPlusHamSandwichListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+
+                int newval = Integer.parseInt(fView.getHamSandwichQuant()) + 1;
+                ArrayList<Item> ingredientsList = new ArrayList<Item>();
+                int calories = 0;
+
+                Sandwich sandwich;
+                
+                if(fModel.getCurrentMachine().getBreadStock().size() - 1 != -1 &&
+                fModel.getCurrentMachine().getHamStock().size() - 1 != -1)   {
+
+                    fView.setHamSandwichQuant(String.valueOf(newval));
+                    ingredientsList.add(new Bread());
+                    ingredientsList.add(new Ham());
+                    
+                    for(int i = 0; i < ingredientsList.size(); i++) {
+                        calories += ingredientsList.get(i).getCalories();
+                    }
+
+                    fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                    fModel.getCurrentMachine().getHamStock().remove(fModel.getCurrentMachine().getHamStock().size()-1);
+
+                    sandwich = new Sandwich(ingredientsList, calories);
+                    fModel.getCurrentMachine().getVendingMachineSlot(0).setinitialQuantity(newval);
+                    fModel.getCurrentMachine().getVendingMachineSlot(0).fillSlots(sandwich);
+                } else fView.dispErrorSandwichRestock();
+                           
+            }
+        });
+
+        this.fView.setPlusEggSandwichListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                int newval = Integer.parseInt(fView.getEggSandwichQuant()) + 1;
+                ArrayList<Item> ingredientsList = new ArrayList<Item>();
+                int calories = 0;
+
+                Sandwich sandwich;
+                
+                if(fModel.getCurrentMachine().getBreadStock().size() - 1 != -1 &&
+                fModel.getCurrentMachine().getEggStock().size() - 1 != -1 &&
+                fModel.getCurrentMachine().getMayonnaiseStock().size() -1 != -1)   {
+
+                    fView.setEggSandwichQuant(String.valueOf(newval));
+                    ingredientsList.add(new Bread());
+                    ingredientsList.add(new Egg());
+                    ingredientsList.add(new Mayonnaise());
+                    
+                    for(int i = 0; i < ingredientsList.size(); i++) {
+                        calories += ingredientsList.get(i).getCalories();
+                    }
+
+                    fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                    fModel.getCurrentMachine().getEggStock().remove(fModel.getCurrentMachine().getEggStock().size()-1);
+                    fModel.getCurrentMachine().getMayonnaiseStock().remove(fModel.getCurrentMachine().getMayonnaiseStock().size()-1);
+
+                    sandwich = new Sandwich(ingredientsList, calories);
+                    fModel.getCurrentMachine().getVendingMachineSlot(1).setinitialQuantity(newval);
+                    fModel.getCurrentMachine().getVendingMachineSlot(1).fillSlots(sandwich);
+                } else fView.dispErrorSandwichRestock();            
+            }
+        });
+
+        this.fView.setPlusTunaSandwichListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                int newval = Integer.parseInt(fView.getTunaSandwichQuant()) + 1;
+                ArrayList<Item> ingredientsList = new ArrayList<Item>();
+                int calories = 0;
+
+                Sandwich sandwich;
+                
+                if(fModel.getCurrentMachine().getBreadStock().size() - 1 != -1 &&
+                fModel.getCurrentMachine().getTunaStock().size() - 1 != -1)   {
+
+                    fView.setTunaSandwichQuant(String.valueOf(newval));
+                    ingredientsList.add(new Bread());
+                    ingredientsList.add(new Tuna());
+
+                    for(int i = 0; i < ingredientsList.size(); i++) {
+                        calories += ingredientsList.get(i).getCalories();
+                    }
+
+                    fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                    fModel.getCurrentMachine().getTunaStock().remove(fModel.getCurrentMachine().getTunaStock().size()-1);
+
+                    sandwich = new Sandwich(ingredientsList, calories);
+                    fModel.getCurrentMachine().getVendingMachineSlot(2).setinitialQuantity(newval);
+                    fModel.getCurrentMachine().getVendingMachineSlot(2).fillSlots(sandwich);
+                } else fView.dispErrorSandwichRestock();            
+            }
+        });
+
+        this.fView.setPlusCheeseSandwichListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                int newval = Integer.parseInt(fView.getCheeseSandwichQuant()) + 1;
+                ArrayList<Item> ingredientsList = new ArrayList<Item>();
+                int calories = 0;
+
+                Sandwich sandwich;
+                
+                if(fModel.getCurrentMachine().getBreadStock().size() - 1 != -1 &&
+                fModel.getCurrentMachine().getCheeseStock().size() - 1 != -1)   {
+
+                    fView.setCheeseSandwichQuant(String.valueOf(newval));
+                    ingredientsList.add(new Bread());
+                    ingredientsList.add(new Cheese());
+
+                    for(int i = 0; i < ingredientsList.size(); i++) {
+                        calories += ingredientsList.get(i).getCalories();
+                    }
+
+                    fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                    fModel.getCurrentMachine().getCheeseStock().remove(fModel.getCurrentMachine().getCheeseStock().size()-1);
+
+                    sandwich = new Sandwich(ingredientsList, calories);
+                    fModel.getCurrentMachine().getVendingMachineSlot(3).setinitialQuantity(newval);
+                    fModel.getCurrentMachine().getVendingMachineSlot(3).fillSlots(sandwich);
+                } else fView.dispErrorSandwichRestock();            
+            }
+        });
+
+        this.fView.setPlusChickenSandwichListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                int newval = Integer.parseInt(fView.getChickenSandwichQuant()) + 1;
+                ArrayList<Item> ingredientsList = new ArrayList<Item>();
+                int calories = 0;
+
+                Sandwich sandwich;
+                
+                if(fModel.getCurrentMachine().getBreadStock().size() - 1 != -1 &&
+                fModel.getCurrentMachine().getChickenStock().size() - 1 != -1)   {
+
+                    fView.setChickenSandwichQuant(String.valueOf(newval));
+                    ingredientsList.add(new Bread());
+                    ingredientsList.add(new Chicken());
+                    ingredientsList.add(new Mayonnaise());
+
+                    for(int i = 0; i < ingredientsList.size(); i++) {
+                        calories += ingredientsList.get(i).getCalories();
+                    }
+
+                    fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                    fModel.getCurrentMachine().getChickenStock().remove(fModel.getCurrentMachine().getChickenStock().size()-1);
+                    fModel.getCurrentMachine().getMayonnaiseStock().remove(fModel.getCurrentMachine().getMayonnaiseStock().size()-1);
+
+                    sandwich = new Sandwich(ingredientsList, calories);
+                    fModel.getCurrentMachine().getVendingMachineSlot(4).setinitialQuantity(newval);
+                    fModel.getCurrentMachine().getVendingMachineSlot(4).fillSlots(sandwich);
+                } else fView.dispErrorSandwichRestock();                 
+            }
+        });
+
+        this.fView.setPlusPeanutBSandwichListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                int newval = Integer.parseInt(fView.getPeanutBSandwichQuant()) + 1;
+                ArrayList<Item> ingredientsList = new ArrayList<Item>();
+                int calories = 0;
+
+                Sandwich sandwich;
+                
+                if(fModel.getCurrentMachine().getBreadStock().size() - 1 != -1 &&
+                fModel.getCurrentMachine().getPeanutbutterStock().size() - 1 != -1)   {
+
+                    fView.setPeanutBSandwichQuant(String.valueOf(newval));
+                    ingredientsList.add(new Bread());
+                    ingredientsList.add(new PeanutButter());
+
+                    for(int i = 0; i < ingredientsList.size(); i++) {
+                        calories += ingredientsList.get(i).getCalories();
+                    }
+
+                    fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                    fModel.getCurrentMachine().getPeanutbutterStock().remove(fModel.getCurrentMachine().getPeanutbutterStock().size()-1);
+
+                    sandwich = new Sandwich(ingredientsList, calories);
+                    fModel.getCurrentMachine().getVendingMachineSlot(3).setinitialQuantity(newval);
+                    fModel.getCurrentMachine().getVendingMachineSlot(3).fillSlots(sandwich);
+                } else fView.dispErrorSandwichRestock();                   
+            }
+        });
+
+        this.fView.setPlusStrawberryJSandwichListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                int newval = Integer.parseInt(fView.getStrawberryJSandwichQuant()) + 1;
+                ArrayList<Item> ingredientsList = new ArrayList<Item>();
+                int calories = 0;
+
+                Sandwich sandwich;
+                
+                if(fModel.getCurrentMachine().getBreadStock().size() - 1 != -1 &&
+                fModel.getCurrentMachine().getStrawberryjamStock().size() - 1 != -1)   {
+
+                    fView.setStrawberryJSandwichQuant(String.valueOf(newval));
+                    ingredientsList.add(new Bread());
+                    ingredientsList.add(new StrawberryJam());
+
+                    for(int i = 0; i < ingredientsList.size(); i++) {
+                        calories += ingredientsList.get(i).getCalories();
+                    }
+
+                    fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                    fModel.getCurrentMachine().getStrawberryjamStock().remove(fModel.getCurrentMachine().getStrawberryjamStock().size()-1);
+
+                    sandwich = new Sandwich(ingredientsList, calories);
+                    fModel.getCurrentMachine().getVendingMachineSlot(3).setinitialQuantity(newval);
+                    fModel.getCurrentMachine().getVendingMachineSlot(3).fillSlots(sandwich);
+                } else fView.dispErrorSandwichRestock();                 
+            }
+        });
+
+        this.fView.setPlusNutellaSandwichListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                int newval = Integer.parseInt(fView.getNutellaSandwichQuant()) + 1;
+                ArrayList<Item> ingredientsList = new ArrayList<Item>();
+                int calories = 0;
+
+                Sandwich sandwich;
+                
+                if(fModel.getCurrentMachine().getBreadStock().size() - 1 != -1 &&
+                fModel.getCurrentMachine().getNutellaStock().size() - 1 != -1)   {
+
+                    fView.setNutellaSandwichQuant(String.valueOf(newval));
+                    ingredientsList.add(new Bread());
+                    ingredientsList.add(new Nutella());
+
+                    for(int i = 0; i < ingredientsList.size(); i++) {
+                        calories += ingredientsList.get(i).getCalories();
+                    }
+
+                    fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                    fModel.getCurrentMachine().getNutellaStock().remove(fModel.getCurrentMachine().getNutellaStock().size()-1);
+
+                    sandwich = new Sandwich(ingredientsList, calories);
+                    fModel.getCurrentMachine().getVendingMachineSlot(3).setinitialQuantity(newval);
+                    fModel.getCurrentMachine().getVendingMachineSlot(3).fillSlots(sandwich);
+                } else fView.dispErrorSandwichRestock();                  
             }
         });
 

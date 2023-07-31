@@ -1062,13 +1062,21 @@ public class FactoryView extends JFrame{
         restockNutellaSandwich = new JLabel("Nutella Sand.");
 
         hamSandwichQuant = new JTextField();
+        hamSandwichQuant.setHorizontalAlignment(JTextField.CENTER);
         cheeseSandwichQuant = new JTextField();
+        cheeseSandwichQuant.setHorizontalAlignment(JTextField.CENTER);
         chickenSandwichQuant = new JTextField();
+        chickenSandwichQuant.setHorizontalAlignment(JTextField.CENTER);
         tunaSandwichQuant = new JTextField();
+        tunaSandwichQuant.setHorizontalAlignment(JTextField.CENTER);
         eggSandwichQuant = new JTextField();
+        eggSandwichQuant.setHorizontalAlignment(JTextField.CENTER);
         peanutBSandwichQuant = new JTextField();
+        peanutBSandwichQuant.setHorizontalAlignment(JTextField.CENTER);
         strawberryJSandwichQuant = new JTextField();
+        strawberryJSandwichQuant.setHorizontalAlignment(JTextField.CENTER);
         nutellaSandwichQuant = new JTextField();
+        nutellaSandwichQuant.setHorizontalAlignment(JTextField.CENTER);
 
         plusHamSandwich = new JButton("+");
         plusCheeseSandwich = new JButton("+");
@@ -1280,6 +1288,10 @@ public class FactoryView extends JFrame{
      public void dispErrorTestVM(){
         JOptionPane.showMessageDialog(null, "No Vending Machine Created!", "Error", JOptionPane.ERROR_MESSAGE);
         
+     }
+
+     public void dispErrorSandwichRestock(){
+        JOptionPane.showMessageDialog(null, "Lack of Ingredients!", "Error", JOptionPane.ERROR_MESSAGE);
      }
 
      public void dispViewPriceList(){
@@ -1785,6 +1797,106 @@ public class FactoryView extends JFrame{
 
     public void setPickleQuantS(String pickleQuantS) {
         this.pickleQuantS.setText(pickleQuantS);;
+    }
+
+    // Restock Sandwich Getters and setters
+
+    public String getHamSandwichQuant() {
+        return hamSandwichQuant.getText();
+    }
+
+    public void setHamSandwichQuant(String hamSandwichQuant) {
+        this.hamSandwichQuant.setText(hamSandwichQuant);
+    }
+
+    public String getCheeseSandwichQuant() {
+        return cheeseSandwichQuant.getText();
+    }
+
+    public void setCheeseSandwichQuant(String cheeseSandwichQuant) {
+        this.cheeseSandwichQuant.setText(cheeseSandwichQuant);
+    }
+
+    public String getChickenSandwichQuant() {
+        return chickenSandwichQuant.getText();
+    }
+
+    public void setChickenSandwichQuant(String chickenSandwichQuant) {
+        this.chickenSandwichQuant.setText(chickenSandwichQuant);
+    }
+
+    public String getTunaSandwichQuant() {
+        return tunaSandwichQuant.getText();
+    }
+
+    public void setTunaSandwichQuant(String tunaSandwichQuant) {
+        this.tunaSandwichQuant.setText(tunaSandwichQuant);
+    }
+
+    public String getEggSandwichQuant() {
+        return eggSandwichQuant.getText();
+    }
+
+    public void setEggSandwichQuant(String eggSandwichQuant) {
+        this.eggSandwichQuant.setText(eggSandwichQuant);
+    }
+
+    public String getPeanutBSandwichQuant() {
+        return peanutBSandwichQuant.getText();
+    }
+
+    public void setPeanutBSandwichQuant(String peanutBSandwichQuant) {
+        this.peanutBSandwichQuant.setText(peanutBSandwichQuant);
+    }
+
+    public String getStrawberryJSandwichQuant() {
+        return strawberryJSandwichQuant.getText();
+    }
+
+    public void setStrawberryJSandwichQuant(String strawberryJSandwichQuant) {
+        this.strawberryJSandwichQuant.setText(strawberryJSandwichQuant);
+    }
+
+    public String getNutellaSandwichQuant() {
+        return nutellaSandwichQuant.getText();
+    }
+
+    public void setNutellaSandwichQuant(String nutellaSandwichQuant) {
+        this.nutellaSandwichQuant.setText(nutellaSandwichQuant);
+    }
+
+    // Restock Sandwich Listeners
+
+    public void setPlusHamSandwichListener(ActionListener actnListener) {
+        this.plusHamSandwich.addActionListener(actnListener);
+    }
+
+    public void setPlusCheeseSandwichListener(ActionListener actnListener)  {
+        this.plusCheeseSandwich.addActionListener(actnListener);
+    }
+
+    public void setPlusChickenSandwichListener(ActionListener actnListener) {
+        this.plusChickenSandwich.addActionListener(actnListener);
+    }
+
+    public void setPlusTunaSandwichListener(ActionListener actnListener)   {
+        this.plusTunaSandwich.addActionListener(actnListener);
+    }
+
+    public void setPlusEggSandwichListener(ActionListener actnListener)    {
+        this.plusEggSandwich.addActionListener(actnListener);
+    }
+
+    public void setPlusPeanutBSandwichListener(ActionListener actnListener)   {
+        this.plusPeanutBSandwich.addActionListener(actnListener);
+    }
+
+    public void setPlusStrawberryJSandwichListener(ActionListener actnListener) {
+        this.plusStrawberryJSandwich.addActionListener(actnListener);
+    }
+    
+    public void setPlusNutellaSandwichListener(ActionListener actnListener) {
+        this.plusNutellaSandwich.addActionListener(actnListener);
     }
     
     // Set Item Price Listeners
