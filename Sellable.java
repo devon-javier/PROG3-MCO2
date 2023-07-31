@@ -1,3 +1,3 @@
 public interface Sellable {
-    public double computePrice();   
+    public void computePrice();   
 }

@@ -2,9 +2,102 @@ import java.util.ArrayList;
 
 public class SpecialVendingMachine extends VendingMachine {
 
+    private ArrayList<Lettuce> lettuceStock;
+    protected ArrayList<Tomato> tomatoStock;
+    protected ArrayList<Pickle> pickleStock;
+
     public SpecialVendingMachine()  {
         super();
     }
+
+    @Override
+    public void initIngredients()   {
+        breadStock = new ArrayList<Bread>();
+        cheeseStock = new ArrayList<Cheese>();
+        hamStock = new ArrayList<Ham>();
+        eggStock = new ArrayList<Egg>();
+        chickenStock = new ArrayList<Chicken>();
+        tunaStock = new ArrayList<Tuna>();
+        nutellaStock = new ArrayList<Nutella>();
+        peanutbutterStock = new ArrayList<PeanutButter>();
+        strawberryjamStock = new ArrayList<StrawberryJam>();
+        mayonnaiseStock = new ArrayList<Mayonnaise>();
+        lettuceStock = new ArrayList<Lettuce>();
+        tomatoStock = new ArrayList<Tomato>();
+        pickleStock = new ArrayList<Pickle>();
+
+        for(int i = 0; i < 30; i++) {
+            breadStock.add(new Bread());
+            breadStock.add(new Bread());
+            breadStock.add(new Bread());
+            cheeseStock.add(new Cheese());
+            hamStock.add(new Ham());
+            eggStock.add(new Egg());
+            chickenStock.add(new Chicken());
+            tunaStock.add(new Tuna());
+            nutellaStock.add(new Nutella());
+            peanutbutterStock.add(new PeanutButter());
+            strawberryjamStock.add(new StrawberryJam());
+            mayonnaiseStock.add(new Mayonnaise());
+            lettuceStock.add(new Lettuce());
+            tomatoStock.add(new Tomato());
+            pickleStock.add(new Pickle());
+        }
+
+    }
+
+    @Override
+    public void resetHistoryRecord() {
+        ArrayList<Transaction> temp = this.history.getTransactions();
+
+        history.setInitialStockS(this);
+        history.setFinalStockS(this);
+    }
+
+    @Override
+    public void addStock(Item item) {
+        if(item instanceof Bread) {
+            breadStock.add((Bread)item);
+
+        } else if (item instanceof Cheese)    {
+            cheeseStock.add((Cheese)item);
+
+        } else if (item instanceof Ham)   {
+            hamStock.add((Ham)item);
+            
+        } else if (item instanceof Egg)   {
+            eggStock.add((Egg)item);
+
+        } else if (item instanceof Chicken)   {
+
+            chickenStock.add((Chicken)item);
+
+        } else if (item instanceof Tuna)  {
+            tunaStock.add((Tuna)item);
+
+        } else if (item instanceof Nutella)   {
+            nutellaStock.add((Nutella)item);
+
+        } else if (item instanceof PeanutButter)  {
+            peanutbutterStock.add((PeanutButter)item);
+
+        } else if (item instanceof StrawberryJam) {
+            strawberryjamStock.add((StrawberryJam)item);
+            
+        } else if (item instanceof Mayonnaise)    {
+            mayonnaiseStock.add((Mayonnaise)item);
+
+        } else if (item instanceof Lettuce) {
+            lettuceStock.add((Lettuce)item);
+
+        } else if (item instanceof Tomato)  {
+            tomatoStock.add((Tomato)item);
+
+        } else if (item instanceof Pickle)  {
+            pickleStock.add((Pickle)item);
+        }
+    }
+
 
     public Sandwich createSandwich(ArrayList<Item> ingredientsList, int calories)  {
 
@@ -54,5 +147,18 @@ public class SpecialVendingMachine extends VendingMachine {
         return new Sandwich(ingredientsList, calories);
 
     }
+
+    public ArrayList<Lettuce> getLettuceStock() {
+        return lettuceStock;
+    }
+
+    public ArrayList<Tomato> getTomatoStock() {
+        return tomatoStock;
+    }
+
+    public ArrayList<Pickle> getPickleStock() {
+        return pickleStock;
+    }
+
     
 }

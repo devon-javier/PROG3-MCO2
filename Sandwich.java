@@ -13,8 +13,16 @@ public class Sandwich extends Item implements Sellable  {
         
     }
 
-    public double computePrice()    {
-        return (double)this.getCalories() * 0.5;
+    public void computePrice()    {
+        this.price = (double)this.getCalories() * 0.5;
+    }
+
+    public double getPrice()    {
+        return this.price;
+    }
+
+    public ArrayList<Item> getIngredients() {
+        return this.ingredientsList;
     }
 
 

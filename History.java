@@ -1,4 +1,4 @@
-import java.time.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class History {
@@ -38,11 +38,45 @@ public class History {
         date = LocalDate.now();
         transactionList = new ArrayList<Transaction>();
 
-        this.setInitialStock(vm);
-        this.setFinalStock(vm);
+        this.setInitialStockR(vm);
+        this.setFinalStockR(vm);
     }
 
-    public void setInitialStock(VendingMachine vm)  {
+    public History(SpecialVendingMachine svm)   {
+        date = LocalDate.now();
+        transactionList = new ArrayList<Transaction>();
+
+        this.setInitialStockS(svm);
+        this.setFinalStockS(svm);
+    }
+
+    public void setInitialStockR(VendingMachine vm)  {
+        this.breadInitial = vm.getBreadStock().size();
+        this.cheeseInitial = vm.getCheeseStock().size();
+        this.hamInitial = vm.getHamStock().size();
+        this.eggInitial = vm.getEggStock().size();
+        this.chickenInitial = vm.getChickenStock().size();
+        this.tunaInitial = vm.getTunaStock().size();
+        this.nutellaInitial = vm.getNutellaStock().size();
+        this.peanutbutterInitial = vm.getPeanutbutterStock().size();
+        this.strawberryjamInitial = vm.getStrawberryjamStock().size();
+        this.mayonnaiseInitial = vm.getMayonnaiseStock().size();
+    }
+
+    public void setFinalStockR(VendingMachine vm)    {
+        this.breadFinal = vm.getBreadStock().size();
+        this.cheeseFinal = vm.getCheeseStock().size();
+        this.hamFinal = vm.getHamStock().size();
+        this.eggFinal = vm.getEggStock().size();
+        this.chickenFinal = vm.getChickenStock().size();
+        this.tunaFinal = vm.getTunaStock().size();
+        this.nutellaFinal = vm.getNutellaStock().size();
+        this.peanutbutterFinal = vm.getPeanutbutterStock().size();
+        this.strawberryjamFinal = vm.getStrawberryjamStock().size();
+        this.mayonnaiseFinal = vm.getMayonnaiseStock().size();
+    }
+
+    public void setInitialStockS(SpecialVendingMachine vm)  {
         this.breadInitial = vm.getBreadStock().size();
         this.cheeseInitial = vm.getCheeseStock().size();
         this.hamInitial = vm.getHamStock().size();
@@ -58,7 +92,7 @@ public class History {
         this.mayonnaiseInitial = vm.getMayonnaiseStock().size();
     }
 
-    public void setFinalStock(VendingMachine vm)    {
+    public void setFinalStockS(SpecialVendingMachine vm)    {
         this.breadFinal = vm.getBreadStock().size();
         this.cheeseFinal = vm.getCheeseStock().size();
         this.hamFinal = vm.getHamStock().size();

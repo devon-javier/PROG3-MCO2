@@ -1,6 +1,26 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class FactoryView extends JFrame{
     //panels
@@ -80,37 +100,64 @@ public class FactoryView extends JFrame{
      private JLabel restockTomato;
      private JLabel restockPickle;
 
-     private JTextField breadQuant;
-     private JTextField hamQuant;
-     private JTextField cheeseQuant;
-     private JTextField chickenQuant;
-     private JTextField tunaQuant;
-     private JTextField eggQuant;
-     private JTextField mayoQuant;
-     private JTextField peanutBQuant;
-     private JTextField strawberryJQuant;
-     private JTextField nutellaQuant;
-     private JTextField lettuceQuant;
-     private JTextField tomatoQuant;
-     private JTextField pickleQuant;
+    // ADDED
+     private JTextField breadQuantR;
+     private JTextField hamQuantR;
+     private JTextField cheeseQuantR;
+     private JTextField chickenQuantR;
+     private JTextField tunaQuantR;
+     private JTextField eggQuantR;
+     private JTextField mayoQuantR;
+     private JTextField peanutBQuantR;
+     private JTextField strawberryJQuantR;
+     private JTextField nutellaQuantR;
+     private JTextField lettuceQuantR;
+     private JTextField tomatoQuantR;
+     private JTextField pickleQuantR;
 
-     private JButton plusBread;
-     private JButton plusHam;
-     private JButton plusCheese;
-     private JButton plusChicken;
-     private JButton plusTuna;
-     private JButton plusEgg;
-     private JButton plusMayo;
-     private JButton plusPeanutB;
-     private JButton plusStrawberryJ;
-     private JButton plusNutella;
-     private JButton plusLettuce;
-     private JButton plusTomato;
-     private JButton plusPickle;
+     private JTextField breadQuantS;
+     private JTextField hamQuantS;
+     private JTextField cheeseQuantS;
+     private JTextField chickenQuantS;
+     private JTextField tunaQuantS;
+     private JTextField eggQuantS;
+     private JTextField mayoQuantS;
+     private JTextField peanutBQuantS;
+     private JTextField strawberryJQuantS;
+     private JTextField nutellaQuantS;
+     private JTextField lettuceQuantS;
+     private JTextField tomatoQuantS;
+     private JTextField pickleQuantS;
+
+     private JButton plusBreadR;
+     private JButton plusHamR;
+     private JButton plusCheeseR;
+     private JButton plusChickenR;
+     private JButton plusTunaR;
+     private JButton plusEggR;
+     private JButton plusMayoR;
+     private JButton plusPeanutBR;
+     private JButton plusStrawberryJR;
+     private JButton plusNutellaR;
      private JButton confirmRestockItemsR;
+
+     private JButton plusBreadS;
+     private JButton plusHamS;
+     private JButton plusCheeseS;
+     private JButton plusChickenS;
+     private JButton plusTunaS;
+     private JButton plusEggS;
+     private JButton plusMayoS;
+     private JButton plusPeanutBS;
+     private JButton plusStrawberryJS;
+     private JButton plusNutellaS;
+     private JButton plusLettuceS;
+     private JButton plusTomatoS;
+     private JButton plusPickleS;
      private JButton confirmRestockItemsS;
 
      private JPanel layoutRestockItems;
+    // ADDED END
 
      //MAINTENANCE MODE - RESTOCK SANDWICHES
      private JLabel restockHamSandwich;
@@ -146,6 +193,33 @@ public class FactoryView extends JFrame{
 
 
     //ADDITIONAL COMPONENTS FOR MAINTENANCE MODE WINDOW - SVM
+
+    //MAINTENANCE MODE - SET ITEM PRICE                       
+    private JLabel setHamSandwichPrice;
+    private JLabel setCheeseSandwichPrice;
+    private JLabel setChickenSandwichPrice;
+    private JLabel setTunaSandwichPrice;
+    private JLabel setEggSandwichPrice;
+    private JLabel setPeanutBSandwichPrice;
+    private JLabel setStrawberryJSandwichPrice;
+    private JLabel setNutellaSandwichPrice;
+
+    //add pa indiv ingredients
+    //add pa svm specific components
+
+    private JTextField curHamSandwichPrice;
+    private JTextField curCheeseSandwichPrice;
+    private JTextField curChickenSandwichPrice;
+    private JTextField curTunaSandwichPrice;
+    private JTextField curEggSandwichPrice;
+    private JTextField curPeanutBSandwichPrice;
+    private JTextField curStrawberryJSandwichPrice;
+    private JTextField curNutellaSandwichPrice;
+
+    private JButton confirmItemPrice;
+    private JButton backMaintenanceModeFromSetPrice;
+
+    private JPanel layoutSetPrice;                              
 
     //COMPONENTS FOR REGULAR VM WINDOW
     private JButton slot1R;
@@ -316,6 +390,7 @@ public class FactoryView extends JFrame{
         this.buildRestockItemsRVM();
         this.buildRestockItemsSVM();
         this.buildRestockSandwich();
+        this.buildSetItemPrice(); 
     }
 
     //display interface methods
@@ -349,6 +424,9 @@ public class FactoryView extends JFrame{
      public void displayRestockSandwiches(){
         cl.show(container, "10");
      }
+     public void displaySetItemPriceRVM(){      
+        cl.show(container, "11");
+     }     
 
     //build methods
     public void buildTestVM()   {
@@ -734,62 +812,74 @@ public class FactoryView extends JFrame{
         restockStrawberryJam = new JLabel("Strawberry Jam");
         restockNutella = new JLabel("Nutella");
 
-        breadQuant = new JTextField();
-        hamQuant = new JTextField();
-        cheeseQuant = new JTextField();
-        chickenQuant = new JTextField();
-        tunaQuant = new JTextField();
-        eggQuant = new JTextField();
-        mayoQuant = new JTextField();
-        peanutBQuant = new JTextField();
-        strawberryJQuant = new JTextField();
-        nutellaQuant = new JTextField();
+        // ADDED 
+        breadQuantR = new JTextField();
+        breadQuantR.setHorizontalAlignment(JTextField.CENTER);
+        hamQuantR = new JTextField();
+        hamQuantR.setHorizontalAlignment(JTextField.CENTER);
+        cheeseQuantR = new JTextField();
+        cheeseQuantR.setHorizontalAlignment(JTextField.CENTER);
+        chickenQuantR = new JTextField();
+        chickenQuantR.setHorizontalAlignment(JTextField.CENTER);
+        tunaQuantR = new JTextField();
+        tunaQuantR.setHorizontalAlignment(JTextField.CENTER);
+        eggQuantR = new JTextField();
+        eggQuantR.setHorizontalAlignment(JTextField.CENTER);
+        mayoQuantR = new JTextField();
+        mayoQuantR.setHorizontalAlignment(JTextField.CENTER);
+        peanutBQuantR = new JTextField();
+        peanutBQuantR.setHorizontalAlignment(JTextField.CENTER);
+        strawberryJQuantR = new JTextField();
+        strawberryJQuantR.setHorizontalAlignment(JTextField.CENTER);
+        nutellaQuantR = new JTextField();
+        nutellaQuantR.setHorizontalAlignment(JTextField.CENTER);
 
-        plusBread = new JButton("+");
-        plusHam = new JButton("+");
-        plusCheese = new JButton("+");
-        plusChicken = new JButton("+");
-        plusTuna = new JButton("+");
-        plusEgg = new JButton("+");
-        plusMayo = new JButton("+");
-        plusPeanutB = new JButton("+");
-        plusStrawberryJ = new JButton("+");
-        plusNutella = new JButton("+");
+
+        plusBreadR = new JButton("+");
+        plusHamR = new JButton("+");
+        plusCheeseR = new JButton("+");
+        plusChickenR = new JButton("+");
+        plusTunaR = new JButton("+");
+        plusEggR = new JButton("+");
+        plusMayoR = new JButton("+");
+        plusPeanutBR = new JButton("+");
+        plusStrawberryJR = new JButton("+");
+        plusNutellaR = new JButton("+");
         confirmRestockItemsR = new JButton("Confirm");
         backMaintenanceModeR = new JButton("Go Back");
 
         layoutRestockItems.add(restockBread);
-        layoutRestockItems.add(breadQuant);
-        layoutRestockItems.add(plusBread);
+        layoutRestockItems.add(breadQuantR);
+        layoutRestockItems.add(plusBreadR);
         layoutRestockItems.add(restockHam);
-        layoutRestockItems.add(hamQuant);
-        layoutRestockItems.add(plusHam);
+        layoutRestockItems.add(hamQuantR);
+        layoutRestockItems.add(plusHamR);
         layoutRestockItems.add(restockCheese);
-        layoutRestockItems.add(cheeseQuant);
-        layoutRestockItems.add(plusCheese);
+        layoutRestockItems.add(cheeseQuantR);
+        layoutRestockItems.add(plusCheeseR);
         layoutRestockItems.add(restockChicken);
-        layoutRestockItems.add(chickenQuant);
-        layoutRestockItems.add(plusChicken);
+        layoutRestockItems.add(chickenQuantR);
+        layoutRestockItems.add(plusChickenR);
         layoutRestockItems.add(restockTuna);
-        layoutRestockItems.add(tunaQuant);
-        layoutRestockItems.add(plusTuna);
+        layoutRestockItems.add(tunaQuantR);
+        layoutRestockItems.add(plusTunaR);
         layoutRestockItems.add(restockEgg);
-        layoutRestockItems.add(eggQuant);
-        layoutRestockItems.add(plusEgg);
+        layoutRestockItems.add(eggQuantR);
+        layoutRestockItems.add(plusEggR);
         layoutRestockItems.add(restockMayo);
-        layoutRestockItems.add(mayoQuant);
-        layoutRestockItems.add(plusMayo);
+        layoutRestockItems.add(mayoQuantR);
+        layoutRestockItems.add(plusMayoR);
         layoutRestockItems.add(restockPeanutButter);
-        layoutRestockItems.add(peanutBQuant);
-        layoutRestockItems.add(plusPeanutB);
+        layoutRestockItems.add(peanutBQuantR);
+        layoutRestockItems.add(plusPeanutBR);
         layoutRestockItems.add(restockStrawberryJam);
-        layoutRestockItems.add(strawberryJQuant);
-        layoutRestockItems.add(plusStrawberryJ);
+        layoutRestockItems.add(strawberryJQuantR);
+        layoutRestockItems.add(plusStrawberryJR);
         layoutRestockItems.add(restockNutella);
-        layoutRestockItems.add(nutellaQuant);
-        layoutRestockItems.add(plusNutella);
+        layoutRestockItems.add(nutellaQuantR);
+        layoutRestockItems.add(plusNutellaR);
         layoutRestockItems.add(backMaintenanceModeR);
-
+        // ADDED END
         // layoutRestockItems.add(filler1);
 
         layoutRestockItems.add(confirmRestockItemsR);
@@ -799,7 +889,7 @@ public class FactoryView extends JFrame{
         container.add(displayBlank1, "8");
      }
 
-     public void buildRestockItemsSVM(){
+    public void buildRestockItemsSVM(){
         background_image_plain = new ImageIcon("plainbg.png");
         Image img6 = background_image_plain.getImage();
         Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
@@ -824,77 +914,91 @@ public class FactoryView extends JFrame{
         restockTomato = new JLabel("Tomato");
         restockPickle = new JLabel("Pickle");
 
-        breadQuant = new JTextField();
-        hamQuant = new JTextField();
-        cheeseQuant = new JTextField();
-        chickenQuant = new JTextField();
-        tunaQuant = new JTextField();
-        eggQuant = new JTextField();
-        mayoQuant = new JTextField();
-        peanutBQuant = new JTextField();
-        strawberryJQuant = new JTextField();
-        nutellaQuant = new JTextField();
-        lettuceQuant = new JTextField();
-        tomatoQuant = new JTextField();
-        pickleQuant = new JTextField();
+        // ADDED
+        breadQuantS = new JTextField();
+        breadQuantS.setHorizontalAlignment(JTextField.CENTER);
+        hamQuantS = new JTextField();
+        hamQuantS.setHorizontalAlignment(JTextField.CENTER);
+        cheeseQuantS = new JTextField();
+        cheeseQuantS.setHorizontalAlignment(JTextField.CENTER);
+        chickenQuantS = new JTextField();
+        chickenQuantS.setHorizontalAlignment(JTextField.CENTER);
+        tunaQuantS = new JTextField();
+        tunaQuantS.setHorizontalAlignment(JTextField.CENTER);
+        eggQuantS = new JTextField();
+        eggQuantS.setHorizontalAlignment(JTextField.CENTER);
+        mayoQuantS = new JTextField();
+        mayoQuantS.setHorizontalAlignment(JTextField.CENTER);
+        peanutBQuantS = new JTextField();
+        peanutBQuantS.setHorizontalAlignment(JTextField.CENTER);
+        strawberryJQuantS = new JTextField();
+        strawberryJQuantS.setHorizontalAlignment(JTextField.CENTER);
+        nutellaQuantS = new JTextField();
+        nutellaQuantS.setHorizontalAlignment(JTextField.CENTER);
+        lettuceQuantS = new JTextField();
+        lettuceQuantS.setHorizontalAlignment(JTextField.CENTER);
+        tomatoQuantS = new JTextField();
+        tomatoQuantS.setHorizontalAlignment(JTextField.CENTER);
+        pickleQuantS = new JTextField();
+        pickleQuantS.setHorizontalAlignment(JTextField.CENTER);
 
-        plusBread = new JButton("+");
-        plusHam = new JButton("+");
-        plusCheese = new JButton("+");
-        plusChicken = new JButton("+");
-        plusTuna = new JButton("+");
-        plusEgg = new JButton("+");
-        plusMayo = new JButton("+");
-        plusPeanutB = new JButton("+");
-        plusStrawberryJ = new JButton("+");
-        plusNutella = new JButton("+");
-        plusLettuce = new JButton("+");
-        plusTomato = new JButton("+");
-        plusPickle = new JButton("+");
+        plusBreadS = new JButton("+");
+        plusHamS = new JButton("+");
+        plusCheeseS = new JButton("+");
+        plusChickenS = new JButton("+");
+        plusTunaS = new JButton("+");
+        plusEggS = new JButton("+");
+        plusMayoS = new JButton("+");
+        plusPeanutBS = new JButton("+");
+        plusStrawberryJS = new JButton("+");
+        plusNutellaS = new JButton("+");
+        plusLettuceS = new JButton("+");
+        plusTomatoS = new JButton("+");
+        plusPickleS = new JButton("+");
         confirmRestockItemsS = new JButton("Confirm");
         backMaintenanceModeS = new JButton("Go Back");
 
         layoutRestockItems.add(restockBread);
-        layoutRestockItems.add(breadQuant);
-        layoutRestockItems.add(plusBread);
+        layoutRestockItems.add(breadQuantS);
+        layoutRestockItems.add(plusBreadS);
         layoutRestockItems.add(restockHam);
-        layoutRestockItems.add(hamQuant);
-        layoutRestockItems.add(plusHam);
+        layoutRestockItems.add(hamQuantS);
+        layoutRestockItems.add(plusHamS);
         layoutRestockItems.add(restockCheese);
-        layoutRestockItems.add(cheeseQuant);
-        layoutRestockItems.add(plusCheese);
+        layoutRestockItems.add(cheeseQuantS);
+        layoutRestockItems.add(plusCheeseS);
         layoutRestockItems.add(restockChicken);
-        layoutRestockItems.add(chickenQuant);
-        layoutRestockItems.add(plusChicken);
+        layoutRestockItems.add(chickenQuantS);
+        layoutRestockItems.add(plusChickenS);
         layoutRestockItems.add(restockTuna);
-        layoutRestockItems.add(tunaQuant);
-        layoutRestockItems.add(plusTuna);
+        layoutRestockItems.add(tunaQuantS);
+        layoutRestockItems.add(plusTunaS);
         layoutRestockItems.add(restockEgg);
-        layoutRestockItems.add(eggQuant);
-        layoutRestockItems.add(plusEgg);
+        layoutRestockItems.add(eggQuantS);
+        layoutRestockItems.add(plusEggS);
         layoutRestockItems.add(restockMayo);
-        layoutRestockItems.add(mayoQuant);
-        layoutRestockItems.add(plusMayo);
+        layoutRestockItems.add(mayoQuantS);
+        layoutRestockItems.add(plusMayoS);
         layoutRestockItems.add(restockPeanutButter);
-        layoutRestockItems.add(peanutBQuant);
-        layoutRestockItems.add(plusPeanutB);
+        layoutRestockItems.add(peanutBQuantS);
+        layoutRestockItems.add(plusPeanutBS);
         layoutRestockItems.add(restockStrawberryJam);
-        layoutRestockItems.add(strawberryJQuant);
-        layoutRestockItems.add(plusStrawberryJ);
+        layoutRestockItems.add(strawberryJQuantS);
+        layoutRestockItems.add(plusStrawberryJS);
         layoutRestockItems.add(restockNutella);
-        layoutRestockItems.add(nutellaQuant);
-        layoutRestockItems.add(plusNutella);
+        layoutRestockItems.add(nutellaQuantS);
+        layoutRestockItems.add(plusNutellaS);
         layoutRestockItems.add(restockLettuce);
-        layoutRestockItems.add(lettuceQuant);
-        layoutRestockItems.add(plusLettuce);
+        layoutRestockItems.add(lettuceQuantS);
+        layoutRestockItems.add(plusLettuceS);
         layoutRestockItems.add(restockTomato);
-        layoutRestockItems.add(tomatoQuant);
-        layoutRestockItems.add(plusTomato);
+        layoutRestockItems.add(tomatoQuantS);
+        layoutRestockItems.add(plusTomatoS);
         layoutRestockItems.add(restockPickle);
-        layoutRestockItems.add(pickleQuant);
-        layoutRestockItems.add(plusPickle);
+        layoutRestockItems.add(pickleQuantS);
+        layoutRestockItems.add(plusPickleS);
         layoutRestockItems.add(backMaintenanceModeS);
-
+        // ADDED END
         //layoutRestockItems.add(filler2);
 
         layoutRestockItems.add(confirmRestockItemsS);
@@ -977,6 +1081,59 @@ public class FactoryView extends JFrame{
         displayBlank3.add(layoutRestockSandwiches);
 
         container.add(displayBlank3, "10");
+     }
+
+     public void buildSetItemPrice(){                                                       
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayBlank4 = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayBlank4.setLayout(new GridBagLayout());
+        layoutSetPrice = new JPanel(new GridLayout(9, 2, 5, 5));
+
+        setHamSandwichPrice = new JLabel("Ham Sand. Price:");
+        setCheeseSandwichPrice = new JLabel("Cheese Sand. Price:");
+        setChickenSandwichPrice = new JLabel("Chicken Sand. Price:");
+        setTunaSandwichPrice = new JLabel("Tuna Sand. Price:");
+        setEggSandwichPrice = new JLabel("Egg Sand. Price:");
+        setPeanutBSandwichPrice = new JLabel("Peanut Butter Sand. Price:");
+        setStrawberryJSandwichPrice = new JLabel("Strawberry Jam Sand. Price:");
+        setNutellaSandwichPrice = new JLabel("Nutella Sand. Price:");
+
+        curHamSandwichPrice = new JTextField();
+        curCheeseSandwichPrice = new JTextField();
+        curChickenSandwichPrice = new JTextField();
+        curTunaSandwichPrice = new JTextField();
+        curEggSandwichPrice = new JTextField();
+        curPeanutBSandwichPrice = new JTextField();
+        curStrawberryJSandwichPrice = new JTextField();
+        curNutellaSandwichPrice = new JTextField();
+
+        confirmItemPrice = new JButton("Confirm");
+        backMaintenanceModeFromSetPrice = new JButton("Go Back");
+
+        layoutSetPrice.add(setHamSandwichPrice);
+        layoutSetPrice.add(curHamSandwichPrice);
+        layoutSetPrice.add(setCheeseSandwichPrice);
+        layoutSetPrice.add(curCheeseSandwichPrice);
+        layoutSetPrice.add(setChickenSandwichPrice);
+        layoutSetPrice.add(curChickenSandwichPrice);
+        layoutSetPrice.add(setTunaSandwichPrice);
+        layoutSetPrice.add(curTunaSandwichPrice);
+        layoutSetPrice.add(setEggSandwichPrice);
+        layoutSetPrice.add(curEggSandwichPrice);
+        layoutSetPrice.add(setPeanutBSandwichPrice);
+        layoutSetPrice.add(curPeanutBSandwichPrice);
+        layoutSetPrice.add(setStrawberryJSandwichPrice);
+        layoutSetPrice.add(curStrawberryJSandwichPrice);
+        layoutSetPrice.add(setNutellaSandwichPrice);
+        layoutSetPrice.add(curNutellaSandwichPrice);
+        layoutSetPrice.add(backMaintenanceModeFromSetPrice);
+        layoutSetPrice.add(confirmItemPrice);
+
+        displayBlank4.add(layoutSetPrice);
+
+        container.add(displayBlank4, "11");
      }
 
      //for JOptionPanes
@@ -1191,6 +1348,308 @@ public class FactoryView extends JFrame{
     public void setBackMaintenanceModeListenerFromSandwich(ActionListener actnListener)    {
         this.backMaintenanceModeFromSandwich.addActionListener(actnListener);
     }
+
+
+    // ADDED
+    // button listeners for Restock Items
+
+    public void setPlusBreadListenerR(ActionListener actnListener)   {
+        this.plusBreadR.addActionListener(actnListener);
+    }
+
+    public void setPlusHamListenerR(ActionListener actnListener)   {
+        this.plusHamR.addActionListener(actnListener);
+    }
+
+    public void setPlusCheeseListenerR(ActionListener actnListener)   {
+        this.plusCheeseR.addActionListener(actnListener);
+    }
+
+    public void setPlusChickenListenerR(ActionListener actnListener)   {
+        this.plusChickenR.addActionListener(actnListener);
+    }
+
+    public void setPlusTunaListenerR(ActionListener actnListener)   {
+        this.plusTunaR.addActionListener(actnListener);
+    }
+
+    public void setPlusEggListenerR(ActionListener actnListener)   {
+        this.plusEggR.addActionListener(actnListener);
+    }
+
+    public void setPlusMayoListenerR(ActionListener actnListener)   {
+        this.plusMayoR.addActionListener(actnListener);
+    }
+
+    public void setPlusPeanutBListenerR(ActionListener actnListener)   {
+        this.plusPeanutBR.addActionListener(actnListener);
+    }
+
+    public void setPlusStrawberryJListenerR(ActionListener actnListener)   {
+        this.plusStrawberryJR.addActionListener(actnListener);
+    }
+
+    public void setPlusNutellaListenerR(ActionListener actnListener)   {
+        this.plusNutellaR.addActionListener(actnListener);
+    }
+
+    // Special
+    public void setPlusBreadListenerS(ActionListener actnListener)   {
+        this.plusBreadS.addActionListener(actnListener);
+    }
+
+    public void setPlusHamListenerS(ActionListener actnListener)   {
+        this.plusHamS.addActionListener(actnListener);
+    }
+
+    public void setPlusCheeseListenerS(ActionListener actnListener)   {
+        this.plusCheeseS.addActionListener(actnListener);
+    }
+
+    public void setPlusChickenListenerS(ActionListener actnListener)   {
+        this.plusChickenS.addActionListener(actnListener);
+    }
+
+    public void setPlusTunaListenerS(ActionListener actnListener)   {
+        this.plusTunaS.addActionListener(actnListener);
+    }
+
+    public void setPlusEggListenerS(ActionListener actnListener)   {
+        this.plusEggS.addActionListener(actnListener);
+    }
+
+    public void setPlusMayoListenerS(ActionListener actnListener)   {
+        this.plusMayoS.addActionListener(actnListener);
+    }
+
+    public void setPlusPeanutBListenerS(ActionListener actnListener)   {
+        this.plusPeanutBS.addActionListener(actnListener);
+    }
+
+    public void setPlusStrawberryJListenerS(ActionListener actnListener)   {
+        this.plusStrawberryJS.addActionListener(actnListener);
+    }
+
+    public void setPlusNutellaListenerS(ActionListener actnListener)   {
+        this.plusNutellaS.addActionListener(actnListener);
+    }
+
+
+    public void setPlusLettuceListenerS(ActionListener actnListener)   {
+        this.plusLettuceS.addActionListener(actnListener);
+    }
+
+    public void setPlusTomatoListenerS(ActionListener actnListener)   {
+        this.plusTomatoS.addActionListener(actnListener);
+    }
+
+    public void setPlusPickleListenerS(ActionListener actnListener)   {
+        this.plusPickleS.addActionListener(actnListener);
+    }
+
+    public void setConfirmRestockItemsR(ActionListener actnListener)    {
+        this.confirmRestockItemsR.addActionListener(actnListener);
+    }
+
+    public void setConfirmRestockItemsS(ActionListener actnListener)    {
+        this.confirmRestockItemsS.addActionListener(actnListener);
+    }
+
+    // getters and setters for TextFields of Restock Items SVM
+    public String getBreadQuantR() {
+        return breadQuantR.getText();
+    }
+
+    public void setBreadQuantR(String breadQuantR) {
+        this.breadQuantR.setText(breadQuantR);
+    }
+
+    public String getHamQuantR() {
+        return hamQuantR.getText();
+    }
+
+    public void setHamQuantR(String hamQuantR) {
+        this.hamQuantR.setText(hamQuantR);;
+    }
+
+    public String getCheeseQuantR() {
+        return cheeseQuantR.getText();
+    }
+
+    public void setCheeseQuantR(String cheeseQuantR) {
+        this.cheeseQuantR.setText(cheeseQuantR);;
+    }
+
+    public String getChickenQuantR() {
+        return chickenQuantR.getText();
+    }
+
+    public void setChickenQuantR(String chickenQuantR) {
+        this.chickenQuantR.setText(chickenQuantR);;
+    }
+
+    public String getTunaQuantR() {
+        return tunaQuantR.getText();
+    }   
+
+    public void setTunaQuantR(String tunaQuantR) {
+        this.tunaQuantR.setText(tunaQuantR);
+    }
+
+    public String getEggQuantR() {
+        return eggQuantR.getText();
+    }
+
+    public void setEggQuantR(String eggQuantR) {
+        this.eggQuantR.setText(eggQuantR);;
+    }
+
+    public String getMayoQuantR() {
+        return mayoQuantR.getText();
+    }
+
+    public void setMayoQuantR(String mayoQuantR) {
+        this.mayoQuantR.setText(mayoQuantR);
+    }
+
+    public String getPeanutBQuantR() {
+        return peanutBQuantR.getText();
+    }
+
+    public void setPeanutBQuantR(String peanutBQuantR) {
+        this.peanutBQuantR.setText(peanutBQuantR);;
+    }
+
+    public String getStrawberryJQuantR() {
+        return strawberryJQuantR.getText();
+    }
+
+    public void setStrawberryJQuantR(String strawberryJQuantR) {
+        this.strawberryJQuantR.setText(strawberryJQuantR);;
+    }
+
+    public String getNutellaQuantR() {
+        return nutellaQuantR.getText();
+    }
+
+    public void setNutellaQuantR(String nutellaQuantR) {
+        this.nutellaQuantR.setText(nutellaQuantR);
+    }
+
+
+    // getters and setters for TextFields of Restock Items SVM
+    public String getBreadQuantS() {
+        return breadQuantS.getText();
+    }
+
+    public void setBreadQuantS(String breadQuantS) {
+        this.breadQuantS.setText(breadQuantS);
+    }
+
+    public String getHamQuantS() {
+        return hamQuantS.getText();
+    }
+
+    public void setHamQuantS(String hamQuantS) {
+        this.hamQuantS.setText(hamQuantS);;
+    }
+
+    public String getCheeseQuantS() {
+        return cheeseQuantS.getText();
+    }
+
+    public void setCheeseQuantS(String cheeseQuantS) {
+        this.cheeseQuantS.setText(cheeseQuantS);;
+    }
+
+    public String getChickenQuantS() {
+        return chickenQuantS.getText();
+    }
+
+    public void setChickenQuantS(String chickenQuantS) {
+        this.chickenQuantS.setText(chickenQuantS);;
+    }
+
+    public String getTunaQuantS() {
+        return tunaQuantS.getText();
+    }   
+
+    public void setTunaQuantS(String tunaQuantS) {
+        this.tunaQuantS.setText(tunaQuantS);
+    }
+
+    public String getEggQuantS() {
+        return eggQuantS.getText();
+    }
+
+    public void setEggQuantS(String eggQuantS) {
+        this.eggQuantS.setText(eggQuantS);;
+    }
+
+    public String getMayoQuantS() {
+        return mayoQuantS.getText();
+    }
+
+    public void setMayoQuantS(String mayoQuantS) {
+        this.mayoQuantS.setText(mayoQuantS);
+    }
+
+    public String getPeanutBQuantS() {
+        return peanutBQuantS.getText();
+    }
+
+    public void setPeanutBQuantS(String peanutBQuantS) {
+        this.peanutBQuantS.setText(peanutBQuantS);;
+    }
+
+    public String getStrawberryJQuantS() {
+        return strawberryJQuantS.getText();
+    }
+
+    public void setStrawberryJQuantS(String strawberryJQuantS) {
+        this.strawberryJQuantS.setText(strawberryJQuantS);;
+    }
+
+    public String getNutellaQuantS() {
+        return nutellaQuantS.getText();
+    }
+
+    public void setNutellaQuantS(String nutellaQuantS) {
+        this.nutellaQuantS.setText(nutellaQuantS);
+    }
+
+    public String getLettuceQuantS() {
+        return lettuceQuantS.getText();
+    }
+
+    public void setLettuceQuantS(String lettuceQuantS) {
+        this.lettuceQuantS.setText(lettuceQuantS);;
+    }
+
+    public String getTomatoQuantS() {
+        return tomatoQuantS.getText();
+    }
+
+    public void setTomatoQuantS(String tomatoQuantS) {
+        this.tomatoQuantS.setText(tomatoQuantS);;
+    }
+
+    public String getPickleQuantS() {
+        return pickleQuantS.getText();
+    }
+
+    public void setPickleQuantS(String pickleQuantS) {
+        this.pickleQuantS.setText(pickleQuantS);;
+    }
+    
+    // Set Item Price Listeners
+    public void setSetItemPriceListener(ActionListener actnListener)    {                      
+        this.setItemPrice.addActionListener(actnListener);
+    }        
+    
+    public void setBackMaintenanceModeListenerFromSetPrice(ActionListener actnListener)    {    
+    }                                                                                          
+
 
 
 }

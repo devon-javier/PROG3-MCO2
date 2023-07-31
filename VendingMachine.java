@@ -11,10 +11,7 @@ public class VendingMachine {
     protected ArrayList<Ham> hamStock;
     protected ArrayList<Egg> eggStock;
     protected ArrayList<Chicken> chickenStock;
-    protected ArrayList<Lettuce> lettuceStock;
     protected ArrayList<Tuna> tunaStock;
-    protected ArrayList<Tomato> tomatoStock;
-    protected ArrayList<Pickle> pickleStock;
     protected ArrayList<Nutella> nutellaStock;
     protected ArrayList<PeanutButter> peanutbutterStock;
     protected ArrayList<StrawberryJam> strawberryjamStock;
@@ -42,10 +39,7 @@ public class VendingMachine {
         hamStock = new ArrayList<Ham>();
         eggStock = new ArrayList<Egg>();
         chickenStock = new ArrayList<Chicken>();
-        lettuceStock = new ArrayList<Lettuce>();
         tunaStock = new ArrayList<Tuna>();
-        tomatoStock = new ArrayList<Tomato>();
-        pickleStock = new ArrayList<Pickle>();
         nutellaStock = new ArrayList<Nutella>();
         peanutbutterStock = new ArrayList<PeanutButter>();
         strawberryjamStock = new ArrayList<StrawberryJam>();
@@ -59,10 +53,7 @@ public class VendingMachine {
             hamStock.add(new Ham());
             eggStock.add(new Egg());
             chickenStock.add(new Chicken());
-            lettuceStock.add(new Lettuce());
             tunaStock.add(new Tuna());
-            tomatoStock.add(new Tomato());
-            pickleStock.add(new Pickle());
             nutellaStock.add(new Nutella());
             peanutbutterStock.add(new PeanutButter());
             strawberryjamStock.add(new StrawberryJam());
@@ -161,7 +152,6 @@ public class VendingMachine {
                 case 4:
                     ingredientsList.add(new Bread());
                     ingredientsList.add(new Chicken());
-                    ingredientsList.add(new Lettuce());
                     ingredientsList.add(new Mayonnaise());
 
                     for(int j = 0; j < ingredientsList.size(); j++) {
@@ -175,7 +165,6 @@ public class VendingMachine {
                     for(int k = 0; k < slots[i].getinitialQuantity(); k++)  {
                         breadStock.remove(breadStock.size() - 1);
                         chickenStock.remove(chickenStock.size() - 1);
-                        lettuceStock.remove(lettuceStock.size() - 1);
                         mayonnaiseStock.remove(mayonnaiseStock.size() - 1);
                     }
 
@@ -276,7 +265,7 @@ public class VendingMachine {
         Money change = new Money();
 
         temp = 
-        (int)userMoney.computeTotal() - (int)slots[index].getsandwichList().get(slots[index].getsandwichList().size() - 1).computePrice();
+        (int)userMoney.computeTotal() - (int)slots[index].getsandwichList().get(slots[index].getsandwichList().size() - 1).getPrice();
 
         curr = temp / 1000;
         change.addPeso1000(curr);
@@ -349,17 +338,8 @@ public class VendingMachine {
 
             chickenStock.add((Chicken)item);
 
-        } else if (item instanceof Lettuce)   {
-            lettuceStock.add((Lettuce)item);
-
         } else if (item instanceof Tuna)  {
             tunaStock.add((Tuna)item);
-
-        } else if (item instanceof Tomato)    {
-            tomatoStock.add((Tomato)item);
-
-        } else if (item instanceof Pickle)    {
-            pickleStock.add((Pickle)item);
 
         } else if (item instanceof Nutella)   {
             nutellaStock.add((Nutella)item);
@@ -378,8 +358,8 @@ public class VendingMachine {
     public void resetHistoryRecord() {
         ArrayList<Transaction> temp = this.history.getTransactions();
 
-        history.setInitialStock(this);
-        history.setFinalStock(this);
+        history.setInitialStockR(this);
+        history.setFinalStockR(this);
     }
 
     public Slot getVendingMachineSlot(int index) {
@@ -418,20 +398,9 @@ public class VendingMachine {
         return chickenStock;
     }
 
-    public ArrayList<Lettuce> getLettuceStock() {
-        return lettuceStock;
-    }
 
     public ArrayList<Tuna> getTunaStock() {
         return tunaStock;
-    }
-
-    public ArrayList<Tomato> getTomatoStock() {
-        return tomatoStock;
-    }
-
-    public ArrayList<Pickle> getPickleStock() {
-        return pickleStock;
     }
 
     public ArrayList<Nutella> getNutellaStock() {
