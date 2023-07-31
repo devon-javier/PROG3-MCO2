@@ -68,7 +68,6 @@ public class FactoryView extends JFrame{
     private JButton confirmPayment;
     private JButton viewPriceList;
     private JTextField currentAmount;
-    private JOptionPane displayPriceList;
     private JTextArea containPriceList;
 
     //COMPONENTS FOR MAINTENANCE MODE WINDOW
@@ -111,9 +110,6 @@ public class FactoryView extends JFrame{
      private JTextField peanutBQuantR;
      private JTextField strawberryJQuantR;
      private JTextField nutellaQuantR;
-     private JTextField lettuceQuantR;
-     private JTextField tomatoQuantR;
-     private JTextField pickleQuantR;
 
      private JTextField breadQuantS;
      private JTextField hamQuantS;
@@ -186,7 +182,6 @@ public class FactoryView extends JFrame{
      private JButton plusPeanutBSandwich;
      private JButton plusStrawberryJSandwich;
      private JButton plusNutellaSandwich;
-     private JButton confirmRestockSandwiches;
      private JButton backMaintenanceModeFromSandwich;
 
      private JPanel layoutRestockSandwiches;
@@ -204,9 +199,6 @@ public class FactoryView extends JFrame{
     private JLabel setStrawberryJSandwichPrice;
     private JLabel setNutellaSandwichPrice;
 
-    //add pa indiv ingredients
-    //add pa svm specific components
-
     private JTextField curHamSandwichPrice;
     private JTextField curCheeseSandwichPrice;
     private JTextField curChickenSandwichPrice;
@@ -219,7 +211,42 @@ public class FactoryView extends JFrame{
     private JButton confirmItemPrice;
     private JButton backMaintenanceModeFromSetPrice;
 
-    private JPanel layoutSetPrice;                              
+    private JPanel layoutSetPrice;
+    
+    //MAINTENANCE MODE - REPLENISH VM MONEY
+    private JLabel curVMMoney;
+    private JLabel curPeso1;
+    private JLabel curPeso5;
+    private JLabel curPeso10;
+    private JLabel curPeso20;
+    private JLabel curPeso50;
+    private JLabel curPeso100;
+    private JLabel curPeso200;
+    private JLabel curPeso500;
+    private JLabel curPeso1000;
+    private JButton replenish1;
+    private JButton replenish5;
+    private JButton replenish10;
+    private JButton replenish20;
+    private JButton replenish50;
+    private JButton replenish100;
+    private JButton replenish200;
+    private JButton replenish500;
+    private JButton replenish1000;
+    private JTextField showCurVMMoney;
+    private JTextField cur1;
+    private JTextField cur5;
+    private JTextField cur10;
+    private JTextField cur20;
+    private JTextField cur50;
+    private JTextField cur100;
+    private JTextField cur200;
+    private JTextField cur500;
+    private JTextField cur1000;
+    private JButton confirmReplenish;
+    private JButton cancelReplenish;
+    private JOptionPane moneyReplenished;
+    private JPanel layoutReplenishMoney;
 
     //COMPONENTS FOR REGULAR VM WINDOW
     private JButton slot1R;
@@ -234,6 +261,7 @@ public class FactoryView extends JFrame{
     private JButton viewItemInfoR;
     private JOptionPane selectItemRVM;  //when an item is selected
     private JPanel layoutRVM;
+    private JTextArea containItemInfoR;
 
     //COMPONENTS FOR SPECIAL VM WINDOW
     private JButton slot1S;
@@ -248,6 +276,7 @@ public class FactoryView extends JFrame{
     private JButton viewItemInfoS;
     private JOptionPane selectItemSVM;  //when an item is selected
     private JPanel layoutSVM;
+    private JTextArea containItemInfoS;
 
     //misc.
     private GridBagConstraints gbc;
@@ -391,6 +420,7 @@ public class FactoryView extends JFrame{
         this.buildRestockItemsSVM();
         this.buildRestockSandwich();
         this.buildSetItemPrice(); 
+        this.buildReplenishMoney();
     }
 
     //display interface methods
@@ -427,6 +457,9 @@ public class FactoryView extends JFrame{
      public void displaySetItemPriceRVM(){      
         cl.show(container, "11");
      }     
+     public void displayReplenishMoney(){
+        cl.show(container, "12");
+     }
 
     //build methods
     public void buildTestVM()   {
@@ -1045,7 +1078,6 @@ public class FactoryView extends JFrame{
         plusPeanutBSandwich = new JButton("+");
         plusStrawberryJSandwich = new JButton("+");
         plusNutellaSandwich = new JButton("+");
-        confirmRestockSandwiches = new JButton("Confirm");
         backMaintenanceModeFromSandwich = new JButton("Go Back");
 
         layoutRestockSandwiches.add(restockHamSandwich);
@@ -1075,8 +1107,6 @@ public class FactoryView extends JFrame{
         layoutRestockSandwiches.add(backMaintenanceModeFromSandwich);
 
         // layoutRestockSandwiches.add(filler1);
-
-        layoutRestockSandwiches.add(confirmRestockSandwiches);
 
         displayBlank3.add(layoutRestockSandwiches);
 
@@ -1136,10 +1166,101 @@ public class FactoryView extends JFrame{
         container.add(displayBlank4, "11");
      }
 
+     public void buildCollectPayment(){
+        //joptionpane so baka di to kailanganin
+     }
+
+     public void buildCollectMachineMoney(){
+        //joptionpane so baka di ko kailanganin
+     }
+
+     public void buildReplenishMoney(){
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayBlank5 = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayBlank5.setLayout(new GridBagLayout());
+        layoutReplenishMoney = new JPanel(new GridLayout(11, 3, 5, 5));
+
+        curVMMoney = new JLabel("Current Money:");
+        showCurVMMoney = new JTextField();
+
+        curPeso1 = new JLabel("insert 1:");
+        curPeso5 = new JLabel("insert 5:");
+        curPeso10 = new JLabel("insert 10:");
+        curPeso20 = new JLabel("insert 20:");
+        curPeso50 = new JLabel("insert 50:");
+        curPeso100 = new JLabel("insert 100:");
+        curPeso200 = new JLabel("insert 200:");
+        curPeso500 = new JLabel("insert 500:");
+        curPeso1000 = new JLabel("insert 1000:");
+
+        cur1 = new JTextField();
+        cur5 = new JTextField();
+        cur10 = new JTextField();
+        cur20 = new JTextField();
+        cur50 = new JTextField();
+        cur100 = new JTextField();
+        cur200 = new JTextField();
+        cur500 = new JTextField();
+        cur1000 = new JTextField();
+
+        replenish1 = new JButton("+");
+        replenish5 = new JButton("+");
+        replenish10 = new JButton("+");
+        replenish20 = new JButton("+");
+        replenish50 = new JButton("+");
+        replenish100 = new JButton("+");
+        replenish200 = new JButton("+");
+        replenish500 = new JButton("+");
+        replenish1000 = new JButton("+");
+
+        confirmReplenish = new JButton("Confirm");
+        cancelReplenish = new JButton("Cancel");
+
+        layoutReplenishMoney.add(curVMMoney);
+        layoutReplenishMoney.add(showCurVMMoney);
+        layoutReplenishMoney.add(filler1);
+        layoutReplenishMoney.add(curPeso1);
+        layoutReplenishMoney.add(cur1);
+        layoutReplenishMoney.add(replenish1);
+        layoutReplenishMoney.add(curPeso5);
+        layoutReplenishMoney.add(cur5);
+        layoutReplenishMoney.add(replenish5);
+        layoutReplenishMoney.add(curPeso10);
+        layoutReplenishMoney.add(cur10);
+        layoutReplenishMoney.add(replenish10);
+        layoutReplenishMoney.add(curPeso20);
+        layoutReplenishMoney.add(cur20);
+        layoutReplenishMoney.add(replenish20);
+        layoutReplenishMoney.add(curPeso50);
+        layoutReplenishMoney.add(cur50);
+        layoutReplenishMoney.add(replenish50);
+        layoutReplenishMoney.add(curPeso100);
+        layoutReplenishMoney.add(cur100);
+        layoutReplenishMoney.add(replenish100);
+        layoutReplenishMoney.add(curPeso200);
+        layoutReplenishMoney.add(cur200);
+        layoutReplenishMoney.add(replenish200);
+        layoutReplenishMoney.add(curPeso500);
+        layoutReplenishMoney.add(cur500);
+        layoutReplenishMoney.add(replenish500);
+        layoutReplenishMoney.add(curPeso1000);
+        layoutReplenishMoney.add(cur1000);
+        layoutReplenishMoney.add(replenish1000);
+        layoutReplenishMoney.add(cancelReplenish);
+        layoutReplenishMoney.add(confirmReplenish);
+
+        displayBlank5.add(layoutReplenishMoney);
+
+        container.add(displayBlank5, "12");
+
+     }
+
      //for JOptionPanes
      public void dispSelectItem(){
         selectItemRVM = new JOptionPane();
-        int resultSelectItem = JOptionPane.showConfirmDialog(null, "Purchase item?", "System Message", JOptionPane.YES_NO_OPTION);
+        int resultSelectItem = JOptionPane.showConfirmDialog(null, "Purchase item?\n\nYes - purchase item\nNo - choose another item", "System Message", JOptionPane.YES_NO_OPTION);
 
         if(resultSelectItem == JOptionPane.YES_OPTION){
             
@@ -1148,12 +1269,32 @@ public class FactoryView extends JFrame{
 
      public void dispCustomizeItem(){
         selectItemSVM = new JOptionPane();
-        int resultCustomizeItem = JOptionPane.showConfirmDialog(null, "Customize item?", "System Message", JOptionPane.YES_NO_CANCEL_OPTION);
+        int resultCustomizeItem = JOptionPane.showConfirmDialog(null, "CUSTOMIZE ITEM?\n\nYes - customize\nNo - purchase as is\nCancel - choose another item", "System Message", JOptionPane.YES_NO_CANCEL_OPTION);
+     }
+
+     public void dispMoneyReplenished(){
+        moneyReplenished = new JOptionPane();
+        JOptionPane.showMessageDialog(null, "Vending Machine Money Replenished!");
      }
 
      public void dispErrorTestVM(){
         JOptionPane.showMessageDialog(null, "No Vending Machine Created!", "Error", JOptionPane.ERROR_MESSAGE);
         
+     }
+
+     public void dispViewPriceList(){
+        containPriceList = new JTextArea(1, 1);
+        String longText = "Ham Sandwich\nP\n\nCheese Sandwich\nP\n\nChicken Sandwich\nP\n\nTuna Sandwich\nP\n\nEgg Salad Sandwich\nP\n\nPeanut Butter Sandwich\nP\n\nStrawberry Jam Sandwich\nP\n\nNutella Sandwich\nP";
+        containPriceList.setText(longText);
+        containPriceList.setOpaque(false);
+        containPriceList.setEditable(false);
+        JOptionPane.showMessageDialog(null, containPriceList, "View Price List", JOptionPane.PLAIN_MESSAGE);
+     }
+
+     public void dispViewItemInfo(){
+        containItemInfoR = new JTextArea(1, 1);
+        String longText2 = "Ham Sandwich\nP\n\nCheese Sandwich\nP\n\nChicken Sandwich\nP\n\nTuna Sandwich\nP\n\nEgg Salad Sandwich\nP\n\nPeanut Butter Sandwich\nP\n\nStrawberry Jam Sandwich\nP\n\nNutella Sandwich\nP";
+
      }
 
     //button listeners
@@ -1171,6 +1312,10 @@ public class FactoryView extends JFrame{
 
     public void setConfirmMoney(ActionListener actnListener) {
         this.confirmPayment.addActionListener(actnListener);
+    }
+
+    public void setViewPriceList(ActionListener actnListener) {
+        this.viewPriceList.addActionListener(actnListener);
     }
 
     public void setMaintenanceListener(ActionListener actnListener) {
@@ -1648,8 +1793,11 @@ public class FactoryView extends JFrame{
     }        
     
     public void setBackMaintenanceModeListenerFromSetPrice(ActionListener actnListener)    {    
-    }                                                                                          
+        this.backMaintenanceModeFromSetPrice.addActionListener(actnListener);
+    }
 
-
-
+    //Replenish Money Listener
+    public void setReplenishVMMoneyListener(ActionListener actnListener)    {    
+        this.replenishVMMoney.addActionListener(actnListener);
+    }
 }

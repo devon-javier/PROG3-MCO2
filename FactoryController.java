@@ -89,6 +89,12 @@ public class FactoryController {
                 }
             }
         });
+        this.fView.setViewPriceList(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.dispViewPriceList();
+            }
+        });
         this.fView.setPlus1Listener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)  {
@@ -651,7 +657,14 @@ public class FactoryController {
             public void actionPerformed(ActionEvent e)  {
                 fView.displaySetItemPriceRVM();
             }
-        });                                                                            
+        });
+        
+        this.fView.setReplenishVMMoneyListener(new ActionListener() {                       //START~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayReplenishMoney();
+            }
+        }); 
 
     }
 
@@ -676,7 +689,4 @@ public class FactoryController {
         }
 
     }
-
-    // ADDED END
-    
 }
