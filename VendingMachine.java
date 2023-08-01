@@ -377,8 +377,6 @@ public class VendingMachine {
     }
 
     public void resetHistoryRecord() {
-        ArrayList<Transaction> temp = this.history.getTransactions();
-
         history.setInitialStockR(this);
         history.setFinalStockR(this);
     }

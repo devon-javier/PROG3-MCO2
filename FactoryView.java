@@ -1691,25 +1691,28 @@ public class FactoryView extends JFrame{
      }
 
      //for JOptionPanes
-     public void dispSelectItem(){
+     public boolean dispSelectItem(){
         selectItemRVM = new JOptionPane();
         int resultSelectItem = JOptionPane.showConfirmDialog(null, "Purchase item?\n\nYes - purchase item\nNo - choose another item", "System Message", JOptionPane.YES_NO_OPTION);
 
         if(resultSelectItem == JOptionPane.YES_OPTION){
-            displayReceiptOfPurchased();
+            return true;
         }
+
+        return false;
      }
 
-     public void dispCustomizeItem(){
+
+     public int dispCustomizeItem(){
         selectItemSVM = new JOptionPane();
         int resultCustomizeItem = JOptionPane.showConfirmDialog(null, "CUSTOMIZE ITEM?\n\nYes - customize\nNo - purchase as is\nCancel - choose another item", "System Message", JOptionPane.YES_NO_CANCEL_OPTION);
 
-        if(resultCustomizeItem == JOptionPane.YES_OPTION){
-            displayCustomizeItemsSVMInterface();
-        }
-        else if(resultCustomizeItem == JOptionPane.NO_OPTION){
-
-        }
+        if(resultCustomizeItem == JOptionPane.YES_OPTION)   {
+            return 1;
+        } else if (resultCustomizeItem == JOptionPane.NO_OPTION)    {
+            return 2;
+        } else return 3;
+        
      }
 
      public void dispMoneyReplenished(){

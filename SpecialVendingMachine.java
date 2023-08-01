@@ -48,8 +48,6 @@ public class SpecialVendingMachine extends VendingMachine {
 
     @Override
     public void resetHistoryRecord() {
-        ArrayList<Transaction> temp = this.history.getTransactions();
-
         history.setInitialStockS(this);
         history.setFinalStockS(this);
     }

@@ -314,52 +314,174 @@ public class FactoryController {
         });
 
        //for slot items ------------------------------------------- RVM
-        this.fView.setSlot1RListener(new ActionListener()  {
-            @Override
-            public void actionPerformed(ActionEvent e)  {
-                fView.dispSelectItem();
+       this.fView.setSlot1RListener(new ActionListener()  {
+        @Override
+        public void actionPerformed(ActionEvent e)  {
+            
+            if(temp_payment.computeTotal() < 
+            fModel.getCurrentMachine().getVendingMachineSlot(0).getsandwichList().get(0).getPrice())    {
+                fView.dispErrorNotEnoughMoney();
+            } else {
+                boolean bool = fView.dispSelectItem();
+
+                if(bool == true)    {
+                        fModel.getCurrentMachine().receiveMoney(temp_payment);
+                        Money change  = fModel.getCurrentMachine().produceChange(0, temp_payment);
+                        fModel.getCurrentMachine().produceTransaction
+                        (fModel.getCurrentMachine().getVendingMachineSlot(0).getsandwichList().get(0), 
+                        temp_payment, change);
+                        fModel.getCurrentMachine().dispenseItem(0);
+                        fView.displayReceiptOfPurchased();
+                }
             }
+            
+        }
         });
         this.fView.setSlot2RListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispSelectItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(1).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    boolean bool = fView.dispSelectItem();
+
+                    if(bool == true)    {
+                        fModel.getCurrentMachine().receiveMoney(temp_payment);
+                        Money change  = fModel.getCurrentMachine().produceChange(1, temp_payment);
+                        fModel.getCurrentMachine().produceTransaction
+                        (fModel.getCurrentMachine().getVendingMachineSlot(1).getsandwichList().get(0), 
+                        temp_payment, change);
+                        fModel.getCurrentMachine().dispenseItem(1);
+                        fView.displayReceiptOfPurchased();
+                    }
+                }
             }
         });
         this.fView.setSlot3RListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispSelectItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(2).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    boolean bool = fView.dispSelectItem();
+
+                    if(bool == true)    {
+                        fModel.getCurrentMachine().receiveMoney(temp_payment);
+                        Money change  = fModel.getCurrentMachine().produceChange(2, temp_payment);
+                        fModel.getCurrentMachine().produceTransaction
+                        (fModel.getCurrentMachine().getVendingMachineSlot(2).getsandwichList().get(0), 
+                        temp_payment, change);
+                        fModel.getCurrentMachine().dispenseItem(2);
+                        fView.displayReceiptOfPurchased();
+                    }
+                }
             }
         });
         this.fView.setSlot4RListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispSelectItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(3).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    boolean bool = fView.dispSelectItem();
+
+                    if(bool == true)    {
+                        fModel.getCurrentMachine().receiveMoney(temp_payment);
+                        Money change  = fModel.getCurrentMachine().produceChange(3, temp_payment);
+                        fModel.getCurrentMachine().produceTransaction
+                        (fModel.getCurrentMachine().getVendingMachineSlot(3).getsandwichList().get(0), 
+                        temp_payment, change);
+                        fModel.getCurrentMachine().dispenseItem(3);
+                        fView.displayReceiptOfPurchased();
+                    }
+                }
             }
         });
         this.fView.setSlot5RListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispSelectItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(4).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    boolean bool = fView.dispSelectItem();
+
+                    if(bool == true)    {
+                        fModel.getCurrentMachine().receiveMoney(temp_payment);
+                        Money change  = fModel.getCurrentMachine().produceChange(4, temp_payment);
+                        fModel.getCurrentMachine().produceTransaction
+                        (fModel.getCurrentMachine().getVendingMachineSlot(4).getsandwichList().get(0), 
+                        temp_payment, change);
+                        fModel.getCurrentMachine().dispenseItem(4);
+                        fView.displayReceiptOfPurchased();
+                    }
+                }
             }
         });
         this.fView.setSlot6RListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispSelectItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(5).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    boolean bool = fView.dispSelectItem();
+
+                    if(bool == true)    {
+                        fModel.getCurrentMachine().receiveMoney(temp_payment);
+                        Money change  = fModel.getCurrentMachine().produceChange(5, temp_payment);
+                        fModel.getCurrentMachine().produceTransaction
+                        (fModel.getCurrentMachine().getVendingMachineSlot(5).getsandwichList().get(0), 
+                        temp_payment, change);
+                        fModel.getCurrentMachine().dispenseItem(5);
+                        fView.displayReceiptOfPurchased();
+                    }
+                }
             }
         });
         this.fView.setSlot7RListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispSelectItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(6).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    boolean bool = fView.dispSelectItem();
+
+                    if(bool == true)    {
+                        fModel.getCurrentMachine().receiveMoney(temp_payment);
+                        Money change  = fModel.getCurrentMachine().produceChange(6, temp_payment);
+                        fModel.getCurrentMachine().produceTransaction
+                        (fModel.getCurrentMachine().getVendingMachineSlot(6).getsandwichList().get(0), 
+                        temp_payment, change);
+                        fModel.getCurrentMachine().dispenseItem(6);
+                        fView.displayReceiptOfPurchased();
+                    }
+                }
             }
         });
         this.fView.setSlot8RListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispSelectItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(7).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    boolean bool = fView.dispSelectItem();
+
+                    if(bool == true)    {
+                        fModel.getCurrentMachine().receiveMoney(temp_payment);
+                        Money change  = fModel.getCurrentMachine().produceChange(7, temp_payment);
+                        fModel.getCurrentMachine().produceTransaction
+                        (fModel.getCurrentMachine().getVendingMachineSlot(7).getsandwichList().get(0), 
+                        temp_payment, change);
+                        fModel.getCurrentMachine().dispenseItem(7);
+                        fView.displayReceiptOfPurchased();
+                    }
+                }
             }
         });
 
@@ -367,49 +489,209 @@ public class FactoryController {
         this.fView.setSlot1SListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispCustomizeItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(0).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    int result = fView.dispCustomizeItem();
+
+                    if(result == 1) {
+                        fView.displayCustomizeItemsSVMInterface();
+                    } else if (result == 2) {
+                        boolean bool = fView.dispSelectItem();
+
+                        if(bool == true)    {
+                            fModel.getCurrentMachine().receiveMoney(temp_payment);
+                            Money change  = fModel.getCurrentMachine().produceChange(0, temp_payment);
+                            fModel.getCurrentMachine().produceTransaction
+                            (fModel.getCurrentMachine().getVendingMachineSlot(0).getsandwichList().get(0), 
+                            temp_payment, change);
+                            fModel.getCurrentMachine().dispenseItem(0);
+                        }
+                    }
+                }
             }
         });
         this.fView.setSlot2SListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispCustomizeItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(1).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    int result = fView.dispCustomizeItem();
+
+                    if(result == 1) {
+                        fView.displayCustomizeItemsSVMInterface();
+                    } else if (result == 2) {
+                        boolean bool = fView.dispSelectItem();
+
+                        if(bool == true)    {
+                            fModel.getCurrentMachine().receiveMoney(temp_payment);
+                            Money change  = fModel.getCurrentMachine().produceChange(1, temp_payment);
+                            fModel.getCurrentMachine().produceTransaction
+                            (fModel.getCurrentMachine().getVendingMachineSlot(1).getsandwichList().get(0), 
+                            temp_payment, change);
+                            fModel.getCurrentMachine().dispenseItem(1);
+                        }
+                    }
+                }
             }
         });
         this.fView.setSlot3SListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispCustomizeItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(2).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    int result = fView.dispCustomizeItem();
+
+                    if(result == 1) {
+                        fView.displayCustomizeItemsSVMInterface();
+                    } else if (result == 2) {
+                        boolean bool = fView.dispSelectItem();
+
+                        if(bool == true)    {
+                            fModel.getCurrentMachine().receiveMoney(temp_payment);
+                            Money change  = fModel.getCurrentMachine().produceChange(2, temp_payment);
+                            fModel.getCurrentMachine().produceTransaction
+                            (fModel.getCurrentMachine().getVendingMachineSlot(2).getsandwichList().get(0), 
+                            temp_payment, change);
+                            fModel.getCurrentMachine().dispenseItem(2);
+                        }
+                    }
+                }
             }
         });
         this.fView.setSlot4SListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispCustomizeItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(3).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    int result = fView.dispCustomizeItem();
+
+                    if(result == 1) {
+                        fView.displayCustomizeItemsSVMInterface();
+                    } else if (result == 2) {
+                        boolean bool = fView.dispSelectItem();
+
+                        if(bool == true)    {
+                            fModel.getCurrentMachine().receiveMoney(temp_payment);
+                            Money change  = fModel.getCurrentMachine().produceChange(3, temp_payment);
+                            fModel.getCurrentMachine().produceTransaction
+                            (fModel.getCurrentMachine().getVendingMachineSlot(3).getsandwichList().get(0), 
+                            temp_payment, change);
+                            fModel.getCurrentMachine().dispenseItem(3);
+                        }
+                    }
+                }
             }
         });
         this.fView.setSlot5SListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispCustomizeItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(4).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    int result = fView.dispCustomizeItem();
+
+                    if(result == 1) {
+                        fView.displayCustomizeItemsSVMInterface();
+                    } else if (result == 2) {
+                        boolean bool = fView.dispSelectItem();
+
+                        if(bool == true)    {
+                            fModel.getCurrentMachine().receiveMoney(temp_payment);
+                            Money change  = fModel.getCurrentMachine().produceChange(4, temp_payment);
+                            fModel.getCurrentMachine().produceTransaction
+                            (fModel.getCurrentMachine().getVendingMachineSlot(4).getsandwichList().get(0), 
+                            temp_payment, change);
+                            fModel.getCurrentMachine().dispenseItem(4);
+                        }
+                    }
+                }
             }
         });
         this.fView.setSlot6SListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispCustomizeItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(5).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    int result = fView.dispCustomizeItem();
+
+                    if(result == 1) {
+                        fView.displayCustomizeItemsSVMInterface();
+                    } else if (result == 2) {
+                        boolean bool = fView.dispSelectItem();
+
+                        if(bool == true)    {
+                            fModel.getCurrentMachine().receiveMoney(temp_payment);
+                            Money change  = fModel.getCurrentMachine().produceChange(5, temp_payment);
+                            fModel.getCurrentMachine().produceTransaction
+                            (fModel.getCurrentMachine().getVendingMachineSlot(5).getsandwichList().get(0), 
+                            temp_payment, change);
+                            fModel.getCurrentMachine().dispenseItem(5);
+                        }
+                    }
+                }
             }
         });
         this.fView.setSlot7SListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispCustomizeItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(6).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    int result = fView.dispCustomizeItem();
+
+                    if(result == 1) {
+                        fView.displayCustomizeItemsSVMInterface();
+                    } else if (result == 2) {
+                        boolean bool = fView.dispSelectItem();
+
+                        if(bool == true)    {
+                            fModel.getCurrentMachine().receiveMoney(temp_payment);
+                            Money change  = fModel.getCurrentMachine().produceChange(6, temp_payment);
+                            fModel.getCurrentMachine().produceTransaction
+                            (fModel.getCurrentMachine().getVendingMachineSlot(6).getsandwichList().get(0), 
+                            temp_payment, change);
+                            fModel.getCurrentMachine().dispenseItem(6);
+                        }
+                    }
+                }
             }
         });
         this.fView.setSlot8SListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispCustomizeItem();
+                if(temp_payment.computeTotal() < 
+                fModel.getCurrentMachine().getVendingMachineSlot(7).getsandwichList().get(0).getPrice())    {
+                    fView.dispErrorNotEnoughMoney();
+                } else {
+                    int result = fView.dispCustomizeItem();
+
+                    if(result == 1) {
+                        fView.displayCustomizeItemsSVMInterface();
+                    } else if (result == 2) {
+                        boolean bool = fView.dispSelectItem();
+
+                        if(bool == true)    {
+                            fModel.getCurrentMachine().receiveMoney(temp_payment);
+                            Money change  = fModel.getCurrentMachine().produceChange(7, temp_payment);
+                            fModel.getCurrentMachine().produceTransaction
+                            (fModel.getCurrentMachine().getVendingMachineSlot(7).getsandwichList().get(0), 
+                            temp_payment, change);
+                            fModel.getCurrentMachine().dispenseItem(7);
+                        }
+                    }
+                }
             }
         });
 
