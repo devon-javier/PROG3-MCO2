@@ -291,7 +291,10 @@ public class FactoryView extends JFrame{
 
     private JPanel layoutViewItemInfoS;
     private JLabel displayViewItemInfoS;
-    private JButton goBackFromViewInfoS;
+    private JPanel layoutViewAdditionalItemInfoS;
+    private JLabel displayViewAdditionaItemlInfoS;
+    private JButton viewAdditionalInfo;
+    private JButton goBackFromViewAdditionalItemInfoS;
 
     private JTextField hamSandAvailabilityS;
     private JTextField cheeseSandAvailabilityS;
@@ -301,6 +304,19 @@ public class FactoryView extends JFrame{
     private JTextField peanutBSandAvailabilityS;
     private JTextField strawberryJSandAvailabilityS;
     private JTextField nutellaSandAvailabilityS;
+
+    private JTextField hamAddAvailability;
+    private JTextField cheeseAddAvailability;
+    private JTextField chickenAddAvailability;
+    private JTextField tunaAddAvailability;
+    private JTextField eggAddAvailability;
+    private JTextField peanutBAddAvailability;
+    private JTextField strawberryJAddAvailability;
+    private JTextField nutellaAddAvailability;
+    private JTextField mayoAddAvailability;
+    private JTextField tomatoAddAvailability;
+    private JTextField lettuceAddAvailability;
+    private JTextField pickleAddAvailability;
 
     //COMPONENTS FOR SVM CUSTOMIZE ITEM
     private JLabel displayCustomizeItemSVM;
@@ -514,6 +530,8 @@ public class FactoryView extends JFrame{
         this.buildSetItemPrice(); 
         this.buildReplenishMoney();
         this.buildViewItemInfoR();
+        this.buildViewItemInfoS();
+        this.buildViewAdditionalItemsS();
         this.buildCustomizeItemSVM();
         this.buildDispenseItemAndChange();
     }
@@ -558,11 +576,17 @@ public class FactoryView extends JFrame{
      public void displayViewItemInfoR(){
         cl.show(container, "13");
      }
+     public void displayViewItemInfoS(){
+        cl.show(container, "16");
+     }
      public void displayCustomizeItemsSVMInterface(){
         cl.show(container, "14");
      }
      public void displayReceiptOfPurchased(){
         cl.show(container, "15");
+     }
+     public void displayViewAddtionalItemsS(){
+        cl.show(container, "17");
      }
 
     //build methods
@@ -744,7 +768,7 @@ public class FactoryView extends JFrame{
         container.add(displayFieldBuy, "4");
     }
 
-    public void buildViewItemInfoR(){                                                  //START~~~~~~~~~~~~~~~~~~~~
+    public void buildViewItemInfoR(){
         background_image_plain = new ImageIcon("viewiteminfomenu.png");
         Image img6 = background_image_plain.getImage();
         Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
@@ -778,7 +802,93 @@ public class FactoryView extends JFrame{
         displayViewItemInfoR.add(layoutViewItemInfoR);
 
         container.add(displayViewItemInfoR, "13");
-     }             
+     }
+
+     public void buildViewItemInfoS(){
+        background_image_plain = new ImageIcon("viewiteminfomenu.png");
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayViewItemInfoS = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayViewItemInfoS.setLayout(new GridBagLayout());
+        layoutViewItemInfoS = new JPanel(new GridLayout(9, 1, 10, 30));
+
+        hamSandAvailabilityS = new JTextField();
+        cheeseSandAvailabilityS = new JTextField();
+        chickenSandAvailabilityS = new JTextField();
+        tunaSandAvailabilityS = new JTextField();
+        eggSandAvailabilityS = new JTextField();
+        peanutBSandAvailabilityS = new JTextField();
+        strawberryJSandAvailabilityS = new JTextField();
+        nutellaSandAvailabilityS = new JTextField();
+        mayoAddAvailability = new JTextField();
+        lettuceAddAvailability = new JTextField();
+        tomatoAddAvailability = new JTextField();
+        pickleAddAvailability = new JTextField();
+
+        viewAdditionalInfo = new JButton("See More");
+
+        layoutViewItemInfoS.add(hamSandAvailabilityS);
+        layoutViewItemInfoS.add(cheeseSandAvailabilityS);
+        layoutViewItemInfoS.add(chickenSandAvailabilityS);
+        layoutViewItemInfoS.add(tunaSandAvailabilityS);
+        layoutViewItemInfoS.add(eggSandAvailabilityS);
+        layoutViewItemInfoS.add(peanutBSandAvailabilityS);
+        layoutViewItemInfoS.add(strawberryJSandAvailabilityS);
+        layoutViewItemInfoS.add(nutellaSandAvailabilityS);
+        layoutViewItemInfoS.add(viewAdditionalInfo);
+        layoutViewItemInfoS.setOpaque(false);
+
+        displayViewItemInfoS.add(layoutViewItemInfoS);
+
+        container.add(displayViewItemInfoS, "16");
+     }
+
+     public void buildViewAdditionalItemsS(){
+        background_image_plain = new ImageIcon("viewadditionalitemmenu.png");
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayViewAdditionaItemlInfoS = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayViewAdditionaItemlInfoS.setLayout(new GridBagLayout());
+        layoutViewAdditionalItemInfoS = new JPanel(new GridLayout(9, 1, 10, 30));
+
+        layoutViewAdditionalItemInfoS.setOpaque(false);
+
+        hamAddAvailability = new JTextField();
+        cheeseAddAvailability = new JTextField();
+        chickenAddAvailability = new JTextField();
+        tunaAddAvailability = new JTextField();
+        eggAddAvailability = new JTextField();
+        mayoAddAvailability = new JTextField();
+        tomatoAddAvailability = new JTextField();
+        lettuceAddAvailability = new JTextField();
+        pickleAddAvailability = new JTextField();
+        peanutBAddAvailability = new JTextField();
+        strawberryJAddAvailability = new JTextField();
+        nutellaAddAvailability = new JTextField();
+
+        goBackFromViewAdditionalItemInfoS = new JButton("Go Back");
+
+        layoutViewAdditionalItemInfoS.add(hamAddAvailability);
+        layoutViewAdditionalItemInfoS.add(cheeseAddAvailability);
+        layoutViewAdditionalItemInfoS.add(chickenAddAvailability);
+        layoutViewAdditionalItemInfoS.add(tunaAddAvailability);
+        layoutViewAdditionalItemInfoS.add(eggAddAvailability);
+        layoutViewAdditionalItemInfoS.add(mayoAddAvailability);
+        layoutViewAdditionalItemInfoS.add(tomatoAddAvailability);
+        layoutViewAdditionalItemInfoS.add(lettuceAddAvailability);
+        layoutViewAdditionalItemInfoS.add(pickleAddAvailability);
+        layoutViewAdditionalItemInfoS.add(peanutBAddAvailability);
+        layoutViewAdditionalItemInfoS.add(strawberryJAddAvailability);
+        layoutViewAdditionalItemInfoS.add(nutellaAddAvailability);
+        layoutViewAdditionalItemInfoS.add(goBackFromViewAdditionalItemInfoS);
+
+        displayViewAdditionaItemlInfoS.add(layoutViewAdditionalItemInfoS);
+
+        container.add(displayViewAdditionaItemlInfoS, "17");
+
+     }
 
      public void buildRegularVM(){
 
@@ -1538,7 +1648,6 @@ public class FactoryView extends JFrame{
         replenish500 = new JButton("+");
         replenish1000 = new JButton("+");
 
-        confirmReplenish = new JButton("Confirm");
         goBackFromReplenish = new JButton("Go Back");
 
         layoutReplenishMoney.add(curVMMoney);
@@ -1572,7 +1681,6 @@ public class FactoryView extends JFrame{
         layoutReplenishMoney.add(cur1000);
         layoutReplenishMoney.add(replenish1000);
         layoutReplenishMoney.add(goBackFromReplenish);
-        layoutReplenishMoney.add(confirmReplenish);
 
         layoutReplenishMoney.setOpaque(false);
 
@@ -1588,7 +1696,7 @@ public class FactoryView extends JFrame{
         int resultSelectItem = JOptionPane.showConfirmDialog(null, "Purchase item?\n\nYes - purchase item\nNo - choose another item", "System Message", JOptionPane.YES_NO_OPTION);
 
         if(resultSelectItem == JOptionPane.YES_OPTION){
-            
+            displayReceiptOfPurchased();
         }
      }
 
@@ -1730,11 +1838,26 @@ public class FactoryView extends JFrame{
     public void setViewItemInfoRListener(ActionListener actnListener)    {
         this.viewItemInfoR.addActionListener(actnListener);
     }
+    public void setViewItemInfoSListener(ActionListener actnListener)    {
+        this.viewItemInfoS.addActionListener(actnListener);
+    }
     public void setProduceReceiptOfPurchaseListener(ActionListener actnListener)    {
         this.custPurchase.addActionListener(actnListener);
     }
     public void setReceiptGoBackToMenuListener(ActionListener actnListener)    {
         this.receiptGoBackToMenu.addActionListener(actnListener);
+    }
+    public void setViewAdditionalInfoListener(ActionListener actnListener)    {
+        this.viewAdditionalInfo.addActionListener(actnListener);
+    }
+    public void setGoBackFromAdditionalInfoListener(ActionListener actnListener)    {
+        this.goBackFromViewAdditionalItemInfoS.addActionListener(actnListener);
+    }
+    public void setCancelTransactionRListener(ActionListener actnListener)    {
+        this.cancelTransactionR.addActionListener(actnListener);
+    }
+    public void setCancelTransactionSListener(ActionListener actnListener)    {
+        this.cancelTransactionS.addActionListener(actnListener);
     }
 
 

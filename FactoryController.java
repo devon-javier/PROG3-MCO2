@@ -270,6 +270,24 @@ public class FactoryController {
                 fView.displayViewItemInfoR();
             }
         });
+        this.fView.setViewItemInfoSListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayViewItemInfoS();
+            }
+        });
+        this.fView.setViewAdditionalInfoListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayViewAddtionalItemsS();
+            }
+        });
+        this.fView.setGoBackFromAdditionalInfoListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displaySVMInterface();
+            }
+        });
         this.fView.setProduceReceiptOfPurchaseListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
@@ -280,6 +298,18 @@ public class FactoryController {
             @Override
             public void actionPerformed(ActionEvent e)  {
                 fView.displayTestVM();
+            }
+        });
+        this.fView.setCancelTransactionRListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayReceiptOfPurchased();
+            }
+        });
+        this.fView.setCancelTransactionSListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayReceiptOfPurchased();
             }
         });
 
