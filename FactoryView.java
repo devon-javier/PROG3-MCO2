@@ -28,7 +28,7 @@ public class FactoryView extends JFrame{
     private JPanel buySubPanel1;
     private JPanel buySubPanel2;
 
-    //interactables
+    //FACTORY interactables
     private JButton createVM;
     private JButton testVM;
     private JButton regularVM;
@@ -99,7 +99,6 @@ public class FactoryView extends JFrame{
      private JLabel restockTomato;
      private JLabel restockPickle;
 
-    // ADDED
      private JTextField breadQuantR;
      private JTextField hamQuantR;
      private JTextField cheeseQuantR;
@@ -153,7 +152,6 @@ public class FactoryView extends JFrame{
      private JButton confirmRestockItemsS;
 
      private JPanel layoutRestockItems;
-    // ADDED END
 
      //MAINTENANCE MODE - RESTOCK SANDWICHES
      private JLabel restockHamSandwich;
@@ -244,7 +242,7 @@ public class FactoryView extends JFrame{
     private JTextField cur500;
     private JTextField cur1000;
     private JButton confirmReplenish;
-    private JButton cancelReplenish;
+    private JButton goBackFromReplenish;
     private JOptionPane moneyReplenished;
     private JPanel layoutReplenishMoney;
 
@@ -304,14 +302,78 @@ public class FactoryView extends JFrame{
     private JTextField strawberryJSandAvailabilityS;
     private JTextField nutellaSandAvailabilityS;
 
+    //COMPONENTS FOR SVM CUSTOMIZE ITEM
+    private JLabel displayCustomizeItemSVM;
+    private JPanel layoutCustomizeItemSVM;
+
+    private JLabel custLabelHam;
+    private JLabel custLabelCheese;
+    private JLabel custLabelChicken;
+    private JLabel custLabelTuna;
+    private JLabel custLabelEgg;
+    private JLabel custLabelMayo;
+    private JLabel custLabelPeanutB;
+    private JLabel custLabelStrawberryJ;
+    private JLabel custLabelNutella;
+    private JLabel custLabelLettuce;
+    private JLabel custLabelTomato;
+    private JLabel custLabelPickle;
+
+    private JTextField custTextHam;
+    private JTextField custTextCheese;
+    private JTextField custTextChicken;
+    private JTextField custTextTuna;
+    private JTextField custTextEgg;
+    private JTextField custTextMayo;
+    private JTextField custTextPeanutB;
+    private JTextField custTextStrawberryJ;
+    private JTextField custTextNutella;
+    private JTextField custTextLettuce;
+    private JTextField custTextTomato;
+    private JTextField custTextPickle;
+
+    private JButton custPlusHam;
+    private JButton custPlusCheese;
+    private JButton custPlusChicken;
+    private JButton custPlusTuna;
+    private JButton custPlusEgg;
+    private JButton custPlusMayo;
+    private JButton custPlusPeanutB;
+    private JButton custPlusStrawberryJ;
+    private JButton custPlusNutella;
+    private JButton custPlusLettuce;
+    private JButton custPlusTomato;
+    private JButton custPlusPickle;
+    private JButton custPurchase;
+
+    //COMPONENTS FOR DISPENSE ITEM AND CHANGE WINDOW
+    private JLabel displayDispenseItemAndChange;
+    private JPanel layoutDispenseItemAndChange;
+    private JPanel layoutDispenseItemSubPanel1;
+    private JPanel layoutDispenseItemSubPanel2;
+    private JPanel layoutDispenseItemSubPanel3;
+
+    private JLabel receiptTransaction;
+    private JTextArea showReceiptTransaction;
+    private JLabel receiptProductPurchased;
+    private JTextArea showReceiptProductPurchased;
+    private JLabel receiptProducedChange;
+    private JTextField showReceiptProducedChange;
+
+    private JButton receiptGoBackToMenu;
+
+    //COMPONENTS FOR ITEM PREPARATION IN SVM
+
+
     //misc.
     private GridBagConstraints gbc;
     private CardLayout cl;          //sets the card layout
     private Container container;    //uh lalagyan?
     private GridBagConstraints gbc2;
     private GridBagConstraints gbc3;
-    private JButton filler1;    //for pure aesthetic in restock view
-    private JButton filler2;    //for pure aesthetic in restock view
+    private JButton filler1;    //for pure aesthetic
+    private JButton filler2;    //for pure aesthetic
+    private JButton filler3;
 
     //for background image
     private JLabel displayField;
@@ -354,6 +416,10 @@ public class FactoryView extends JFrame{
         filler2.setContentAreaFilled(false);
         filler2.setFocusPainted(false);
         filler2.setBorderPainted(false);
+        filler3 = new JButton("");
+        filler3.setContentAreaFilled(false);
+        filler3.setFocusPainted(false);
+        filler3.setBorderPainted(false);
         
         //panels
         buyMainPanel = new JPanel();
@@ -448,6 +514,8 @@ public class FactoryView extends JFrame{
         this.buildSetItemPrice(); 
         this.buildReplenishMoney();
         this.buildViewItemInfoR();
+        this.buildCustomizeItemSVM();
+        this.buildDispenseItemAndChange();
     }
 
     //display interface methods
@@ -489,6 +557,12 @@ public class FactoryView extends JFrame{
      }
      public void displayViewItemInfoR(){
         cl.show(container, "13");
+     }
+     public void displayCustomizeItemsSVMInterface(){
+        cl.show(container, "14");
+     }
+     public void displayReceiptOfPurchased(){
+        cl.show(container, "15");
      }
 
     //build methods
@@ -851,6 +925,150 @@ public class FactoryView extends JFrame{
         container.add(displayFieldSVM, "6");
      }
 
+     public void buildCustomizeItemSVM(){
+        background_image_plain = new ImageIcon("plainbg.png");
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayCustomizeItemSVM = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayCustomizeItemSVM.setLayout(new GridBagLayout());
+        layoutCustomizeItemSVM = new JPanel(new GridLayout(13, 3, 5, 5));
+
+        custLabelHam = new JLabel("add Ham");
+        custLabelCheese = new JLabel("add Cheese");
+        custLabelChicken = new JLabel("add Chicken");
+        custLabelTuna = new JLabel("add Tuna");
+        custLabelEgg = new JLabel("add Egg");
+        custLabelMayo = new JLabel("add Mayo");
+        custLabelPeanutB = new JLabel("add Peanut Butter");
+        custLabelStrawberryJ = new JLabel("add Strawberry Jam");
+        custLabelNutella = new JLabel("add Nutella");
+        custLabelLettuce = new JLabel("add Lettuce");
+        custLabelTomato = new JLabel("add Tomato");
+        custLabelPickle = new JLabel("add Pickle");
+
+        custTextHam = new JTextField();
+        custTextCheese = new JTextField();
+        custTextChicken = new JTextField();
+        custTextTuna = new JTextField();
+        custTextEgg = new JTextField();
+        custTextMayo = new JTextField();
+        custTextPeanutB = new JTextField();
+        custTextStrawberryJ = new JTextField();
+        custTextNutella = new JTextField();
+        custTextLettuce = new JTextField();
+        custTextTomato = new JTextField();
+        custTextPickle = new JTextField();
+
+        custPlusHam = new JButton("+");
+        custPlusCheese = new JButton("+");
+        custPlusChicken = new JButton("+");
+        custPlusTuna = new JButton("+");
+        custPlusEgg = new JButton("+");
+        custPlusMayo = new JButton("+");
+        custPlusPeanutB = new JButton("+");
+        custPlusStrawberryJ = new JButton("+");
+        custPlusNutella = new JButton("+");
+        custPlusLettuce = new JButton("+");
+        custPlusTomato = new JButton("+");
+        custPlusPickle = new JButton("+");
+        custPurchase = new JButton("Confirm");
+
+        layoutCustomizeItemSVM.add(custLabelHam);
+        layoutCustomizeItemSVM.add(custTextHam);
+        layoutCustomizeItemSVM.add(custPlusHam);
+        layoutCustomizeItemSVM.add(custLabelCheese);
+        layoutCustomizeItemSVM.add(custTextCheese);
+        layoutCustomizeItemSVM.add(custPlusCheese);
+        layoutCustomizeItemSVM.add(custLabelChicken);
+        layoutCustomizeItemSVM.add(custTextChicken);
+        layoutCustomizeItemSVM.add(custPlusChicken);
+        layoutCustomizeItemSVM.add(custLabelTuna);
+        layoutCustomizeItemSVM.add(custTextTuna);
+        layoutCustomizeItemSVM.add(custPlusTuna);
+        layoutCustomizeItemSVM.add(custLabelEgg);
+        layoutCustomizeItemSVM.add(custTextEgg);
+        layoutCustomizeItemSVM.add(custPlusEgg);
+        layoutCustomizeItemSVM.add(custLabelMayo);
+        layoutCustomizeItemSVM.add(custTextMayo);
+        layoutCustomizeItemSVM.add(custPlusMayo);
+        layoutCustomizeItemSVM.add(custLabelPeanutB);
+        layoutCustomizeItemSVM.add(custTextPeanutB);
+        layoutCustomizeItemSVM.add(custPlusPeanutB);
+        layoutCustomizeItemSVM.add(custLabelStrawberryJ);
+        layoutCustomizeItemSVM.add(custTextStrawberryJ);
+        layoutCustomizeItemSVM.add(custPlusStrawberryJ);
+        layoutCustomizeItemSVM.add(custLabelNutella);
+        layoutCustomizeItemSVM.add(custTextNutella);
+        layoutCustomizeItemSVM.add(custPlusNutella);
+        layoutCustomizeItemSVM.add(custLabelLettuce);
+        layoutCustomizeItemSVM.add(custTextLettuce);
+        layoutCustomizeItemSVM.add(custPlusLettuce);
+        layoutCustomizeItemSVM.add(custLabelTomato);
+        layoutCustomizeItemSVM.add(custTextTomato);
+        layoutCustomizeItemSVM.add(custPlusTomato);
+        layoutCustomizeItemSVM.add(custLabelPickle);
+        layoutCustomizeItemSVM.add(custTextPickle);
+        layoutCustomizeItemSVM.add(custPlusPickle);
+        layoutCustomizeItemSVM.add(filler1);
+        layoutCustomizeItemSVM.add(filler2);
+        layoutCustomizeItemSVM.add(custPurchase);
+
+        layoutCustomizeItemSVM.setOpaque(false);
+
+        displayCustomizeItemSVM.add(layoutCustomizeItemSVM);
+
+        container.add(displayCustomizeItemSVM, "14");
+     }
+     
+     public void buildDispenseItemAndChange(){  //basically creates a receipt
+        background_image_plain = new ImageIcon("plainbg.png");
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayDispenseItemAndChange = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayDispenseItemAndChange.setLayout(new GridBagLayout());
+        layoutDispenseItemAndChange = new JPanel(new GridLayout(4, 1, 5, 30));
+        layoutDispenseItemSubPanel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        layoutDispenseItemSubPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        layoutDispenseItemSubPanel3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        receiptTransaction = new JLabel("Your Transaction:");
+        showReceiptTransaction = new JTextArea("LALALALALALLALAA");
+        receiptProductPurchased = new JLabel("Product Purchased:");
+        showReceiptProductPurchased = new JTextArea("WILL THIS SHOW IT MUSH SHOW RYT");
+        receiptProducedChange = new JLabel("Your Change:");
+        showReceiptProducedChange = new JTextField();
+        receiptGoBackToMenu = new JButton("Finish");
+
+        showReceiptTransaction.setEditable(false);
+        showReceiptProductPurchased.setEditable(false);
+        showReceiptProducedChange.setEditable(false);
+
+        layoutDispenseItemSubPanel1.add(receiptTransaction);
+        layoutDispenseItemSubPanel1.add(showReceiptTransaction);
+        layoutDispenseItemSubPanel2.add(receiptProductPurchased);
+        layoutDispenseItemSubPanel2.add(showReceiptProductPurchased);
+        layoutDispenseItemSubPanel3.add(receiptProducedChange);
+        layoutDispenseItemSubPanel3.add(showReceiptProducedChange);
+
+        layoutDispenseItemAndChange.add(layoutDispenseItemSubPanel1);
+        layoutDispenseItemAndChange.add(layoutDispenseItemSubPanel2);
+        layoutDispenseItemAndChange.add(layoutDispenseItemSubPanel3);
+
+        layoutDispenseItemAndChange.add(receiptGoBackToMenu);
+
+        layoutDispenseItemSubPanel1.setOpaque(false);
+        layoutDispenseItemSubPanel2.setOpaque(false);
+        layoutDispenseItemSubPanel3.setOpaque(false);
+        layoutDispenseItemAndChange.setOpaque(false);
+
+        displayDispenseItemAndChange.add(layoutDispenseItemAndChange);
+
+        container.add(displayDispenseItemAndChange, "15");
+     }
+
+     //MAINTENANCE FEATURES
      public void buildMaintenanceMode(){
         background_image_Maintenance = new ImageIcon("maintenancemodemenu.png");
         Image img5 = background_image_Maintenance.getImage();
@@ -911,7 +1129,6 @@ public class FactoryView extends JFrame{
         restockStrawberryJam = new JLabel("Strawberry Jam");
         restockNutella = new JLabel("Nutella");
 
-        // ADDED 
         breadQuantR = new JTextField();
         breadQuantR.setHorizontalAlignment(JTextField.CENTER);
         hamQuantR = new JTextField();
@@ -978,8 +1195,6 @@ public class FactoryView extends JFrame{
         layoutRestockItems.add(nutellaQuantR);
         layoutRestockItems.add(plusNutellaR);
         layoutRestockItems.add(backMaintenanceModeR);
-        // ADDED END
-        // layoutRestockItems.add(filler1);
 
         layoutRestockItems.add(confirmRestockItemsR);
 
@@ -1013,7 +1228,6 @@ public class FactoryView extends JFrame{
         restockTomato = new JLabel("Tomato");
         restockPickle = new JLabel("Pickle");
 
-        // ADDED
         breadQuantS = new JTextField();
         breadQuantS.setHorizontalAlignment(JTextField.CENTER);
         hamQuantS = new JTextField();
@@ -1097,8 +1311,6 @@ public class FactoryView extends JFrame{
         layoutRestockItems.add(pickleQuantS);
         layoutRestockItems.add(plusPickleS);
         layoutRestockItems.add(backMaintenanceModeS);
-        // ADDED END
-        //layoutRestockItems.add(filler2);
 
         layoutRestockItems.add(confirmRestockItemsS);
 
@@ -1179,8 +1391,6 @@ public class FactoryView extends JFrame{
         layoutRestockSandwiches.add(nutellaSandwichQuant);
         layoutRestockSandwiches.add(plusNutellaSandwich);
         layoutRestockSandwiches.add(backMaintenanceModeFromSandwich);
-
-        // layoutRestockSandwiches.add(filler1);
 
         displayBlank3.add(layoutRestockSandwiches);
 
@@ -1329,11 +1539,11 @@ public class FactoryView extends JFrame{
         replenish1000 = new JButton("+");
 
         confirmReplenish = new JButton("Confirm");
-        cancelReplenish = new JButton("Cancel");
+        goBackFromReplenish = new JButton("Go Back");
 
         layoutReplenishMoney.add(curVMMoney);
         layoutReplenishMoney.add(showCurVMMoney);
-        layoutReplenishMoney.add(filler1);
+        layoutReplenishMoney.add(filler3);
         layoutReplenishMoney.add(curPeso1);
         layoutReplenishMoney.add(cur1);
         layoutReplenishMoney.add(replenish1);
@@ -1361,8 +1571,10 @@ public class FactoryView extends JFrame{
         layoutReplenishMoney.add(curPeso1000);
         layoutReplenishMoney.add(cur1000);
         layoutReplenishMoney.add(replenish1000);
-        layoutReplenishMoney.add(cancelReplenish);
+        layoutReplenishMoney.add(goBackFromReplenish);
         layoutReplenishMoney.add(confirmReplenish);
+
+        layoutReplenishMoney.setOpaque(false);
 
         displayBlank5.add(layoutReplenishMoney);
 
@@ -1383,6 +1595,13 @@ public class FactoryView extends JFrame{
      public void dispCustomizeItem(){
         selectItemSVM = new JOptionPane();
         int resultCustomizeItem = JOptionPane.showConfirmDialog(null, "CUSTOMIZE ITEM?\n\nYes - customize\nNo - purchase as is\nCancel - choose another item", "System Message", JOptionPane.YES_NO_CANCEL_OPTION);
+
+        if(resultCustomizeItem == JOptionPane.YES_OPTION){
+            displayCustomizeItemsSVMInterface();
+        }
+        else if(resultCustomizeItem == JOptionPane.NO_OPTION){
+
+        }
      }
 
      public void dispMoneyReplenished(){
@@ -1511,6 +1730,13 @@ public class FactoryView extends JFrame{
     public void setViewItemInfoRListener(ActionListener actnListener)    {
         this.viewItemInfoR.addActionListener(actnListener);
     }
+    public void setProduceReceiptOfPurchaseListener(ActionListener actnListener)    {
+        this.custPurchase.addActionListener(actnListener);
+    }
+    public void setReceiptGoBackToMenuListener(ActionListener actnListener)    {
+        this.receiptGoBackToMenu.addActionListener(actnListener);
+    }
+
 
     //button listeners for insert money interface
     public void setPlus1Listener(ActionListener actnListener)  {
@@ -1618,8 +1844,6 @@ public class FactoryView extends JFrame{
         this.backMaintenanceModeFromSandwich.addActionListener(actnListener);
     }
 
-
-    // ADDED
     // button listeners for Restock Items
 
     public void setPlusBreadListenerR(ActionListener actnListener)   {
@@ -2011,8 +2235,6 @@ public class FactoryView extends JFrame{
         this.plusNutellaSandwich.addActionListener(actnListener);
     }
 
-    // 
-    
     public void setCollectPaymentsListener(ActionListener actnListener)  {
         this.collectPayments.addActionListener(actnListener);
     }

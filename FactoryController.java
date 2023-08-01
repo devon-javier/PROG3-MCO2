@@ -270,7 +270,18 @@ public class FactoryController {
                 fView.displayViewItemInfoR();
             }
         });
-
+        this.fView.setProduceReceiptOfPurchaseListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayReceiptOfPurchased();
+            }
+        });
+        this.fView.setReceiptGoBackToMenuListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayTestVM();
+            }
+        });
 
        //for slot items ------------------------------------------- RVM
         this.fView.setSlot1RListener(new ActionListener()  {
