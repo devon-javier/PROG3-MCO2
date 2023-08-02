@@ -9,7 +9,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -23,6 +22,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.border.LineBorder;
 
 public class FactoryView extends JFrame{
     //panels
@@ -367,9 +367,12 @@ public class FactoryView extends JFrame{
     private JLabel displayItemPreparation;
     private JPanel layoutItemPreparation;
     private JButton finishItemPreparation;
-    private JTextArea containItemPreparation;
-    private String textPreparation;
-    private int i;
+    private JTextField containItemPreparation1;
+    private JTextField containItemPreparation2;
+    private JTextField containItemPreparation3;
+    private JTextField containItemPreparation4;
+    private JTextField containItemPreparation5;
+    private JTextField containItemPreparation6;
 
     //COMPONENTS FOR DISPENSE ITEM AND CHANGE WINDOW
     private JLabel displayDispenseItemAndChange;
@@ -389,6 +392,17 @@ public class FactoryView extends JFrame{
 
     //COMPONENTS FOR ITEM PREPARATION IN SVM
 
+    //COMPONENTS FOR VIEW TRANSACTION HISTORY
+    private JLabel displayViewTransactionHistory;
+    private JPanel layoutDisplayViewTransactionHistory;
+    private JTextArea containTransactionHistory;
+    private JButton goBackFromTransactionHistory;
+
+    //COMPONENTS FOR VIEW ITEM INVENTORY
+    private JLabel displayViewInventoryHistory;
+    private JPanel layoutDisplayInventoryHistory;
+    private JTextArea containInventoryHistory;
+    private JButton goBackFromInventoryHistory;
 
     //misc.
     private GridBagConstraints gbc;
@@ -1071,17 +1085,29 @@ public class FactoryView extends JFrame{
         custLabelPickle = new JLabel("add Pickle");
 
         custTextHam = new JTextField();
+        custTextHam.setHorizontalAlignment(JTextField.CENTER);
         custTextCheese = new JTextField();
+        custTextCheese.setHorizontalAlignment(JTextField.CENTER);
         custTextChicken = new JTextField();
+        custTextChicken.setHorizontalAlignment(JTextField.CENTER);
         custTextTuna = new JTextField();
+        custTextTuna.setHorizontalAlignment(JTextField.CENTER);
         custTextEgg = new JTextField();
+        custTextEgg.setHorizontalAlignment(JTextField.CENTER);
         custTextMayo = new JTextField();
+        custTextMayo.setHorizontalAlignment(JTextField.CENTER);
         custTextPeanutB = new JTextField();
+        custTextPeanutB.setHorizontalAlignment(JTextField.CENTER);
         custTextStrawberryJ = new JTextField();
+        custTextStrawberryJ.setHorizontalAlignment(JTextField.CENTER);
         custTextNutella = new JTextField();
+        custTextNutella.setHorizontalAlignment(JTextField.CENTER);
         custTextLettuce = new JTextField();
+        custTextLettuce.setHorizontalAlignment(JTextField.CENTER);
         custTextTomato = new JTextField();
+        custTextTomato.setHorizontalAlignment(JTextField.CENTER);
         custTextPickle = new JTextField();
+        custTextPickle.setHorizontalAlignment(JTextField.CENTER);
 
         custPlusHam = new JButton("+");
         custPlusCheese = new JButton("+");
@@ -1144,48 +1170,100 @@ public class FactoryView extends JFrame{
         container.add(displayCustomizeItemSVM, "14");
      }
 
-     public void buildItemPreparationSVM(){
+
+    public void buildItemPreparationSVM(){
         background_image_plain = new ImageIcon("plainbg.png");
         Image img6 = background_image_plain.getImage();
         Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
         background_image_plain = new ImageIcon(temp_img6);
         displayItemPreparation = new JLabel("", background_image_plain, JLabel.CENTER);
         displayItemPreparation.setLayout(new GridBagLayout());
-        layoutItemPreparation = new JPanel(new GridLayout(2, 1, 5, 5));
+        layoutItemPreparation = new JPanel(new GridLayout(7, 1, 5, 5));
 
-        i = 0;
-        containItemPreparation = new JTextArea();
-        containItemPreparation.setBounds(100, 100, 100, 90);
-        containItemPreparation.setLineWrap(true);
-        containItemPreparation.setWrapStyleWord(true);
-        containItemPreparation.setOpaque(false);
+        containItemPreparation1 = new JTextField("Preparing your sandwich...");
+        containItemPreparation2 = new JTextField("Toasting bread...");
+        containItemPreparation3 = new JTextField("Adding filling...");
+        containItemPreparation4 = new JTextField("Adding your additional filling...");
+        containItemPreparation5 = new JTextField("Packing sandwich...");
+        containItemPreparation6 = new JTextField("Sandwich done!");
+        finishItemPreparation = new JButton("Done");
 
-        layoutItemPreparation.add(containItemPreparation);
+        //ONE SETTING SETS FOR ALL
+        containItemPreparation1.setPreferredSize(new Dimension(200, 50));
+
+        Font biggerFont = new Font(containItemPreparation1.getFont().getName(), Font.BOLD, 15);
+        containItemPreparation1.setFont(biggerFont);
+        containItemPreparation2.setFont(biggerFont);
+        containItemPreparation3.setFont(biggerFont);
+        containItemPreparation4.setFont(biggerFont);
+        containItemPreparation5.setFont(biggerFont);
+        containItemPreparation6.setFont(biggerFont);
+
+        Color transparentColor = new Color(0, 0, 0, 0);
+        LineBorder transparentBorder = new LineBorder(transparentColor, 1, true);
+
+        containItemPreparation1.setBorder(transparentBorder);
+        containItemPreparation2.setBorder(transparentBorder);
+        containItemPreparation3.setBorder(transparentBorder);
+        containItemPreparation4.setBorder(transparentBorder);
+        containItemPreparation5.setBorder(transparentBorder);
+        containItemPreparation6.setBorder(transparentBorder);
+
+        layoutItemPreparation.add(containItemPreparation1);
+        layoutItemPreparation.add(containItemPreparation2);
+        layoutItemPreparation.add(containItemPreparation3);
+        layoutItemPreparation.add(containItemPreparation4);
+        layoutItemPreparation.add(containItemPreparation5);
+        layoutItemPreparation.add(containItemPreparation6);
+        layoutItemPreparation.add(finishItemPreparation);
+
+        layoutItemPreparation.setOpaque(false);
+        
+        containItemPreparation1.setVisible(false);
+        containItemPreparation2.setVisible(false);
+        containItemPreparation3.setVisible(false);
+        containItemPreparation4.setVisible(false);
+        containItemPreparation5.setVisible(false);
+        containItemPreparation6.setVisible(false);
+        finishItemPreparation.setVisible(false);
+        
         displayItemPreparation.add(layoutItemPreparation);
 
-        textPreparation = "helloooooooooooooo will this work?";
-
-        timer.start();
+        Timer timer1 = new Timer(3000, e -> {
+            containItemPreparation1.setVisible(true);
+            Timer timer2 = new Timer(3000, e1 -> {
+                containItemPreparation2.setVisible(true);
+                Timer timer3 = new Timer(3000, e2 -> {
+                    containItemPreparation3.setVisible(true);
+                    Timer timer4 = new Timer(3000, e3 -> {
+                        containItemPreparation4.setVisible(true);
+                        Timer timer5 = new Timer(3000, e4 -> {
+                            containItemPreparation5.setVisible(true);
+                            Timer timer6 = new Timer(3000, e5 -> {
+                                containItemPreparation6.setVisible(true);
+                                finishItemPreparation.setVisible(true);
+                            });
+                            timer6.setRepeats(false);
+                            timer6.start();
+                        });
+                        timer5.setRepeats(false);
+                        timer5.start();
+                    });
+                    timer4.setRepeats(false);
+                    timer4.start();
+                });
+                timer3.setRepeats(false);
+                timer3.start();
+            });
+            timer2.setRepeats(false);
+            timer2.start();
+        });
+        timer1.setRepeats(false);
+        timer1.start();
 
         container.add(displayItemPreparation, "18");
      }
 
-     Timer timer = new Timer(700, new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e){
-            
-            char character[] = textPreparation.toCharArray();
-            int arrayNumber = character.length;
-
-            String addedCharacter = "";
-            String blank = "";
-
-            addedCharacter = blank + character[i];
-            containItemPreparation.append(addedCharacter);
-
-            i++;
-        }
-     });
 
      
      public void buildDispenseItemAndChange(){  //basically creates a receipt
@@ -1746,6 +1824,26 @@ public class FactoryView extends JFrame{
         container.add(displayBlank5, "12");
      }
 
+     public void buildViewTransactionHistory(){
+        background_image_plain = new ImageIcon("plainbg.png");
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayViewTransactionHistory = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayViewTransactionHistory.setLayout(new GridBagLayout());
+        layoutDisplayViewTransactionHistory = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 10));
+
+        containTransactionHistory = new JTextArea();
+        goBackFromTransactionHistory = new JButton("Go Back");
+
+        //JScrollPane = 
+
+        layoutDisplayViewTransactionHistory.add(containTransactionHistory);
+        layoutDisplayViewTransactionHistory.add(goBackFromTransactionHistory);
+
+        displayViewTransactionHistory.add(layoutDisplayViewTransactionHistory);
+     }
+
      //for JOptionPanes
      public boolean dispSelectItem(){
         selectItemRVM = new JOptionPane();
@@ -1789,9 +1887,18 @@ public class FactoryView extends JFrame{
         JOptionPane.showMessageDialog(null, "Not Enough Money", "Error", JOptionPane.ERROR_MESSAGE);
      }
 
-     public void dispViewPriceList(){
+     public void dispErrorNotEnoughMoneySpecial(){
+        JOptionPane.showMessageDialog(null, "Cannot Afford this with Current Money!\n\nRedirecting back to adding money", "Error", JOptionPane.ERROR_MESSAGE);
+     }
+
+     public void dispErrorNotEnoughStock(){
+        JOptionPane.showMessageDialog(null, "Not enough stock", "Error", JOptionPane.ERROR_MESSAGE);
+     }
+
+
+
+     public void dispViewPriceList(String longText){
         containPriceList = new JTextArea(1, 1);
-        String longText = "Ham Sandwich\nP\n\nCheese Sandwich\nP\n\nChicken Sandwich\nP\n\nTuna Sandwich\nP\n\nEgg Salad Sandwich\nP\n\nPeanut Butter Sandwich\nP\n\nStrawberry Jam Sandwich\nP\n\nNutella Sandwich\nP";
         containPriceList.setText(longText);
         containPriceList.setOpaque(false);
         containPriceList.setEditable(false);
@@ -1904,6 +2011,9 @@ public class FactoryView extends JFrame{
         this.viewItemInfoS.addActionListener(actnListener);
     }
     public void setProduceReceiptOfPurchaseListener(ActionListener actnListener)    {
+        this.finishItemPreparation.addActionListener(actnListener);
+    }
+    public void setPurchaseCustItemListener(ActionListener actnListener)    {
         this.custPurchase.addActionListener(actnListener);
     }
     public void setReceiptGoBackToMenuListener(ActionListener actnListener)    {
@@ -2629,4 +2739,153 @@ public class FactoryView extends JFrame{
     public void setGoBackFromReplenishMoneyListener(ActionListener actnListener)  {
         this.goBackFromReplenish.addActionListener(actnListener);
     }
+
+    // Getters and Setters for Customize Item
+
+    public String getCustTextHam() {
+        return custTextHam.getText();
+    }
+
+    public void setCustTextHam(String custTextHam) {
+        this.custTextHam.setText(custTextHam);
+    }
+
+    public String getCustTextCheese() {
+        return custTextCheese.getText();
+    }
+
+    public void setCustTextCheese(String custTextCheese) {
+        this.custTextCheese.setText(custTextCheese);;
+    }
+
+    public String getCustTextChicken() {
+        return custTextChicken.getText();
+    }
+
+    public void setCustTextChicken(String custTextChicken) {
+        this.custTextChicken.setText(custTextChicken);;
+    }
+
+    public String getCustTextTuna() {
+        return custTextTuna.getText();
+    }
+
+    public void setCustTextTuna(String custTextTuna) {
+        this.custTextTuna.setText(custTextTuna);;
+    }
+
+    public String getCustTextEgg() {
+        return custTextEgg.getText();
+    }
+
+    public void setCustTextEgg(String custTextEgg) {
+        this.custTextEgg.setText(custTextEgg);;
+    }
+
+    public String getCustTextMayo() {
+        return custTextMayo.getText();
+    }
+
+    public void setCustTextMayo(String custTextMayo) {
+        this.custTextMayo.setText(custTextMayo);;
+    }
+
+    public String getCustTextPeanutB() {
+        return custTextPeanutB.getText();
+    }
+
+    public void setCustTextPeanutB(String custTextPeanutB) {
+        this.custTextPeanutB.setText(custTextPeanutB);;
+    }
+
+    public String getCustTextStrawberryJ() {
+        return custTextStrawberryJ.getText();
+    }
+
+    public void setCustTextStrawberryJ(String custTextStrawberryJ) {
+        this.custTextStrawberryJ.setText(custTextStrawberryJ);;
+    }
+
+    public String getCustTextNutella() {
+        return custTextNutella.getText();
+    }
+
+    public void setCustTextNutella(String custTextNutella) {
+        this.custTextNutella.setText(custTextNutella);;
+    }
+
+    public String getCustTextLettuce() {
+        return custTextLettuce.getText();
+    }
+
+    public void setCustTextLettuce(String custTextLettuce) {
+        this.custTextLettuce.setText(custTextLettuce);;
+    }
+
+    public String getCustTextTomato() {
+        return custTextTomato.getText();
+    }
+
+    public void setCustTextTomato(String custTextTomato) {
+        this.custTextTomato.setText(custTextTomato);;
+    }
+
+    public String getCustTextPickle() {
+        return custTextPickle.getText();
+    }
+
+    public void setCustTextPickle(String custTextPickle) {
+        this.custTextPickle.setText(custTextPickle);;
+    }
+
+    // Action Listeners for Customize Item\
+
+    public void setCustPlusHamListener(ActionListener actnListener) {
+        this.custPlusHam.addActionListener(actnListener);
+    }
+
+    public void setCustPlusCheeseListener(ActionListener actnListener) {
+        this.custPlusCheese.addActionListener(actnListener);
+    }
+
+    public void setCustPlusChickenListener(ActionListener actnListener) {
+        this.custPlusChicken.addActionListener(actnListener);
+    }
+
+    public void setCustPlusTunaListener(ActionListener actnListener) {
+        this.custPlusTuna.addActionListener(actnListener);
+    }
+
+    public void setCustPlusEggListener(ActionListener actnListener) {
+        this.custPlusEgg.addActionListener(actnListener);
+    }
+
+    public void setCustPlusMayoListener(ActionListener actnListener) {
+        this.custPlusMayo.addActionListener(actnListener);
+    }
+
+    public void setCustPlusPeanutBListener(ActionListener actnListener) {
+        this.custPlusPeanutB.addActionListener(actnListener);
+    }
+
+    public void setCustPlusStrawberryJListener(ActionListener actnListener) {
+        this.custPlusStrawberryJ.addActionListener(actnListener);
+    }
+
+    public void setCustPlusNutellaListener(ActionListener actnListener) {
+        this.custPlusNutella.addActionListener(actnListener);
+    }
+
+    public void setCustPlusLettuceListener(ActionListener actnListener) {
+        this.custPlusLettuce.addActionListener(actnListener);
+    }
+
+    public void setCustPlusTomatoListener(ActionListener actnListener) {
+        this.custPlusTomato.addActionListener(actnListener);
+    }
+
+    public void setCustPlusPickleListener(ActionListener actnListener) {
+        this.custPlusPickle.addActionListener(actnListener);
+    }
+
 }

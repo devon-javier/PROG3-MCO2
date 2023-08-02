@@ -2,12 +2,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * The FactoryController class handles all the logical processing for the program and handles
+ * all the computations for all functions of the program.
+ * 
+ */
+
 public class FactoryController {
 
     private FactoryView fView;
     private FactoryModel fModel;
-    //private SpecialVendingMachine svm;
 
+    /** Constructor for FactoryController
+     * 
+     * @param fView contains all GUI properties and provides feedback to the user
+     * @param fModel hosts the stored vending machine
+     */
 
     public FactoryController(FactoryView fView, FactoryModel fModel)    {
         this.fView = fView;
@@ -98,6 +108,9 @@ public class FactoryController {
         });
     } 
 
+    /**
+     * The createVM() method handles the panel regarding the creation of a vending machine
+     */
     public void createVM()  {
         Factory factory = new Factory();
 
@@ -127,6 +140,8 @@ public class FactoryController {
     public void buyItem()   {
 
         Money temp_payment = new Money();
+        ArrayList<Item> temp_ingredientsList = new ArrayList<Item>();
+
         this.fView.setBuyItemListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
@@ -153,7 +168,16 @@ public class FactoryController {
         this.fView.setViewPriceList(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.dispViewPriceList();
+                String longText = "Ham Sandwich\nP " + fModel.getCurrentMachine().getVendingMachineSlot(0).getsandwichList().get(0).getPrice()
+                + "\n\nCheese Sandwich\nP" + fModel.getCurrentMachine().getVendingMachineSlot(1).getsandwichList().get(0).getPrice() 
+                + "\n\nChicken Sandwich\nP" + fModel.getCurrentMachine().getVendingMachineSlot(2).getsandwichList().get(0).getPrice() 
+                + "\n\nTuna Sandwich\nP" + fModel.getCurrentMachine().getVendingMachineSlot(3).getsandwichList().get(0).getPrice() 
+                + "\n\nEgg Salad Sandwich\nP" + fModel.getCurrentMachine().getVendingMachineSlot(4).getsandwichList().get(0).getPrice() 
+                + "\n\nPeanut Butter Sandwich\nP" + fModel.getCurrentMachine().getVendingMachineSlot(5).getsandwichList().get(0).getPrice() 
+                + "\n\nStrawberry Jam Sandwich\nP" + fModel.getCurrentMachine().getVendingMachineSlot(6).getsandwichList().get(0).getPrice() 
+                + "\n\nNutella Sandwich\nP" + fModel.getCurrentMachine().getVendingMachineSlot(7).getsandwichList().get(0).getPrice();
+
+                fView.dispViewPriceList(longText);
             }
         });
         this.fView.setPlus1Listener(new ActionListener() {
@@ -297,9 +321,28 @@ public class FactoryController {
         this.fView.setProduceReceiptOfPurchaseListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.displayViewItemPreparation();
+                int calories = 0;
+
+                for(int i = 0; i < temp_ingredientsList.size(); i++)    {
+                    calories += temp_ingredientsList.get(i).getCalories();
+                }
+
+                SpecialVendingMachine svm = (SpecialVendingMachine)fModel.getCurrentMachine();
+
+                Sandwich sandwich = svm.createSandwich(temp_ingredientsList, calories);
+                sandwich.computePrice();
+
+                if(sandwich.getPrice() > temp_payment.computeTotal())   {
+                    fView.dispErrorNotEnoughMoneySpecial();
+                    fView.displayBuyItemInterface();
+                } else  {
+                    fView.displayViewItemPreparation();
+                }
+
+
             }
         });
+
         this.fView.setReceiptGoBackToMenuListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
@@ -309,6 +352,8 @@ public class FactoryController {
         this.fView.setCancelTransactionRListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
+                fModel.getCurrentMachine().receiveMoney(temp_payment);
+                Money change  = fModel.getCurrentMachine().produceChange(0, temp_payment);
                 fView.displayReceiptOfPurchased();
             }
         });
@@ -331,14 +376,16 @@ public class FactoryController {
                 boolean bool = fView.dispSelectItem();
 
                 if(bool == true)    {
-                        fModel.getCurrentMachine().receiveMoney(temp_payment);
-                        Money change  = fModel.getCurrentMachine().produceChange(0, temp_payment);
-                        fModel.getCurrentMachine().produceTransaction
-                        (fModel.getCurrentMachine().getVendingMachineSlot(0).getsandwichList().get(0), 
-                        temp_payment, change);
-                        fModel.getCurrentMachine().dispenseItem(0);
-                        fView.displayReceiptOfPurchased();
-                }
+                    fModel.getCurrentMachine().receiveMoney(temp_payment);
+                    Money change  = fModel.getCurrentMachine().produceChange(0, temp_payment);
+                    fModel.getCurrentMachine().produceTransaction
+                    (fModel.getCurrentMachine().getVendingMachineSlot(0).getsandwichList().get(0), 
+                    temp_payment, change);
+                    fModel.getCurrentMachine().dispenseItem(0);
+                    fView.displayReceiptOfPurchased();
+                    temp_payment.resetMoney();
+                    resetMoneyFields();
+                } 
             }
             
         }
@@ -360,6 +407,8 @@ public class FactoryController {
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(1);
                         fView.displayReceiptOfPurchased();
+                        temp_payment.resetMoney();
+                        resetMoneyFields();
                     }
                 }
             }
@@ -381,6 +430,8 @@ public class FactoryController {
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(2);
                         fView.displayReceiptOfPurchased();
+                        temp_payment.resetMoney();
+                        resetMoneyFields();
                     }
                 }
             }
@@ -402,7 +453,10 @@ public class FactoryController {
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(3);
                         fView.displayReceiptOfPurchased();
+                        temp_payment.resetMoney();
+                        resetMoneyFields();
                     }
+
                 }
             }
         });
@@ -423,6 +477,8 @@ public class FactoryController {
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(4);
                         fView.displayReceiptOfPurchased();
+                        temp_payment.resetMoney();
+                        resetMoneyFields();
                     }
                 }
             }
@@ -444,10 +500,13 @@ public class FactoryController {
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(5);
                         fView.displayReceiptOfPurchased();
+                        temp_payment.resetMoney();
+                        resetMoneyFields();
                     }
                 }
             }
         });
+
         this.fView.setSlot7RListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
@@ -465,6 +524,8 @@ public class FactoryController {
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(6);
                         fView.displayReceiptOfPurchased();
+                        temp_payment.resetMoney();
+                        resetMoneyFields();
                     }
                 }
             }
@@ -486,6 +547,8 @@ public class FactoryController {
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(7);
                         fView.displayReceiptOfPurchased();
+                        temp_payment.resetMoney();
+                        resetMoneyFields();
                     }
                 }
             }
@@ -502,6 +565,23 @@ public class FactoryController {
                     int result = fView.dispCustomizeItem();
 
                     if(result == 1) {
+                        fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                        fModel.getCurrentMachine().getHamStock().remove(fModel.getCurrentMachine().getHamStock().size() - 1);
+                        temp_ingredientsList.add(new Bread());
+                        temp_ingredientsList.add(new Ham());
+                        fView.setCustTextHam("1");
+                        fView.setCustTextCheese("0");
+                        fView.setCustTextChicken("0");
+                        fView.setCustTextTuna("0");
+                        fView.setCustTextEgg("0");
+                        fView.setCustTextMayo("0");
+                        fView.setCustTextPeanutB("0");
+                        fView.setCustTextStrawberryJ("0");
+                        fView.setCustTextNutella("0");
+                        fView.setCustTextLettuce("0");
+                        fView.setCustTextTomato("0");
+                        fView.setCustTextPickle("0");
+
                         fView.displayCustomizeItemsSVMInterface();
                     } else if (result == 2) {
                         boolean bool = fView.dispSelectItem();
@@ -513,6 +593,8 @@ public class FactoryController {
                             (fModel.getCurrentMachine().getVendingMachineSlot(0).getsandwichList().get(0), 
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(0);
+                            temp_payment.resetMoney();
+                            resetMoneyFields();
                         }
                     }
                 }
@@ -528,6 +610,24 @@ public class FactoryController {
                     int result = fView.dispCustomizeItem();
 
                     if(result == 1) {
+                        fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                        fModel.getCurrentMachine().getEggStock().remove(fModel.getCurrentMachine().getEggStock().size() - 1);
+                        fModel.getCurrentMachine().getMayonnaiseStock().remove(fModel.getCurrentMachine().getMayonnaiseStock().size() - 1);
+                        temp_ingredientsList.add(new Bread());
+                        temp_ingredientsList.add(new Egg());
+                        temp_ingredientsList.add(new Mayonnaise());
+                        fView.setCustTextHam("0");
+                        fView.setCustTextCheese("0");
+                        fView.setCustTextChicken("0");
+                        fView.setCustTextTuna("0");
+                        fView.setCustTextEgg("1");
+                        fView.setCustTextMayo("1");
+                        fView.setCustTextPeanutB("0");
+                        fView.setCustTextStrawberryJ("0");
+                        fView.setCustTextNutella("0");
+                        fView.setCustTextLettuce("0");
+                        fView.setCustTextTomato("0");
+                        fView.setCustTextPickle("0");
                         fView.displayCustomizeItemsSVMInterface();
                     } else if (result == 2) {
                         boolean bool = fView.dispSelectItem();
@@ -539,6 +639,8 @@ public class FactoryController {
                             (fModel.getCurrentMachine().getVendingMachineSlot(1).getsandwichList().get(0), 
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(1);
+                            temp_payment.resetMoney();
+                            resetMoneyFields();
                         }
                     }
                 }
@@ -554,6 +656,22 @@ public class FactoryController {
                     int result = fView.dispCustomizeItem();
 
                     if(result == 1) {
+                        fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                        fModel.getCurrentMachine().getTunaStock().remove(fModel.getCurrentMachine().getTunaStock().size() - 1);
+                        temp_ingredientsList.add(new Bread());
+                        temp_ingredientsList.add(new Tuna());
+                        fView.setCustTextHam("0");
+                        fView.setCustTextCheese("0");
+                        fView.setCustTextChicken("0");
+                        fView.setCustTextTuna("1");
+                        fView.setCustTextEgg("0");
+                        fView.setCustTextMayo("0");
+                        fView.setCustTextPeanutB("0");
+                        fView.setCustTextStrawberryJ("0");
+                        fView.setCustTextNutella("0");
+                        fView.setCustTextLettuce("0");
+                        fView.setCustTextTomato("0");
+                        fView.setCustTextPickle("0");
                         fView.displayCustomizeItemsSVMInterface();
                     } else if (result == 2) {
                         boolean bool = fView.dispSelectItem();
@@ -565,6 +683,8 @@ public class FactoryController {
                             (fModel.getCurrentMachine().getVendingMachineSlot(2).getsandwichList().get(0), 
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(2);
+                            temp_payment.resetMoney();
+                            resetMoneyFields();
                         }
                     }
                 }
@@ -580,6 +700,22 @@ public class FactoryController {
                     int result = fView.dispCustomizeItem();
 
                     if(result == 1) {
+                        fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                        fModel.getCurrentMachine().getCheeseStock().remove(fModel.getCurrentMachine().getCheeseStock().size() - 1);
+                        temp_ingredientsList.add(new Bread());
+                        temp_ingredientsList.add(new Cheese());
+                        fView.setCustTextHam("0");
+                        fView.setCustTextCheese("1");
+                        fView.setCustTextChicken("0");
+                        fView.setCustTextTuna("0");
+                        fView.setCustTextEgg("0");
+                        fView.setCustTextMayo("0");
+                        fView.setCustTextPeanutB("0");
+                        fView.setCustTextStrawberryJ("0");
+                        fView.setCustTextNutella("0");
+                        fView.setCustTextLettuce("0");
+                        fView.setCustTextTomato("0");
+                        fView.setCustTextPickle("0");
                         fView.displayCustomizeItemsSVMInterface();
                     } else if (result == 2) {
                         boolean bool = fView.dispSelectItem();
@@ -591,6 +727,8 @@ public class FactoryController {
                             (fModel.getCurrentMachine().getVendingMachineSlot(3).getsandwichList().get(0), 
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(3);
+                            temp_payment.resetMoney();
+                            resetMoneyFields();
                         }
                     }
                 }
@@ -606,6 +744,24 @@ public class FactoryController {
                     int result = fView.dispCustomizeItem();
 
                     if(result == 1) {
+                        fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                        fModel.getCurrentMachine().getChickenStock().remove(fModel.getCurrentMachine().getChickenStock().size() - 1);
+                        fModel.getCurrentMachine().getMayonnaiseStock().remove(fModel.getCurrentMachine().getMayonnaiseStock().size() - 1);
+                        temp_ingredientsList.add(new Bread());
+                        temp_ingredientsList.add(new Chicken());
+                        temp_ingredientsList.add(new Mayonnaise());
+                        fView.setCustTextHam("0");
+                        fView.setCustTextCheese("0");
+                        fView.setCustTextChicken("1");
+                        fView.setCustTextTuna("0");
+                        fView.setCustTextEgg("0");
+                        fView.setCustTextMayo("1");
+                        fView.setCustTextPeanutB("0");
+                        fView.setCustTextStrawberryJ("0");
+                        fView.setCustTextNutella("0");
+                        fView.setCustTextLettuce("0");
+                        fView.setCustTextTomato("0");
+                        fView.setCustTextPickle("0");
                         fView.displayCustomizeItemsSVMInterface();
                     } else if (result == 2) {
                         boolean bool = fView.dispSelectItem();
@@ -617,6 +773,8 @@ public class FactoryController {
                             (fModel.getCurrentMachine().getVendingMachineSlot(4).getsandwichList().get(0), 
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(4);
+                            temp_payment.resetMoney();
+                            resetMoneyFields();
                         }
                     }
                 }
@@ -632,6 +790,22 @@ public class FactoryController {
                     int result = fView.dispCustomizeItem();
 
                     if(result == 1) {
+                        fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                        fModel.getCurrentMachine().getPeanutbutterStock().remove(fModel.getCurrentMachine().getPeanutbutterStock().size() - 1);
+                        temp_ingredientsList.add(new Bread());
+                        temp_ingredientsList.add(new PeanutButter());
+                        fView.setCustTextHam("0");
+                        fView.setCustTextCheese("0");
+                        fView.setCustTextChicken("0");
+                        fView.setCustTextTuna("0");
+                        fView.setCustTextEgg("0");
+                        fView.setCustTextMayo("0");
+                        fView.setCustTextPeanutB("1");
+                        fView.setCustTextStrawberryJ("0");
+                        fView.setCustTextNutella("0");
+                        fView.setCustTextLettuce("0");
+                        fView.setCustTextTomato("0");
+                        fView.setCustTextPickle("0");
                         fView.displayCustomizeItemsSVMInterface();
                     } else if (result == 2) {
                         boolean bool = fView.dispSelectItem();
@@ -643,6 +817,8 @@ public class FactoryController {
                             (fModel.getCurrentMachine().getVendingMachineSlot(5).getsandwichList().get(0), 
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(5);
+                            temp_payment.resetMoney();
+                            resetMoneyFields();
                         }
                     }
                 }
@@ -658,6 +834,22 @@ public class FactoryController {
                     int result = fView.dispCustomizeItem();
 
                     if(result == 1) {
+                        fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                        fModel.getCurrentMachine().getStrawberryjamStock().remove(fModel.getCurrentMachine().getStrawberryjamStock().size() - 1);
+                        temp_ingredientsList.add(new Bread());
+                        temp_ingredientsList.add(new StrawberryJam());
+                        fView.setCustTextHam("0");
+                        fView.setCustTextCheese("0");
+                        fView.setCustTextChicken("0");
+                        fView.setCustTextTuna("0");
+                        fView.setCustTextEgg("0");
+                        fView.setCustTextMayo("0");
+                        fView.setCustTextPeanutB("0");
+                        fView.setCustTextStrawberryJ("1");
+                        fView.setCustTextNutella("0");
+                        fView.setCustTextLettuce("0");
+                        fView.setCustTextTomato("0");
+                        fView.setCustTextPickle("0");
                         fView.displayCustomizeItemsSVMInterface();
                     } else if (result == 2) {
                         boolean bool = fView.dispSelectItem();
@@ -669,6 +861,8 @@ public class FactoryController {
                             (fModel.getCurrentMachine().getVendingMachineSlot(6).getsandwichList().get(0), 
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(6);
+                            temp_payment.resetMoney();
+                            resetMoneyFields();
                         }
                     }
                 }
@@ -681,9 +875,26 @@ public class FactoryController {
                 fModel.getCurrentMachine().getVendingMachineSlot(7).getsandwichList().get(0).getPrice())    {
                     fView.dispErrorNotEnoughMoney();
                 } else {
+
                     int result = fView.dispCustomizeItem();
 
                     if(result == 1) {
+                        fModel.getCurrentMachine().getBreadStock().remove(fModel.getCurrentMachine().getBreadStock().size() - 1);
+                        fModel.getCurrentMachine().getNutellaStock().remove(fModel.getCurrentMachine().getNutellaStock().size() - 1);
+                        temp_ingredientsList.add(new Bread());
+                        temp_ingredientsList.add(new Nutella());
+                        fView.setCustTextHam("0");
+                        fView.setCustTextCheese("0");
+                        fView.setCustTextChicken("0");
+                        fView.setCustTextTuna("0");
+                        fView.setCustTextEgg("0");
+                        fView.setCustTextMayo("0");
+                        fView.setCustTextPeanutB("0");
+                        fView.setCustTextStrawberryJ("0");
+                        fView.setCustTextNutella("1");
+                        fView.setCustTextLettuce("0");
+                        fView.setCustTextTomato("0");
+                        fView.setCustTextPickle("0");
                         fView.displayCustomizeItemsSVMInterface();
                     } else if (result == 2) {
                         boolean bool = fView.dispSelectItem();
@@ -695,12 +906,203 @@ public class FactoryController {
                             (fModel.getCurrentMachine().getVendingMachineSlot(7).getsandwichList().get(0), 
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(7);
+                            temp_payment.resetMoney();
+                            resetMoneyFields();
                         }
                     }
                 }
             }
         });
 
+        this.fView.setCustPlusHamListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                int newval = Integer.parseInt(fView.getCustTextHam()) + 1;
+
+                if(fModel.getCurrentMachine().getHamStock().size() - newval < 0)    {
+                    fView.dispErrorNotEnoughStock();
+                } else  {
+                    fView.setCustTextHam(String.valueOf(newval));
+                    temp_ingredientsList.add(new Ham());
+                }
+
+            }            
+        });
+
+        this.fView.setCustPlusCheeseListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                int newval = Integer.parseInt(fView.getCustTextCheese()) + 1;
+
+                if(fModel.getCurrentMachine().getCheeseStock().size() - newval < 0)    {
+                    fView.dispErrorNotEnoughStock();
+                } else  {
+                    fView.setCustTextCheese(String.valueOf(newval));
+                    temp_ingredientsList.add(new Cheese());
+                }
+            }            
+        });
+
+        this.fView.setCustPlusChickenListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                int newval = Integer.parseInt(fView.getCustTextChicken()) + 1;
+
+                if(fModel.getCurrentMachine().getChickenStock().size() - newval < 0)   {
+                    fView.dispErrorNotEnoughStock();
+                } else  {
+                    fView.setCustTextChicken(String.valueOf(newval));
+                    temp_ingredientsList.add(new Chicken());
+                }
+            }            
+        });
+
+        this.fView.setCustPlusTunaListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+
+                int newval = Integer.parseInt(fView.getCustTextTuna()) + 1;
+
+                if(fModel.getCurrentMachine().getTunaStock().size() - newval < 0)    {
+                    fView.dispErrorNotEnoughStock();
+                } else  {
+                    fView.setCustTextTuna(String.valueOf(newval));
+                    temp_ingredientsList.add(new Tuna());
+                }
+            }            
+        });
+
+        this.fView.setCustPlusEggListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+
+                int newval = Integer.parseInt(fView.getCustTextEgg()) + 1;
+
+                if(fModel.getCurrentMachine().getEggStock().size() - newval < 0)    {
+                    fView.dispErrorNotEnoughStock();
+                } else  {
+                    fView.setCustTextEgg(String.valueOf(newval));
+                    temp_ingredientsList.add(new Egg());
+                }
+            }            
+        });
+
+        this.fView.setCustPlusMayoListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+
+                int newval = Integer.parseInt(fView.getCustTextMayo()) + 1;
+
+                if(fModel.getCurrentMachine().getMayonnaiseStock().size() - newval < 0)    {
+                    fView.dispErrorNotEnoughStock();
+                } else  {
+                    fView.setCustTextMayo(String.valueOf(newval));
+                    temp_ingredientsList.add(new Mayonnaise());
+                }
+            }            
+        });
+
+        this.fView.setCustPlusPeanutBListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+
+                int newval = Integer.parseInt(fView.getCustTextPeanutB()) + 1;
+
+                if(fModel.getCurrentMachine().getPeanutbutterStock().size() - newval < 0)    {
+                    fView.dispErrorNotEnoughStock();
+                } else  {
+                    fView.setCustTextPeanutB(String.valueOf(newval));
+                    temp_ingredientsList.add(new PeanutButter());
+                }
+            }            
+        });
+
+        this.fView.setCustPlusStrawberryJListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+
+                int newval = Integer.parseInt(fView.getCustTextStrawberryJ()) + 1;
+
+                if(fModel.getCurrentMachine().getStrawberryjamStock().size() - newval < 0)    {
+                    fView.dispErrorNotEnoughStock();
+                } else  {
+                    fView.setCustTextStrawberryJ(String.valueOf(newval));
+                    temp_ingredientsList.add(new StrawberryJam());
+                }
+            }            
+        });
+
+        this.fView.setCustPlusNutellaListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+
+                int newval = Integer.parseInt(fView.getCustTextNutella()) + 1;
+
+                if(fModel.getCurrentMachine().getNutellaStock().size() - newval < 0)    {
+                    fView.dispErrorNotEnoughStock();
+                } else  {
+                    fView.setCustTextNutella(String.valueOf(newval));
+                    temp_ingredientsList.add(new Nutella());
+                }
+            }            
+        });
+
+        this.fView.setCustPlusLettuceListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+
+                int newval = Integer.parseInt(fView.getCustTextLettuce()) + 1;
+
+                SpecialVendingMachine svm = (SpecialVendingMachine)fModel.getCurrentMachine();
+
+                if(svm.getLettuceStock().size() - newval < 0)    {
+                    fView.dispErrorNotEnoughStock();
+                } else  {
+                    fView.setCustTextLettuce(String.valueOf(newval));
+                    temp_ingredientsList.add(new Lettuce());
+                }
+            }            
+        });
+
+        this.fView.setCustPlusTomatoListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+
+                int newval = Integer.parseInt(fView.getCustTextTomato()) + 1;
+
+                SpecialVendingMachine svm = (SpecialVendingMachine)fModel.getCurrentMachine();
+
+                if(svm.getTomatoStock().size() - newval < 0)    {
+                    fView.dispErrorNotEnoughStock();
+                } else  {
+                    fView.setCustTextTomato(String.valueOf(newval));
+                    temp_ingredientsList.add(new Tomato());
+                }
+            }            
+        });
+
+        this.fView.setCustPlusPickleListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+
+                int newval = Integer.parseInt(fView.getCustTextPickle()) + 1;
+
+                SpecialVendingMachine svm = (SpecialVendingMachine)fModel.getCurrentMachine();
+
+                if(svm.getPickleStock().size() - newval < 0)    {
+                    fView.dispErrorNotEnoughStock();
+                } else  {
+                    fView.setCustTextPickle(String.valueOf(newval));
+                    temp_ingredientsList.add(new Pickle());
+                }
+            }            
+        });
+        this.fView.setPurchaseCustItemListener(new ActionListener()    {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                        fView.displayReceiptOfPurchased();
+            }
+        });
     }
 
     private void restockItems()  {
@@ -1501,5 +1903,17 @@ public class FactoryController {
             }
         }
 
+    }
+
+    public void resetMoneyFields()  {
+        fView.setQuant1("0");
+        fView.setQuant5("0");
+        fView.setQuant10("0");
+        fView.setQuant20("0");
+        fView.setQuant50("0");
+        fView.setQuant100("0");
+        fView.setQuant200("0");
+        fView.setQuant500("0");
+        fView.setQuant1000("0");
     }
 }
