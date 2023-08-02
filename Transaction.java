@@ -14,11 +14,17 @@ public class Transaction {
         this.change = change.computeTotal();
     }
 
+    public Transaction(Money userPayment, Money change) {
+        date = LocalDate.now();
+        item = new None();
+        this.userPayment = userPayment.computeTotal();
+        this.change = change.computeTotal();
+    }
+
     public LocalDate getDate()  {
         return this.date;
     }
 
-    // Count ingredients lost in the print method ( ? )
 
     public Item getItem()   {
         return this.item;

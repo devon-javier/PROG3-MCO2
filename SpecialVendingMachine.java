@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class SpecialVendingMachine extends VendingMachine{
 
     private ArrayList<Lettuce> lettuceStock;
-    protected ArrayList<Tomato> tomatoStock;
-    protected ArrayList<Pickle> pickleStock;
+    private ArrayList<Tomato> tomatoStock;
+    private ArrayList<Pickle> pickleStock;
 
     public SpecialVendingMachine()  {
         super();

@@ -349,7 +349,21 @@ public class FactoryController {
             @Override
             public void actionPerformed(ActionEvent e)  {
                 fModel.getCurrentMachine().receiveMoney(temp_payment);
-                Money change  = fModel.getCurrentMachine().produceChange(0, temp_payment);
+                None none = new None();
+                none.receiveMoney(temp_payment);
+                fModel.getCurrentMachine().produceTransaction(temp_payment, none.getChange());
+                temp_payment.resetMoney();
+
+                int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+
+                String text1, text2, text3;
+                text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                none.getChange().computeTotal();
+                text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                fView.setShowReceiptTransaction(text1);
+                fView.setShowReceiptProductPurchased(text2);
+                fView.setShowReceiptProducedChange(text3);
                 fView.displayReceiptOfPurchased();
             }
         });

@@ -342,6 +342,10 @@ public class VendingMachine {
         this.history.addTransaction(new Transaction(item, payment, change));
     }
 
+    public void produceTransaction(Money payment, Money change) {
+        this.history.addTransaction(new Transaction(payment, change));
+    }
+
     public void addStock(Item item) {
         if(item instanceof Bread) {
             breadStock.add((Bread)item);
