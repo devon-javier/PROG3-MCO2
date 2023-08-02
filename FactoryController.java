@@ -270,6 +270,12 @@ public class FactoryController {
                 fView.displayViewItemInfoR();
             }
         });
+        this.fView.setGoBackFromViewItemInfoRListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayRVMInterface();
+            }
+        });
         this.fView.setViewItemInfoSListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
@@ -291,7 +297,7 @@ public class FactoryController {
         this.fView.setProduceReceiptOfPurchaseListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                fView.displayReceiptOfPurchased();
+                fView.displayViewItemPreparation();
             }
         });
         this.fView.setReceiptGoBackToMenuListener(new ActionListener()  {
@@ -1370,7 +1376,7 @@ public class FactoryController {
     }
 
     private void replenishVMMoney()  {
-        this.fView.setReplenishVMMoneyListener(new ActionListener() {                       //START~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        this.fView.setReplenishVMMoneyListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)  {
                 fView.setShowCurVMMoney(String.valueOf(fModel.getCurrentMachine().getVmMoney().computeTotal()));
@@ -1467,9 +1473,16 @@ public class FactoryController {
                 fView.setShowCurVMMoney(String.valueOf(fModel.getCurrentMachine().getVmMoney().computeTotal()));
             }
         });
-
+        
+        this.fView.setGoBackFromReplenishMoneyListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayMaintenanceInterface();
+            }
+        });
+        
     }
-
+    
     public void restockItemR(int limit, Item item)  {
 
         if(limit != 0)  {

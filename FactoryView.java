@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -21,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 public class FactoryView extends JFrame{
     //panels
@@ -241,7 +243,6 @@ public class FactoryView extends JFrame{
     private JTextField cur200;
     private JTextField cur500;
     private JTextField cur1000;
-    private JButton confirmReplenish;
     private JButton goBackFromReplenish;
     private JOptionPane moneyReplenished;
     private JPanel layoutReplenishMoney;
@@ -361,6 +362,14 @@ public class FactoryView extends JFrame{
     private JButton custPlusTomato;
     private JButton custPlusPickle;
     private JButton custPurchase;
+
+    //COMPONENTS FOR SVM ITEM PREPARATION
+    private JLabel displayItemPreparation;
+    private JPanel layoutItemPreparation;
+    private JButton finishItemPreparation;
+    private JTextArea containItemPreparation;
+    private String textPreparation;
+    private int i;
 
     //COMPONENTS FOR DISPENSE ITEM AND CHANGE WINDOW
     private JLabel displayDispenseItemAndChange;
@@ -534,6 +543,7 @@ public class FactoryView extends JFrame{
         this.buildViewAdditionalItemsS();
         this.buildCustomizeItemSVM();
         this.buildDispenseItemAndChange();
+        this.buildItemPreparationSVM();
     }
 
     //display interface methods
@@ -587,6 +597,9 @@ public class FactoryView extends JFrame{
      }
      public void displayViewAddtionalItemsS(){
         cl.show(container, "17");
+     }
+     public void displayViewItemPreparation(){
+        cl.show(container, "18");
      }
 
     //build methods
@@ -1130,6 +1143,50 @@ public class FactoryView extends JFrame{
 
         container.add(displayCustomizeItemSVM, "14");
      }
+
+     public void buildItemPreparationSVM(){
+        background_image_plain = new ImageIcon("plainbg.png");
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayItemPreparation = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayItemPreparation.setLayout(new GridBagLayout());
+        layoutItemPreparation = new JPanel(new GridLayout(2, 1, 5, 5));
+
+        i = 0;
+        containItemPreparation = new JTextArea();
+        containItemPreparation.setBounds(100, 100, 100, 90);
+        containItemPreparation.setLineWrap(true);
+        containItemPreparation.setWrapStyleWord(true);
+        containItemPreparation.setOpaque(false);
+
+        layoutItemPreparation.add(containItemPreparation);
+        displayItemPreparation.add(layoutItemPreparation);
+
+        textPreparation = "helloooooooooooooo will this work?";
+
+        timer.start();
+
+        container.add(displayItemPreparation, "18");
+     }
+
+     Timer timer = new Timer(700, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            
+            char character[] = textPreparation.toCharArray();
+            int arrayNumber = character.length;
+
+            String addedCharacter = "";
+            String blank = "";
+
+            addedCharacter = blank + character[i];
+            containItemPreparation.append(addedCharacter);
+
+            i++;
+        }
+     });
+
      
      public void buildDispenseItemAndChange(){  //basically creates a receipt
         background_image_plain = new ImageIcon("plainbg.png");
@@ -1178,7 +1235,7 @@ public class FactoryView extends JFrame{
         container.add(displayDispenseItemAndChange, "15");
      }
 
-     //MAINTENANCE FEATURES
+     //MAINTENANCE FEATURES ---------------------------------------------------------------------------------------------------------------------
      public void buildMaintenanceMode(){
         background_image_Maintenance = new ImageIcon("maintenancemodemenu.png");
         Image img5 = background_image_Maintenance.getImage();
@@ -1687,7 +1744,6 @@ public class FactoryView extends JFrame{
         displayBlank5.add(layoutReplenishMoney);
 
         container.add(displayBlank5, "12");
-
      }
 
      //for JOptionPanes
@@ -1840,6 +1896,9 @@ public class FactoryView extends JFrame{
     }
     public void setViewItemInfoRListener(ActionListener actnListener)    {
         this.viewItemInfoR.addActionListener(actnListener);
+    }
+    public void setGoBackFromViewItemInfoRListener(ActionListener actnListener)    {
+        this.goBackFromViewInfoR.addActionListener(actnListener);
     }
     public void setViewItemInfoSListener(ActionListener actnListener)    {
         this.viewItemInfoS.addActionListener(actnListener);
@@ -2565,5 +2624,9 @@ public class FactoryView extends JFrame{
 
     public void setReplenish1000Listener(ActionListener actnListener)  {
         this.replenish1000.addActionListener(actnListener);
+    }
+
+    public void setGoBackFromReplenishMoneyListener(ActionListener actnListener)  {
+        this.goBackFromReplenish.addActionListener(actnListener);
     }
 }
