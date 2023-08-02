@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class SpecialVendingMachine extends VendingMachine {
+public class SpecialVendingMachine extends VendingMachine{
 
     private ArrayList<Lettuce> lettuceStock;
     protected ArrayList<Tomato> tomatoStock;
@@ -97,6 +97,7 @@ public class SpecialVendingMachine extends VendingMachine {
     }
 
 
+
     public Sandwich createSandwich(ArrayList<Item> ingredientsList, int calories)  {
 
         for(int i = 0; i < ingredientsList.size(); i++) {
@@ -143,6 +144,65 @@ public class SpecialVendingMachine extends VendingMachine {
         }
 
         return new Sandwich(ingredientsList, calories);
+
+    }
+
+
+
+    public Money produceSpecialChange(Sandwich sandwich, Money userPayment)    {
+        int temp, curr; 
+        Money change = new Money();
+
+        temp = 
+        (int)userPayment.computeTotal() - (int)sandwich.getPrice();
+
+        curr = temp / 1000;
+        change.addPeso1000(curr);
+        //vmMoney.reducePeso1000(curr);
+        temp %= 1000;
+
+        curr = temp / 500;
+        change.addPeso500(curr);
+        //vmMoney.reducePeso500(curr);
+        temp %= 500;
+
+        curr = temp / 200;
+        change.addPeso200(curr);
+        //vmMoney.reducePeso200(curr);
+        temp %= 200;
+
+        curr = temp / 100;
+        change.addPeso100(curr);
+        //vmMoney.reducePeso100(curr);
+        temp %= 100;
+
+        curr = temp / 50;
+        change.addPeso50(curr);
+        //vmMoney.reducePeso50(curr);
+        temp %= 50;
+
+        curr = temp / 20; 
+        change.addPeso20(curr);
+        //vmMoney.reducePeso20(curr);
+        temp %= 20;
+
+        curr = temp / 10;
+        change.addPeso10(curr);
+        //vmMoney.reducePeso10(curr);
+        temp %= 10;
+
+        curr = temp / 5;
+        change.addPeso5(curr);
+        //vmMoney.reducePeso5(curr);
+        temp %= 5;
+
+        curr = temp / 1;
+        change.addPeso1(curr);
+        //vmMoney.reducePeso1(curr);
+
+        this.reduceVMMoney(change);
+
+        return change;
 
     }
 

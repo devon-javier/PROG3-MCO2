@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -552,6 +553,8 @@ public class FactoryView extends JFrame{
         this.buildRestockSandwich();
         this.buildSetItemPrice(); 
         this.buildReplenishMoney();
+        this.buildViewTransactionHistory();
+        this.buildViewInventoryHistory();
         this.buildViewItemInfoR();
         this.buildViewItemInfoS();
         this.buildViewAdditionalItemsS();
@@ -614,6 +617,12 @@ public class FactoryView extends JFrame{
      }
      public void displayViewItemPreparation(){
         cl.show(container, "18");
+     }
+     public void displayVMTransactionHistory(){
+        cl.show(container, "19");
+     }
+     public void displayVMInventoryHistory(){
+        cl.show(container, "20");
      }
 
     //build methods
@@ -1313,7 +1322,7 @@ public class FactoryView extends JFrame{
         container.add(displayDispenseItemAndChange, "15");
      }
 
-     //MAINTENANCE FEATURES ---------------------------------------------------------------------------------------------------------------------
+    //MAINTENANCE FEATURES ---------------------------------------------------------------------------------------------------------------------
      public void buildMaintenanceMode(){
         background_image_Maintenance = new ImageIcon("maintenancemodemenu.png");
         Image img5 = background_image_Maintenance.getImage();
@@ -1824,25 +1833,71 @@ public class FactoryView extends JFrame{
         container.add(displayBlank5, "12");
      }
 
-     public void buildViewTransactionHistory(){
+     public void buildViewTransactionHistory() {
         background_image_plain = new ImageIcon("plainbg.png");
         Image img6 = background_image_plain.getImage();
         Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
         background_image_plain = new ImageIcon(temp_img6);
         displayViewTransactionHistory = new JLabel("", background_image_plain, JLabel.CENTER);
         displayViewTransactionHistory.setLayout(new GridBagLayout());
-        layoutDisplayViewTransactionHistory = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 10));
-
+        layoutDisplayViewTransactionHistory = new JPanel(new GridBagLayout());
+    
         containTransactionHistory = new JTextArea();
         goBackFromTransactionHistory = new JButton("Go Back");
-
-        //JScrollPane = 
-
-        layoutDisplayViewTransactionHistory.add(containTransactionHistory);
-        layoutDisplayViewTransactionHistory.add(goBackFromTransactionHistory);
-
+    
+        containTransactionHistory.setPreferredSize(new Dimension(400, 500));
+    
+        JScrollPane scrollPaneTransactionHistory = new JScrollPane(containTransactionHistory);
+        scrollPaneTransactionHistory.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPaneTransactionHistory.setPreferredSize(new Dimension(400, 500));
+    
+        GridBagConstraints gbc4 = new GridBagConstraints();
+        gbc4.fill = GridBagConstraints.BOTH;
+        gbc4.weightx = 1.0;
+        gbc4.weighty = 1.0;
+    
+        layoutDisplayViewTransactionHistory.add(scrollPaneTransactionHistory, gbc4);
+    
+        gbc4.gridy = 1; // Move to the next row
+        layoutDisplayViewTransactionHistory.add(goBackFromTransactionHistory, gbc4);
+    
         displayViewTransactionHistory.add(layoutDisplayViewTransactionHistory);
-     }
+    
+        container.add(displayViewTransactionHistory, "19");
+    }
+
+    public void buildViewInventoryHistory() {
+        background_image_plain = new ImageIcon("plainbg.png");
+        Image img6 = background_image_plain.getImage();
+        Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
+        background_image_plain = new ImageIcon(temp_img6);
+        displayViewInventoryHistory = new JLabel("", background_image_plain, JLabel.CENTER);
+        displayViewInventoryHistory.setLayout(new GridBagLayout());
+        layoutDisplayInventoryHistory = new JPanel(new GridBagLayout());
+    
+        containInventoryHistory = new JTextArea();
+        goBackFromInventoryHistory = new JButton("Go Back");
+    
+        containInventoryHistory.setPreferredSize(new Dimension(400, 500));
+    
+        JScrollPane scrollPaneInventoryHistory = new JScrollPane(containInventoryHistory);
+        scrollPaneInventoryHistory.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPaneInventoryHistory.setPreferredSize(new Dimension(400, 500));
+    
+        GridBagConstraints gbc5 = new GridBagConstraints();
+        gbc5.fill = GridBagConstraints.BOTH;
+        gbc5.weightx = 1.0;
+        gbc5.weighty = 1.0;
+    
+        layoutDisplayInventoryHistory.add(scrollPaneInventoryHistory, gbc5);
+    
+        gbc5.gridy = 1; // Move to the next row
+        layoutDisplayInventoryHistory.add(goBackFromInventoryHistory, gbc5);
+    
+        displayViewInventoryHistory.add(layoutDisplayInventoryHistory);
+
+        container.add(displayViewInventoryHistory, "20");
+    }
 
      //for JOptionPanes
      public boolean dispSelectItem(){
@@ -2888,4 +2943,42 @@ public class FactoryView extends JFrame{
         this.custPlusPickle.addActionListener(actnListener);
     }
 
+    // view transaction history
+
+    public void setShowReceiptTransaction(String showReceiptTransaction) {
+        this.showReceiptTransaction.setText(showReceiptTransaction);
+    }
+
+    public void setShowReceiptProductPurchased(String showReceiptProductPurchased) {
+        this.showReceiptProductPurchased.setText(showReceiptProductPurchased);
+    }
+    
+    public void setShowReceiptProducedChange(String showReceiptProducedChange) {
+        this.showReceiptProducedChange.setText(showReceiptProducedChange);
+    }
+
+    //for transaction history
+    public void setViewTransactionHistory(ActionListener actnListener) {
+        this.viewTransactionHistory.addActionListener(actnListener);
+    }
+
+    public void setViewInventoryHistory(ActionListener actnListener) {
+        this.viewInventoryHistory.addActionListener(actnListener);
+    }
+
+    public void setGoBackFromTransactionHistory(ActionListener actnListener) {
+        this.goBackFromTransactionHistory.addActionListener(actnListener);
+    }
+
+    public void setGoBackFromInventoryHistory(ActionListener actnListener) {
+        this.goBackFromInventoryHistory.addActionListener(actnListener);
+    }
+
+    public void setContainTransactionHistory(String text)   {
+        this.containTransactionHistory.setText(text);
+    }
+
+    public void setContainInventoryHistory(String text)   {
+        this.containInventoryHistory.setText(text);
+    }
 }

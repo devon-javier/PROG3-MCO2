@@ -381,6 +381,11 @@ public class VendingMachine {
         history.setFinalStockR(this);
     }
 
+    public History getHistory()    {
+        return this.history;
+    }
+
+
     public Slot getVendingMachineSlot(int index) {
         return slots[index];
     }

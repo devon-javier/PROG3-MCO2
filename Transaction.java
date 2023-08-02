@@ -1,16 +1,17 @@
-import java.time.*;
+import java.time.LocalDate;
 
 public class Transaction {
     private LocalDate date;
     private Item item;
-    private Money userPayment;
-    private Money change;
+    private double userPayment;
+    private double change;
+
 
     public Transaction(Item item, Money userPayment, Money change)    {
         date = LocalDate.now();
         this.item = item;
-        this.userPayment = userPayment;
-        this.change = change;
+        this.userPayment = userPayment.computeTotal();
+        this.change = change.computeTotal();
     }
 
     public LocalDate getDate()  {
@@ -23,11 +24,11 @@ public class Transaction {
         return this.item;
     }
 
-    public Money getPayment()   {
+    public double getPayment()   {
         return this.userPayment;
     }
 
-    public Money getChange()    {
+    public double getChange()    {
         return this.change;
     }
     

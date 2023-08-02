@@ -1,4 +1,4 @@
-public class Money {
+public class Money implements Cloneable{
 
     private int peso1, peso5, peso10, peso20, peso50, peso100,
                 peso200, peso500, peso1000;

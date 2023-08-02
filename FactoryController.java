@@ -33,6 +33,7 @@ public class FactoryController {
         collectVMMoney();
         setItemPrice();
         replenishVMMoney();
+        transactionHistory();
 
         //to go back to factory view from test VM menu
         this.fView.setBackListener(new ActionListener() {
@@ -109,7 +110,9 @@ public class FactoryController {
     } 
 
     /**
-     * The createVM() method handles the panel regarding the creation of a vending machine
+     * The createVM() method handles the panel regarding the creation of a vending machine and stores it
+     * in a FactoryModel
+     * 
      */
     public void createVM()  {
         Factory factory = new Factory();
@@ -130,6 +133,11 @@ public class FactoryController {
 
                 fModel.setCurrentMachine(factory.createSpecialVendingMachine());
 
+                SpecialVendingMachine svm = (SpecialVendingMachine)fModel.getCurrentMachine();
+                svm.getHistory().setInitialStockS(svm);
+
+                fModel.setCurrentMachine(svm);
+
                 fView.displayFactoryView();
             
             }
@@ -137,10 +145,16 @@ public class FactoryController {
         });
     }
 
+    /**
+     * The buyItem() handles the whole process of buying an item from the stored vending machine
+     * 
+     * 
+     */
     public void buyItem()   {
 
         Money temp_payment = new Money();
         ArrayList<Item> temp_ingredientsList = new ArrayList<Item>();
+
 
         this.fView.setBuyItemListener(new ActionListener()  {
             @Override
@@ -321,25 +335,7 @@ public class FactoryController {
         this.fView.setProduceReceiptOfPurchaseListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                int calories = 0;
-
-                for(int i = 0; i < temp_ingredientsList.size(); i++)    {
-                    calories += temp_ingredientsList.get(i).getCalories();
-                }
-
-                SpecialVendingMachine svm = (SpecialVendingMachine)fModel.getCurrentMachine();
-
-                Sandwich sandwich = svm.createSandwich(temp_ingredientsList, calories);
-                sandwich.computePrice();
-
-                if(sandwich.getPrice() > temp_payment.computeTotal())   {
-                    fView.dispErrorNotEnoughMoneySpecial();
-                    fView.displayBuyItemInterface();
-                } else  {
-                    fView.displayViewItemPreparation();
-                }
-
-
+                fView.displayReceiptOfPurchased();
             }
         });
 
@@ -376,15 +372,25 @@ public class FactoryController {
                 boolean bool = fView.dispSelectItem();
 
                 if(bool == true)    {
-                    fModel.getCurrentMachine().receiveMoney(temp_payment);
-                    Money change  = fModel.getCurrentMachine().produceChange(0, temp_payment);
-                    fModel.getCurrentMachine().produceTransaction
-                    (fModel.getCurrentMachine().getVendingMachineSlot(0).getsandwichList().get(0), 
-                    temp_payment, change);
-                    fModel.getCurrentMachine().dispenseItem(0);
-                    fView.displayReceiptOfPurchased();
-                    temp_payment.resetMoney();
-                    resetMoneyFields();
+                        fModel.getCurrentMachine().receiveMoney(temp_payment);
+                        Money change  = fModel.getCurrentMachine().produceChange(0, temp_payment);
+                        fModel.getCurrentMachine().produceTransaction
+                        (fModel.getCurrentMachine().getVendingMachineSlot(0).getsandwichList().get(0), 
+                        temp_payment, change);
+                        fModel.getCurrentMachine().dispenseItem(0);
+                        temp_payment.resetMoney();
+                        int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                        String text1, text2, text3;
+                        text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                        text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                        fModel.getCurrentMachine().getVendingMachineSlot(0).getsandwichList().get(0).getPrice();
+                        text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                        fView.setShowReceiptTransaction(text1);
+                        fView.setShowReceiptProductPurchased(text2);
+                        fView.setShowReceiptProducedChange(text3);
+
+                        fView.displayReceiptOfPurchased();
+                        resetMoneyFields();
                 } 
             }
             
@@ -406,8 +412,18 @@ public class FactoryController {
                         (fModel.getCurrentMachine().getVendingMachineSlot(1).getsandwichList().get(0), 
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(1);
-                        fView.displayReceiptOfPurchased();
                         temp_payment.resetMoney();
+                        int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                        String text1, text2, text3;
+                        text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                        text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                        fModel.getCurrentMachine().getVendingMachineSlot(1).getsandwichList().get(0).getPrice();
+                        text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                        fView.setShowReceiptTransaction(text1);
+                        fView.setShowReceiptProductPurchased(text2);
+                        fView.setShowReceiptProducedChange(text3);
+
+                        fView.displayReceiptOfPurchased();
                         resetMoneyFields();
                     }
                 }
@@ -429,8 +445,18 @@ public class FactoryController {
                         (fModel.getCurrentMachine().getVendingMachineSlot(2).getsandwichList().get(0), 
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(2);
+
+                        int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                        String text1, text2, text3;
+                        text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                        text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                        fModel.getCurrentMachine().getVendingMachineSlot(2).getsandwichList().get(0).getPrice();
+                        text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                        fView.setShowReceiptTransaction(text1);
+                        fView.setShowReceiptProductPurchased(text2);
+                        fView.setShowReceiptProducedChange(text3);
+
                         fView.displayReceiptOfPurchased();
-                        temp_payment.resetMoney();
                         resetMoneyFields();
                     }
                 }
@@ -452,8 +478,19 @@ public class FactoryController {
                         (fModel.getCurrentMachine().getVendingMachineSlot(3).getsandwichList().get(0), 
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(3);
-                        fView.displayReceiptOfPurchased();
                         temp_payment.resetMoney();
+
+                        int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                        String text1, text2, text3;
+                        text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                        text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                        fModel.getCurrentMachine().getVendingMachineSlot(3).getsandwichList().get(0).getPrice();
+                        text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                        fView.setShowReceiptTransaction(text1);
+                        fView.setShowReceiptProductPurchased(text2);
+                        fView.setShowReceiptProducedChange(text3);
+
+                        fView.displayReceiptOfPurchased();
                         resetMoneyFields();
                     }
 
@@ -476,8 +513,19 @@ public class FactoryController {
                         (fModel.getCurrentMachine().getVendingMachineSlot(4).getsandwichList().get(0), 
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(4);
-                        fView.displayReceiptOfPurchased();
                         temp_payment.resetMoney();
+
+                        int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                        String text1, text2, text3;
+                        text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                        text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                        fModel.getCurrentMachine().getVendingMachineSlot(4).getsandwichList().get(0).getPrice();
+                        text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                        fView.setShowReceiptTransaction(text1);
+                        fView.setShowReceiptProductPurchased(text2);
+                        fView.setShowReceiptProducedChange(text3);
+
+                        fView.displayReceiptOfPurchased();
                         resetMoneyFields();
                     }
                 }
@@ -493,14 +541,25 @@ public class FactoryController {
                     boolean bool = fView.dispSelectItem();
 
                     if(bool == true)    {
-                        fModel.getCurrentMachine().receiveMoney(temp_payment);
+                         fModel.getCurrentMachine().receiveMoney(temp_payment);
                         Money change  = fModel.getCurrentMachine().produceChange(5, temp_payment);
                         fModel.getCurrentMachine().produceTransaction
                         (fModel.getCurrentMachine().getVendingMachineSlot(5).getsandwichList().get(0), 
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(5);
-                        fView.displayReceiptOfPurchased();
                         temp_payment.resetMoney();
+
+                        int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                        String text1, text2, text3;
+                        text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                        text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                        fModel.getCurrentMachine().getVendingMachineSlot(5).getsandwichList().get(0).getPrice();
+                        text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                        fView.setShowReceiptTransaction(text1);
+                        fView.setShowReceiptProductPurchased(text2);
+                        fView.setShowReceiptProducedChange(text3);
+
+                        fView.displayReceiptOfPurchased();
                         resetMoneyFields();
                     }
                 }
@@ -517,14 +576,25 @@ public class FactoryController {
                     boolean bool = fView.dispSelectItem();
 
                     if(bool == true)    {
-                        fModel.getCurrentMachine().receiveMoney(temp_payment);
+                         fModel.getCurrentMachine().receiveMoney(temp_payment);
                         Money change  = fModel.getCurrentMachine().produceChange(6, temp_payment);
                         fModel.getCurrentMachine().produceTransaction
                         (fModel.getCurrentMachine().getVendingMachineSlot(6).getsandwichList().get(0), 
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(6);
-                        fView.displayReceiptOfPurchased();
                         temp_payment.resetMoney();
+
+                        int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                        String text1, text2, text3;
+                        text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                        text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                        fModel.getCurrentMachine().getVendingMachineSlot(6).getsandwichList().get(0).getPrice();
+                        text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                        fView.setShowReceiptTransaction(text1);
+                        fView.setShowReceiptProductPurchased(text2);
+                        fView.setShowReceiptProducedChange(text3);
+
+                        fView.displayReceiptOfPurchased();
                         resetMoneyFields();
                     }
                 }
@@ -540,14 +610,25 @@ public class FactoryController {
                     boolean bool = fView.dispSelectItem();
 
                     if(bool == true)    {
-                        fModel.getCurrentMachine().receiveMoney(temp_payment);
+                         fModel.getCurrentMachine().receiveMoney(temp_payment);
                         Money change  = fModel.getCurrentMachine().produceChange(7, temp_payment);
                         fModel.getCurrentMachine().produceTransaction
                         (fModel.getCurrentMachine().getVendingMachineSlot(7).getsandwichList().get(0), 
                         temp_payment, change);
                         fModel.getCurrentMachine().dispenseItem(7);
-                        fView.displayReceiptOfPurchased();
                         temp_payment.resetMoney();
+
+                        int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                        String text1, text2, text3;
+                        text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                        text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                        fModel.getCurrentMachine().getVendingMachineSlot(7).getsandwichList().get(0).getPrice();
+                        text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                        fView.setShowReceiptTransaction(text1);
+                        fView.setShowReceiptProductPurchased(text2);
+                        fView.setShowReceiptProducedChange(text3);
+
+                        fView.displayReceiptOfPurchased();
                         resetMoneyFields();
                     }
                 }
@@ -594,6 +675,18 @@ public class FactoryController {
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(0);
                             temp_payment.resetMoney();
+
+                            int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                            String text1, text2, text3;
+                            text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                            text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                            fModel.getCurrentMachine().getVendingMachineSlot(0).getsandwichList().get(0).getPrice();
+                            text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                            fView.setShowReceiptTransaction(text1);
+                            fView.setShowReceiptProductPurchased(text2);
+                            fView.setShowReceiptProducedChange(text3);
+
+                            fView.displayReceiptOfPurchased();
                             resetMoneyFields();
                         }
                     }
@@ -684,6 +777,18 @@ public class FactoryController {
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(2);
                             temp_payment.resetMoney();
+
+                            int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                            String text1, text2, text3;
+                            text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                            text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                            fModel.getCurrentMachine().getVendingMachineSlot(2).getsandwichList().get(0).getPrice();
+                            text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                            fView.setShowReceiptTransaction(text1);
+                            fView.setShowReceiptProductPurchased(text2);
+                            fView.setShowReceiptProducedChange(text3);
+
+                            fView.displayReceiptOfPurchased();
                             resetMoneyFields();
                         }
                     }
@@ -728,6 +833,18 @@ public class FactoryController {
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(3);
                             temp_payment.resetMoney();
+
+                            int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                            String text1, text2, text3;
+                            text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                            text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                            fModel.getCurrentMachine().getVendingMachineSlot(3).getsandwichList().get(0).getPrice();
+                            text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                            fView.setShowReceiptTransaction(text1);
+                            fView.setShowReceiptProductPurchased(text2);
+                            fView.setShowReceiptProducedChange(text3);
+
+                            fView.displayReceiptOfPurchased();
                             resetMoneyFields();
                         }
                     }
@@ -774,6 +891,18 @@ public class FactoryController {
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(4);
                             temp_payment.resetMoney();
+
+                            int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                            String text1, text2, text3;
+                            text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                            text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                            fModel.getCurrentMachine().getVendingMachineSlot(4).getsandwichList().get(0).getPrice();
+                            text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                            fView.setShowReceiptTransaction(text1);
+                            fView.setShowReceiptProductPurchased(text2);
+                            fView.setShowReceiptProducedChange(text3);
+
+                            fView.displayReceiptOfPurchased();
                             resetMoneyFields();
                         }
                     }
@@ -818,6 +947,18 @@ public class FactoryController {
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(5);
                             temp_payment.resetMoney();
+
+                            int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                            String text1, text2, text3;
+                            text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                            text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                            fModel.getCurrentMachine().getVendingMachineSlot(5).getsandwichList().get(0).getPrice();
+                            text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                            fView.setShowReceiptTransaction(text1);
+                            fView.setShowReceiptProductPurchased(text2);
+                            fView.setShowReceiptProducedChange(text3);
+
+                            fView.displayReceiptOfPurchased();
                             resetMoneyFields();
                         }
                     }
@@ -862,6 +1003,18 @@ public class FactoryController {
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(6);
                             temp_payment.resetMoney();
+
+                            int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                            String text1, text2, text3;
+                            text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                            text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                            fModel.getCurrentMachine().getVendingMachineSlot(6).getsandwichList().get(0).getPrice();
+                            text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                            fView.setShowReceiptTransaction(text1);
+                            fView.setShowReceiptProductPurchased(text2);
+                            fView.setShowReceiptProducedChange(text3);
+
+                            fView.displayReceiptOfPurchased();
                             resetMoneyFields();
                         }
                     }
@@ -907,6 +1060,18 @@ public class FactoryController {
                             temp_payment, change);
                             fModel.getCurrentMachine().dispenseItem(7);
                             temp_payment.resetMoney();
+
+                            int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+                            String text1, text2, text3;
+                            text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                            text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                            fModel.getCurrentMachine().getVendingMachineSlot(7).getsandwichList().get(0).getPrice();
+                            text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                            fView.setShowReceiptTransaction(text1);
+                            fView.setShowReceiptProductPurchased(text2);
+                            fView.setShowReceiptProducedChange(text3);
+
+                            fView.displayReceiptOfPurchased();
                             resetMoneyFields();
                         }
                     }
@@ -1100,9 +1265,51 @@ public class FactoryController {
         this.fView.setPurchaseCustItemListener(new ActionListener()    {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                        fView.displayReceiptOfPurchased();
+
+                int calories = 0;
+                Money change;
+
+                for(int i = 0; i < temp_ingredientsList.size(); i++)    {
+                    calories += temp_ingredientsList.get(i).getCalories();
+                }
+
+                Sandwich temp_sandwich = new Sandwich(temp_ingredientsList, calories);
+                temp_sandwich.computePrice();
+
+                SpecialVendingMachine svm = (SpecialVendingMachine)fModel.getCurrentMachine();
+
+                if(temp_sandwich.getPrice() > temp_payment.computeTotal())   {
+                    temp_ingredientsList.clear();
+                    fView.dispErrorNotEnoughMoneySpecial();
+                    fView.displayBuyItemInterface();
+                } else  {
+
+                    Sandwich sandwich = svm.createSandwich(temp_ingredientsList, calories);
+                    sandwich.computePrice();
+
+                    change = svm.produceSpecialChange(sandwich, temp_payment);
+                    
+                    svm.produceTransaction(sandwich, temp_payment, change);
+
+                    int latest = svm.getHistory().getTransactions().size() - 1;
+                    String text1, text2, text3;
+                    text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                    text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
+                    sandwich.getPrice();
+                    text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                    fView.setShowReceiptTransaction(text1);
+                    fView.setShowReceiptProductPurchased(text2);
+                    fView.setShowReceiptProducedChange(text3);
+
+                    temp_payment.resetMoney();
+                    resetMoneyFields();
+                    fView.displayViewItemPreparation();
+                }
+                    
             }
         });
+
+
     }
 
     private void restockItems()  {
@@ -1354,6 +1561,8 @@ public class FactoryController {
                 int nutellaLimit = Integer.parseInt(fView.getNutellaQuantR()) - fModel.getCurrentMachine().getNutellaStock().size();
                 restockItemR(nutellaLimit, new Nutella());
 
+                fModel.getCurrentMachine().resetHistoryRecord();
+
                 fView.displayTestVM();
             }
         });
@@ -1388,7 +1597,7 @@ public class FactoryController {
                 restockItemS(tomatoLimit, new Tomato(), temp);
                 int pickleLimit = Integer.parseInt(fView.getPickleQuantS()) - temp.getPickleStock().size();
                 restockItemS(pickleLimit, new Pickle(), temp);
-
+                temp.resetHistoryRecord();
                 fModel.setCurrentMachine(temp);
 
                 fView.displayTestVM();
@@ -1884,6 +2093,82 @@ public class FactoryController {
         });
         
     }
+
+    public void transactionHistory(){
+        this.fView.setViewTransactionHistory(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                String text = "";
+                int size = fModel.getCurrentMachine().getHistory().getTransactions().size();
+                Transaction transaction;
+                Sandwich item;
+                for(int i = 0; i < size; i++) {
+                    transaction = fModel.getCurrentMachine().getHistory().getTransactions().get(i);
+                    item = (Sandwich)transaction.getItem();
+                    text += "Transaction #" + String.valueOf(i+1) + "\n\n\nMoney Inputted: P" + String.valueOf(transaction.getPayment()) + 
+                    "\nItem Purchased: " + String.valueOf(transaction.getItem().getName()) + " P" + String.valueOf(item.getPrice()) + "\nChange Received: P" +
+                    String.valueOf(transaction.getChange()) + "\n\n\n";
+                }
+
+                fView.setContainTransactionHistory(text);
+                fView.displayVMTransactionHistory();
+            }
+        });
+        this.fView.setViewInventoryHistory(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                String text = "";
+
+                if(fModel.getCurrentMachine() instanceof SpecialVendingMachine) {
+                    SpecialVendingMachine svm = (SpecialVendingMachine)fModel.getCurrentMachine();
+                    svm.getHistory().setFinalStockS(svm);
+                    text = "Bread Initial : " + String.valueOf(svm.getHistory().getBreadInitial()) + "\t\tBread Final : " + String.valueOf(svm.getHistory().getBreadFinal());
+                    text += "\nHam Initial : " + String.valueOf(svm.getHistory().getHamInitial()) + "\t\tHam Final : " + String.valueOf(svm.getHistory().getHamFinal());
+                    text += "\nCheese Initial : " + String.valueOf(svm.getHistory().getCheeseInitial()) + "\tCheese Final : " + String.valueOf(svm.getHistory().getCheeseFinal());
+                    text += "\nEgg Initial : " + String.valueOf(svm.getHistory().getEggInitial()) + "\t\tEgg Final : " + String.valueOf(svm.getHistory().getEggFinal());
+                    text += "\nChicken Initial : " + String.valueOf(svm.getHistory().getChickenInitial()) + "\tChicken Final : " + String.valueOf(svm.getHistory().getChickenFinal());
+                    text += "\nTuna Initial : " + String.valueOf(svm.getHistory().getTunaInitial()) + "\t\tTuna Final : " + String.valueOf(svm.getHistory().getTunaFinal());
+                    text += "\nPeanut Butter Initial : " + String.valueOf(svm.getHistory().getPeanutbutterInitial()) + "\tPeanut Butter Final : " + String.valueOf(svm.getHistory().getPeanutbutterFinal());
+                    text += "\nStrawberry Jam Initial : " + String.valueOf(svm.getHistory().getStrawberryjamInitial()) + "\tStrawberry Jam Final : " + String.valueOf(svm.getHistory().getStrawberryjamFinal());
+                    text += "\nNutella Initial : " + String.valueOf(svm.getHistory().getNutellaInitial()) + "\tNutella Final : " + String.valueOf(svm.getHistory().getNutellaFinal());
+                    text += "\nLettuce Initial : " + String.valueOf(svm.getHistory().getLettuceInitial()) + "\tLettuce Final : " + String.valueOf(svm.getHistory().getLettuceFinal());
+                    text += "\nTomato Initial : " + String.valueOf(svm.getHistory().getTomatoInitial()) + "\tTomato Final : " + String.valueOf(svm.getHistory().getTomatoFinal());
+                    text += "\nPickle Initial : " + String.valueOf(svm.getHistory().getPickleInitial()) + "\t\tPickle Final : " + String.valueOf(svm.getHistory().getPickleFinal());
+                } else  {
+                    VendingMachine vm = fModel.getCurrentMachine();
+                    vm.getHistory().setFinalStockR(vm);
+                    text = "Bread Initial : " + String.valueOf(vm.getHistory().getBreadInitial()) + "\t\tBread Final : " + String.valueOf(vm.getHistory().getBreadFinal()) +
+                     "\nHam Initial : " + String.valueOf(vm.getHistory().getHamInitial()) + "\t\tHam Final : " + String.valueOf(vm.getHistory().getHamFinal()) +
+                     "\nCheese Initial : " + String.valueOf(vm.getHistory().getCheeseInitial()) + "\t\tCheese Final : " + String.valueOf(vm.getHistory().getCheeseFinal()) +
+                     "\nEgg Initial : " + String.valueOf(vm.getHistory().getEggInitial()) + "\t\tEgg Final : " + String.valueOf(vm.getHistory().getEggFinal()) +
+                     "\nChicken Initial : " + String.valueOf(vm.getHistory().getChickenInitial()) + "\t\tChicken Final : " + String.valueOf(vm.getHistory().getChickenFinal()) +
+                     "\nTuna Initial : " + String.valueOf(vm.getHistory().getTunaInitial()) + "\t\tTuna Final : " + String.valueOf(vm.getHistory().getTunaFinal()) +
+                     "\nPeanut Butter Initial : " + String.valueOf(vm.getHistory().getPeanutbutterInitial()) + "\t\tPeanut Butter Final : " + String.valueOf(vm.getHistory().getPeanutbutterFinal()) +
+                     "\nStrawberry Jam Initial : " + String.valueOf(vm.getHistory().getStrawberryjamInitial()) + "\t\tStrawberry Jam Final : " + String.valueOf(vm.getHistory().getStrawberryjamFinal()) +
+                     "\nNutella Initial : " + String.valueOf(vm.getHistory().getNutellaInitial()) + "\t\tNutella Final : " + String.valueOf(vm.getHistory().getNutellaFinal()) +
+                     "\nLettuce Initial : " + String.valueOf(vm.getHistory().getLettuceInitial()) + "\t\tLettuce Final : " + String.valueOf(vm.getHistory().getLettuceFinal()) +
+                     "\nTomato Initial : " + String.valueOf(vm.getHistory().getTomatoInitial()) + "\t\tTomato Final : " + String.valueOf(vm.getHistory().getTomatoFinal()) +
+                     "\nPickle Initial : " + String.valueOf(vm.getHistory().getPickleInitial()) + "\t\tPickle Final : " + String.valueOf(vm.getHistory().getPickleFinal());
+                }
+
+                fView.setContainInventoryHistory(text);
+                fView.repaint();
+                fView.displayVMInventoryHistory();
+            }
+        });
+        this.fView.setGoBackFromTransactionHistory(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayMaintenanceInterface();
+            }
+        });
+        this.fView.setGoBackFromInventoryHistory(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                fView.displayMaintenanceInterface();
+            }
+        });
+    }
     
     public void restockItemR(int limit, Item item)  {
 
@@ -1904,6 +2189,7 @@ public class FactoryController {
         }
 
     }
+
 
     public void resetMoneyFields()  {
         fView.setQuant1("0");

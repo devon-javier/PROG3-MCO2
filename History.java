@@ -33,7 +33,6 @@ public class History {
     private int strawberryjamFinal;
     private int mayonnaiseFinal;
 
-
     public History(VendingMachine vm)    {
         date = LocalDate.now();
         transactionList = new ArrayList<Transaction>();
@@ -61,6 +60,10 @@ public class History {
         this.peanutbutterInitial = vm.getPeanutbutterStock().size();
         this.strawberryjamInitial = vm.getStrawberryjamStock().size();
         this.mayonnaiseInitial = vm.getMayonnaiseStock().size();
+        this.lettuceInitial = -1;
+        this.tomatoInitial = -1;
+        this.pickleInitial = -1;
+
     }
 
     public void setFinalStockR(VendingMachine vm)    {
@@ -74,6 +77,9 @@ public class History {
         this.peanutbutterFinal = vm.getPeanutbutterStock().size();
         this.strawberryjamFinal = vm.getStrawberryjamStock().size();
         this.mayonnaiseFinal = vm.getMayonnaiseStock().size();
+        this.lettuceFinal = -1;
+        this.tomatoFinal = -1;
+        this.pickleFinal = -1;
     }
 
     public void setInitialStockS(SpecialVendingMachine vm)  {
@@ -118,6 +124,110 @@ public class History {
 
     public ArrayList<Transaction> getTransactions() {
         return this.transactionList;
+    }
+
+    public int getBreadInitial() {
+        return breadInitial;
+    }
+
+    public int getCheeseInitial() {
+        return cheeseInitial;
+    }
+
+    public int getHamInitial() {
+        return hamInitial;
+    }
+
+    public int getEggInitial() {
+        return eggInitial;
+    }
+
+    public int getChickenInitial() {
+        return chickenInitial;
+    }
+
+    public int getLettuceInitial() {
+        return lettuceInitial;
+    }
+
+    public int getTunaInitial() {
+        return tunaInitial;
+    }
+
+    public int getTomatoInitial() {
+        return tomatoInitial;
+    }
+
+    public int getPickleInitial() {
+        return pickleInitial;
+    }
+
+    public int getNutellaInitial() {
+        return nutellaInitial;
+    }
+
+    public int getPeanutbutterInitial() {
+        return peanutbutterInitial;
+    }
+
+    public int getStrawberryjamInitial() {
+        return strawberryjamInitial;
+    }
+
+    public int getMayonnaiseInitial() {
+        return mayonnaiseInitial;
+    }
+
+    public int getBreadFinal() {
+        return breadFinal;
+    }
+
+    public int getCheeseFinal() {
+        return cheeseFinal;
+    }
+
+    public int getHamFinal() {
+        return hamFinal;
+    }
+
+    public int getEggFinal() {
+        return eggFinal;
+    }
+
+    public int getChickenFinal() {
+        return chickenFinal;
+    }
+
+    public int getLettuceFinal() {
+        return lettuceFinal;
+    }
+
+    public int getTunaFinal() {
+        return tunaFinal;
+    }
+
+    public int getTomatoFinal() {
+        return tomatoFinal;
+    }
+
+    public int getPickleFinal() {
+        return pickleFinal;
+    }
+
+    public int getNutellaFinal() {
+        return nutellaFinal;
+    }
+
+    public int getPeanutbutterFinal() {
+        return peanutbutterFinal;
+    }
+
+    public int getStrawberryjamFinal() {
+        return strawberryjamFinal;
+    }
+
+    public int getMayonnaiseFinal() {
+        return mayonnaiseFinal;
     }
 
 }
