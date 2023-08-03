@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class FactoryController {
 
-    private FactoryView fView;
-    private FactoryModel fModel;
+    public FactoryView fView;
+    public FactoryModel fModel;
 
     /** Constructor for FactoryController
      * 
