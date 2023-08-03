@@ -305,6 +305,14 @@ public class FactoryController {
         this.fView.setViewItemInfoRListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
+                fView.setHamSandAvailabilityR(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(0).getcurrentQuantity()));
+                fView.setEggSandAvailabilityR(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(1).getcurrentQuantity()));
+                fView.setTunaSandAvailabilityR(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(2).getcurrentQuantity()));
+                fView.setCheeseSandAvailabilityR(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(3).getcurrentQuantity()));
+                fView.setChickenSandAvailabilityR(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(4).getcurrentQuantity()));
+                fView.setPeanutBSandAvailabilityR(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(5).getcurrentQuantity()));
+                fView.setStrawberryJSandAvailabilityR(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(6).getcurrentQuantity()));
+                fView.setNutellaSandAvailabilityR(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(7).getcurrentQuantity()));
                 fView.displayViewItemInfoR();
             }
         });
@@ -317,6 +325,27 @@ public class FactoryController {
         this.fView.setViewItemInfoSListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
+                fView.setHamSandAvailabilityS(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(0).getcurrentQuantity()));
+                fView.setEggSandAvailabilityS(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(1).getcurrentQuantity()));
+                fView.setTunaSandAvailabilityS(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(2).getcurrentQuantity()));
+                fView.setCheeseSandAvailabilityS(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(3).getcurrentQuantity()));
+                fView.setChickenSandAvailabilityS(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(4).getcurrentQuantity()));
+                fView.setPeanutBSandAvailabilityS(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(5).getcurrentQuantity()));
+                fView.setStrawberryJSandAvailabilityS(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(6).getcurrentQuantity()));
+                fView.setNutellaSandAvailabilityS(String.valueOf(fModel.getCurrentMachine().getVendingMachineSlot(7).getcurrentQuantity()));
+                fView.setMayoAddAvailability(String.valueOf(fModel.getCurrentMachine().getMayonnaiseStock().size()));
+                fView.setHamAddAvailability(String.valueOf(fModel.getCurrentMachine().getHamStock().size()));
+                fView.setCheeseAddAvailability(String.valueOf(fModel.getCurrentMachine().getCheeseStock().size()));
+                fView.setChickenAddAvailability(String.valueOf(fModel.getCurrentMachine().getChickenStock().size()));
+                fView.setEggAddAvailability(String.valueOf(fModel.getCurrentMachine().getEggStock().size()));
+                fView.setTunaAddAvailability(String.valueOf(fModel.getCurrentMachine().getTunaStock().size()));
+                fView.setPeanutBAddAvailability(String.valueOf(fModel.getCurrentMachine().getPeanutbutterStock().size()));
+                fView.setStrawberryJAddAvailability(String.valueOf(fModel.getCurrentMachine().getStrawberryjamStock().size()));
+                fView.setNutellaAddAvailability(String.valueOf(fModel.getCurrentMachine().getNutellaStock().size()));
+                SpecialVendingMachine svm = (SpecialVendingMachine)fModel.getCurrentMachine();
+                fView.setLettuceAddAvailability(String.valueOf(svm.getLettuceStock().size()));
+                fView.setTomatoAddAvailability(String.valueOf(svm.getTomatoStock().size()));
+                fView.setPickleAddAvailability((String.valueOf(svm.getPickleStock().size())));
                 fView.displayViewItemInfoS();
             }
         });
@@ -349,28 +378,40 @@ public class FactoryController {
             @Override
             public void actionPerformed(ActionEvent e)  {
                 fModel.getCurrentMachine().receiveMoney(temp_payment);
-                None none = new None();
-                none.receiveMoney(temp_payment);
-                fModel.getCurrentMachine().produceTransaction(temp_payment, none.getChange());
+                fModel.getCurrentMachine().produceTransaction(temp_payment, temp_payment);
                 temp_payment.resetMoney();
 
                 int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
 
                 String text1, text2, text3;
                 text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
-                text2 = fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getItem().getName() + " P" + 
-                none.getChange().computeTotal();
+                text2 = "CANCELLED";
                 text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
                 fView.setShowReceiptTransaction(text1);
                 fView.setShowReceiptProductPurchased(text2);
                 fView.setShowReceiptProducedChange(text3);
                 fView.displayReceiptOfPurchased();
+                resetMoneyFields();
             }
         });
         this.fView.setCancelTransactionSListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e)  {
+                fModel.getCurrentMachine().receiveMoney(temp_payment);
+                fModel.getCurrentMachine().produceTransaction(temp_payment, temp_payment);
+                temp_payment.resetMoney();
+
+                int latest = fModel.getCurrentMachine().getHistory().getTransactions().size() - 1;
+
+                String text1, text2, text3;
+                text1 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getPayment());
+                text2 = "CANCELLED";
+                text3 = String.valueOf(fModel.getCurrentMachine().getHistory().getTransactions().get(latest).getChange());
+                fView.setShowReceiptTransaction(text1);
+                fView.setShowReceiptProductPurchased(text2);
+                fView.setShowReceiptProducedChange(text3);
                 fView.displayReceiptOfPurchased();
+                resetMoneyFields();
             }
         });
 

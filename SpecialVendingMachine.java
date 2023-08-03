@@ -1,15 +1,31 @@
 import java.util.ArrayList;
 
+/**
+ * The SpecialVendingMachine class is a simulation of a real world vending machine
+ * object with special features, wherein it has all the features of a regular vending machine
+ * but with the added special customization feature wherein a user can build their own food item
+ * 
+ */
+
 public class SpecialVendingMachine extends VendingMachine{
 
     private ArrayList<Lettuce> lettuceStock;
     private ArrayList<Tomato> tomatoStock;
     private ArrayList<Pickle> pickleStock;
 
+    /**
+     * Constructor for SpecialVendingMachine
+     * 
+     */
+
     public SpecialVendingMachine()  {
         super();
     }
 
+    /**
+     * initIngredients() initializes the stock inventory of items
+     * 
+     */
     @Override
     public void initIngredients()   {
         breadStock = new ArrayList<Bread>();
@@ -46,12 +62,21 @@ public class SpecialVendingMachine extends VendingMachine{
 
     }
 
+    /**
+     * resetHistoryRecord() resets the initial and final stock of the special vending machine inventory
+     * 
+     */
     @Override
     public void resetHistoryRecord() {
         history.setInitialStockS(this);
         history.setFinalStockS(this);
     }
 
+    /**
+     * addStock() adds a new stock ingredient into the special vending machine inventory
+     * 
+     * @param item is the ingredient to be added into the inventory
+     */
     @Override
     public void addStock(Item item) {
         if(item instanceof Bread) {
@@ -97,7 +122,12 @@ public class SpecialVendingMachine extends VendingMachine{
     }
 
 
-
+    /**
+     * createSandwich() facilitates the creation process for a sandwich customized by the user
+     * 
+     * @param ingredientsList contains the list of ingredients of the sandwich
+     * @param calories is the number of calories in the sandwich
+     */
     public Sandwich createSandwich(ArrayList<Item> ingredientsList, int calories)  {
 
         for(int i = 0; i < ingredientsList.size(); i++) {
@@ -147,7 +177,12 @@ public class SpecialVendingMachine extends VendingMachine{
 
     }
 
-
+    /**
+     * produceSpecialChange() produces change specifically for the customized sandwich created by the user
+     * 
+     * @param sandwich is the sandwich created by the user
+     * @param userPayment is the payment in different denomations given by the user
+     */
 
     public Money produceSpecialChange(Sandwich sandwich, Money userPayment)    {
         int temp, curr; 

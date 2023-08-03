@@ -1,5 +1,10 @@
 import java.util.ArrayList;
-
+/**
+ * The VendingMachine class is a simulation of a real world vending machine
+ * object, which will facilitate the dispension of items, the production
+ * of such items, and the recording of transactions
+ * 
+ */
 public class VendingMachine {
 
     protected Slot[] slots;
@@ -20,7 +25,10 @@ public class VendingMachine {
 
     protected History history;
 
-
+    /**
+     * Constructor for VendingMachine
+     * 
+     */
     public VendingMachine() {
         slots = new Slot[8];
         vmMoney = new Money();
@@ -33,6 +41,12 @@ public class VendingMachine {
         history = new History(this);
 
     }
+
+    /**
+     * initIngredients() will initialize the stock storage of ingredients 
+     * int the vending machine
+     * 
+     */
 
     protected void initIngredients()   {
         breadStock = new ArrayList<Bread>();
@@ -63,6 +77,10 @@ public class VendingMachine {
 
     }
 
+/**
+ * initSlots() will initialize the sandwich items into the slots for selling
+ * 
+ */
     private void initSlots() {
 
         ArrayList<Item> ingredientsList = new ArrayList<Item>();
@@ -237,6 +255,12 @@ public class VendingMachine {
         }
     }
 
+    /**
+     * initVMMoney() will initialize the initial bills that the 
+     * vending machine will use for change.
+     *
+     */
+
     private void initVMMoney()  {
         this.vmMoney.addPeso1(20);
         this.vmMoney.addPeso5(10);
@@ -250,6 +274,13 @@ public class VendingMachine {
 
     }
 
+
+    /**
+     * receiveMoney() will take money from the user and add it to the
+     * userPayments money box
+     * 
+     * @param userPayment is a money object created by the user containing their denomination of bills for the payment
+     */
     public void receiveMoney(Money userPayment)    {
         this.userPayments.addPeso1(userPayment.getPeso1());
         this.userPayments.addPeso5(userPayment.getPeso5());
@@ -262,7 +293,12 @@ public class VendingMachine {
         this.userPayments.addPeso1000(userPayment.getPeso1000());
     }
 
-    
+    /**
+     * reduceVMMoney() will reduce the VendingMachine money box used
+     * for change to dispense change
+     * 
+     * @param change is the change being dispensed by the vending machine
+     */
     public void reduceVMMoney(Money change) {
         this.vmMoney.reducePeso1(change.getPeso1());
         this.vmMoney.reducePeso5(change.getPeso5());
@@ -275,11 +311,24 @@ public class VendingMachine {
         this.vmMoney.reducePeso1000(change.getPeso1000());
     }
     
-
+    /**
+     * dispenseItem() will facilitate the dispension of an item from a certain 
+     * vending machine slot
+     * 
+     * @param index refers to the index of the vending machine slot from where the sandwich is being dispensed
+     */
     public void dispenseItem(int index)  {
         slots[index].sellSandwich();
     }
-    
+
+    /**
+     * produceChange() will compute the change required to be given to the user and reduced
+     * in the vending machine
+     * 
+     * @param index refers to the index of the vending machine slot from where the sandwich is being dispensed
+     * @param userMoney is a money object created by the user containing their denomination of bills for the payment
+     * @return Money object containing the denomation of bills for change
+     */
     public Money produceChange(int index, Money userMoney) {
 
         int temp, curr; 
@@ -338,14 +387,33 @@ public class VendingMachine {
 
     }
 
+    /**
+     * produceTransaction() will produce a transaction object to store transaction data
+     * 
+     * @param item is the item sold to the user
+     * @param payment is a money object created by the user containing their denomination of bills for the payment
+     * @param change is the change being dispensed by the vending machine
+     */
     public void produceTransaction(Item item, Money payment, Money change) {
         this.history.addTransaction(new Transaction(item, payment, change));
     }
+
+    /**
+     * produceTransaction() will produce a transaction object to store transaction data, in which no item was bought
+     * 
+     * @param payment is a money object created by the user containing their denomination of bills for the payment
+     * @param change is the change being dispensed by the vending machine
+     */
 
     public void produceTransaction(Money payment, Money change) {
         this.history.addTransaction(new Transaction(payment, change));
     }
 
+    /**
+     * addItem() will add a new stock ingredient to the inventory
+     * 
+     * @param item is the new ingredient being stored in the stock
+     */
     public void addStock(Item item) {
         if(item instanceof Bread) {
             breadStock.add((Bread)item);
@@ -380,6 +448,11 @@ public class VendingMachine {
         }
     }
 
+    /**
+     * resetHistoryRecord() will reset the the initial and final inventory due to recent restocking
+     * 
+     * @param item is the new ingredient being stored in the stock
+     */
     public void resetHistoryRecord() {
         history.setInitialStockR(this);
         history.setFinalStockR(this);

@@ -25,6 +25,20 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 
+ /**
+ * The FactoryView class contains the all the components that makes up the program's GUI. This concerns the different:
+ * 
+ *      panels (contains and displays the other GUI components),
+ *      buttons (interactables that move you to different panels or performs an action when pressed),
+ *      labels (provides short titles and descriptions within the program),
+ *      text fields (either accepts input or displays output),
+ *      text areas (displays large/long output),
+ *      image icons (used for background images),
+ *      card layout (contains each panel in a single container and calls upon the container number when the panel is used),
+ *      gridbagconstraints(assists the use of gridBagLayout in some panels),
+ *      and the frame that has been used (JFrame has been extended).
+ */
+
 public class FactoryView extends JFrame{
     //panels
     private JPanel buyMainPanel;
@@ -187,9 +201,6 @@ public class FactoryView extends JFrame{
 
      private JPanel layoutRestockSandwiches;
 
-
-    //ADDITIONAL COMPONENTS FOR MAINTENANCE MODE WINDOW - SVM
-
     //MAINTENANCE MODE - SET ITEM PRICE                       
     private JLabel setHamSandwichPrice;
     private JLabel setCheeseSandwichPrice;
@@ -245,7 +256,6 @@ public class FactoryView extends JFrame{
     private JTextField cur500;
     private JTextField cur1000;
     private JButton goBackFromReplenish;
-    private JOptionPane moneyReplenished;
     private JPanel layoutReplenishMoney;
 
     //COMPONENTS FOR REGULAR VM WINDOW
@@ -289,7 +299,6 @@ public class FactoryView extends JFrame{
     private JButton viewItemInfoS;
     private JOptionPane selectItemSVM;  //when an item is selected
     private JPanel layoutSVM;
-    private JTextArea containItemPriceS;
 
     private JPanel layoutViewItemInfoS;
     private JLabel displayViewItemInfoS;
@@ -391,8 +400,6 @@ public class FactoryView extends JFrame{
 
     private JButton receiptGoBackToMenu;
 
-    //COMPONENTS FOR ITEM PREPARATION IN SVM
-
     //COMPONENTS FOR VIEW TRANSACTION HISTORY
     private JLabel displayViewTransactionHistory;
     private JPanel layoutDisplayViewTransactionHistory;
@@ -408,12 +415,12 @@ public class FactoryView extends JFrame{
     //misc.
     private GridBagConstraints gbc;
     private CardLayout cl;          //sets the card layout
-    private Container container;    //uh lalagyan?
+    private Container container;    
     private GridBagConstraints gbc2;
     private GridBagConstraints gbc3;
-    private JButton filler1;    //for pure aesthetic
-    private JButton filler2;    //for pure aesthetic
-    private JButton filler3;
+    private JButton filler1;        //for pure aesthetic
+    private JButton filler2;        //for pure aesthetic
+    private JButton filler3;        //for pure aesthetic
 
     //for background image
     private JLabel displayField;
@@ -435,10 +442,16 @@ public class FactoryView extends JFrame{
     private JLabel displayBlank3;
     private JLabel displayBlank4;
     private JLabel displayBlank5;
-    private JLabel displayBlank6;
-    private JLabel displayBlank7;
     private ImageIcon background_image_plain;
 
+    /**
+     * Constructs an instance of FactoryView.
+     * 
+     *      Sets the card layout, contains panel 1 in the card layout that displays the factory main menu.
+     *      Contains the interactables for panel 2, which displays buttons for creating a Regular or Special vending machine.
+     *      Contains JFrame configurations.
+     *      Holds all added "build" methods under the FactoryView class to assist the program in properly displaying panels.
+     */
     public FactoryView(){
         super("CCPROG3 MCO2");
 
@@ -564,68 +577,181 @@ public class FactoryView extends JFrame{
     }
 
     //display interface methods
-    public void displayCreateVM() {
-        cl.show(container, "2");
-    }
-    public void displayTestVM(){
-        cl.show(container, "3");
-     }
+
+    /**
+     * Displays the 1st panel inside the card layout's container. This contains the starting interface where
+     * the user can choose to create a vending machine or test a vending machine.
+     */
      public void displayFactoryView()  {
         cl.show(container, "1");
      }
+
+    /**
+     * Displays the 2nd panel inside the card layout's container. This contains the interface for creating
+     * a Regular or Special vending machine.
+     */
+    public void displayCreateVM() {
+        cl.show(container, "2");
+    }
+
+    /**
+     * Displays the 3rd panel inside the card layout's container. This contains the interface for testing
+     * the most recently created vending machine.
+     */
+    public void displayTestVM(){
+        cl.show(container, "3");
+     }
+
+     /**
+     * Displays the 4th panel inside the card layout's container. This contains the interface for when
+     * the user chooses to buy an item.
+     */
      public void displayBuyItemInterface(){
         cl.show(container, "4");
      }
+
+     /**
+     * Displays the 5th panel inside the card layout's container. This contains the interface for purchasing an
+     * item and viewing item information under the Regular vending machine.
+     */
      public void displayRVMInterface(){
         cl.show(container, "5");
      }
+
+     /**
+     * Displays the 6th panel inside the card layout's container. This contains the interface for purchasing an
+     * item and viewing item information under the Special vending machine.
+     */
      public void displaySVMInterface(){
         cl.show(container, "6");
      }
+
+     /**
+     * Displays the 7th panel inside the card layout's container. This contains the interface for when
+     * the user accesses maintenance mode.
+     */
      public void displayMaintenanceInterface(){
         cl.show(container, "7");
      }
+
+     /**
+     * Displays the 8th panel inside the card layout's container. This contains the interface for
+     * restocking items (individual ingredients) under the Regular vending machine.
+     */
      public void displayRestockItemRVM(){
         cl.show(container, "8");
      }
+
+     /**
+     * Displays the 9th panel inside the card layout's container. This contains the interface for
+     * restocking items (individual ingredients) under the Special vending machine.
+     */
      public void displayRestockItemSVM(){
         cl.show(container, "9");
      }
+
+    /**
+     * Displays the 10th panel inside the card layout's container. This contains the interface for
+     * restocking sandwiches under the Regular or Special vending machine (depending on which variant is
+     * the most recently created vending machine).
+     */
      public void displayRestockSandwiches(){
         cl.show(container, "10");
      }
+
+    /**
+     * Displays the 11th panel inside the card layout's container. This contains the interface for
+     * setting item prices (individual ingredients) under the Regular vending machine.
+     */
      public void displaySetItemPriceRVM(){      
         cl.show(container, "11");
-     }     
+     }
+
+     /**
+     * Displays the 12th panel inside the card layout's container. This contains the interface for
+     * replenishing the machine's money (used for producing change) under the Regular or Special vending machine
+     * (depending on which variant is the most recently created vending machine).
+     */
      public void displayReplenishMoney(){
         cl.show(container, "12");
      }
+
+     /**
+     * Displays the 13th panel inside the card layout's container. This contains the interface for
+     * viewing the items' additional information (calories and availability),
+     * under the Regular vending machine, when purchasing a product.
+     */
      public void displayViewItemInfoR(){
         cl.show(container, "13");
      }
+
+     /**
+     * Displays the 16th panel inside the card layout's container. This contains the interface for
+     * viewing the items' additional information (calories and availability),
+     * under the Special vending machine, when purchasing a product.
+     */
      public void displayViewItemInfoS(){
         cl.show(container, "16");
      }
+
+     /**
+     * Displays the 14th panel inside the card layout's container. This contains the interface for
+     * when the user chooses to customize their chosen item under the Special vending machine.
+     */
      public void displayCustomizeItemsSVMInterface(){
         cl.show(container, "14");
      }
+
+    /**
+     * Displays the 15th panel inside the card layout's container. This contains the interface for
+     * the receipt produced when the user purchases an item under the Regular or Special
+     * vending machine (depending on which variant is the most recently created vending machine).
+     */
      public void displayReceiptOfPurchased(){
         cl.show(container, "15");
      }
+
+     /**
+     * Displays the 17th panel inside the card layout's container. This contains the interface for
+     * viewing additional items (what can be added to customization of product) under the Special vending machine.
+     */
      public void displayViewAddtionalItemsS(){
         cl.show(container, "17");
      }
+
+     /**
+     * Displays the 18th panel inside the card layout's container. This contains the interface for
+     * the item preparation when the user chooses to customize their item under the Special vending machine.
+     */
      public void displayViewItemPreparation(){
         cl.show(container, "18");
      }
+
+     /**
+     * Displays the 19th panel inside the card layout's container. This contains the interface for
+     * viewing the transaction history (transaction number, amount of money received from buyer, change dispensed)
+     * that has been stored in the Regular or Special vending machine (depending on which variant is the most recently created vending machine).
+     */
      public void displayVMTransactionHistory(){
         cl.show(container, "19");
      }
+
+     /**
+     * Displays the 20th panel inside the card layout's container. This contains the interface for
+     * viewing the inventory history (initial inventory, inventory after a transaction)
+     * that has been stored in the Regular or Special vending machine (depending on which variant is the most recently created vending machine).
+     */
      public void displayVMInventoryHistory(){
         cl.show(container, "20");
      }
 
+
     //build methods
+
+    /**
+     * Contains the contents of the panel to test a vending machine, stored in container 3.
+     * Contains buttons to buy an item, access maintenance mode, and go back to the factory menu interface.
+     */
     public void buildTestVM()   {
         background_image_test = new ImageIcon("bgtest.png");
         Image img2 = background_image_test.getImage();
@@ -679,6 +805,10 @@ public class FactoryView extends JFrame{
         container.add(displayFieldTest, "3");
     }
 
+    /**
+     * Contains the contents of the panel to insert money in the vending machine, stored in container 4.
+     * Contains interactables to insert money and view the items price list.
+     */
     public void buildBuyItem(){
         //interface for BUY ITEM
         background_image_buy = new ImageIcon("moneymenu.png");
@@ -783,11 +913,6 @@ public class FactoryView extends JFrame{
         currentAmount.setFont(font);
         confirmPayment = new JButton("Confirm");
         viewPriceList = new JButton("View Price List");
-        // confirmPayment.setOpaque(false);
-        // confirmPayment.setFocusPainted(false);
-        // confirmPayment.setContentAreaFilled(false);
-        // confirmPayment.setBorderPainted(true);
-        // confirmPayment.setBorder(BorderFactory.createEtchedBorder(0));
 
         buySubPanel2.add(confirmPayment);
         buySubPanel2.add(viewPriceList);
@@ -804,6 +929,10 @@ public class FactoryView extends JFrame{
         container.add(displayFieldBuy, "4");
     }
 
+    /**
+     * Contains the contents of the panel to view item info(calories and availability) under the Regular vending machine,
+     * stored in container 13. Contains a button to go back to the item select interface.
+     */
     public void buildViewItemInfoR(){
         background_image_plain = new ImageIcon("viewiteminfomenu.png");
         Image img6 = background_image_plain.getImage();
@@ -814,13 +943,21 @@ public class FactoryView extends JFrame{
         layoutViewItemInfoR = new JPanel(new GridLayout(9, 1, 10, 30));
 
         hamSandAvailabilityR = new JTextField();
+        hamSandAvailabilityR.setHorizontalAlignment(JTextField.CENTER);
         cheeseSandAvailabilityR = new JTextField();
+        cheeseSandAvailabilityR.setHorizontalAlignment(JTextField.CENTER);
         chickenSandAvailabilityR = new JTextField();
+        chickenSandAvailabilityR.setHorizontalAlignment(JTextField.CENTER);
         tunaSandAvailabilityR = new JTextField();
+        tunaSandAvailabilityR.setHorizontalAlignment(JTextField.CENTER);
         eggSandAvailabilityR = new JTextField();
+        eggSandAvailabilityR.setHorizontalAlignment(JTextField.CENTER);
         peanutBSandAvailabilityR = new JTextField();
+        peanutBSandAvailabilityR.setHorizontalAlignment(JTextField.CENTER);
         strawberryJSandAvailabilityR = new JTextField();
+        strawberryJSandAvailabilityR.setHorizontalAlignment(JTextField.CENTER);
         nutellaSandAvailabilityR = new JTextField();
+        nutellaSandAvailabilityR.setHorizontalAlignment(JTextField.CENTER);
 
         goBackFromViewInfoR = new JButton("Go Back");
 
@@ -840,6 +977,10 @@ public class FactoryView extends JFrame{
         container.add(displayViewItemInfoR, "13");
      }
 
+     /**
+     * Contains the contents of the panel to view item info(calories and availability) under the Special vending machine,
+     * stored in container 16. Contains a button to view additional item info(additional ingredients for customization).
+     */
      public void buildViewItemInfoS(){
         background_image_plain = new ImageIcon("viewiteminfomenu.png");
         Image img6 = background_image_plain.getImage();
@@ -850,17 +991,29 @@ public class FactoryView extends JFrame{
         layoutViewItemInfoS = new JPanel(new GridLayout(9, 1, 10, 30));
 
         hamSandAvailabilityS = new JTextField();
+        hamSandAvailabilityS.setHorizontalAlignment(JTextField.CENTER);
         cheeseSandAvailabilityS = new JTextField();
+        cheeseSandAvailabilityS.setHorizontalAlignment(JTextField.CENTER);
         chickenSandAvailabilityS = new JTextField();
+        chickenSandAvailabilityS.setHorizontalAlignment(JTextField.CENTER);
         tunaSandAvailabilityS = new JTextField();
+        tunaSandAvailabilityS.setHorizontalAlignment(JTextField.CENTER);
         eggSandAvailabilityS = new JTextField();
+        eggSandAvailabilityS.setHorizontalAlignment(JTextField.CENTER);
         peanutBSandAvailabilityS = new JTextField();
+        peanutBSandAvailabilityS.setHorizontalAlignment(JTextField.CENTER);
         strawberryJSandAvailabilityS = new JTextField();
+        strawberryJSandAvailabilityS.setHorizontalAlignment(JTextField.CENTER);
         nutellaSandAvailabilityS = new JTextField();
+        nutellaSandAvailabilityS.setHorizontalAlignment(JTextField.CENTER);
         mayoAddAvailability = new JTextField();
+        mayoAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         lettuceAddAvailability = new JTextField();
+        lettuceAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         tomatoAddAvailability = new JTextField();
+        tomatoAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         pickleAddAvailability = new JTextField();
+        pickleAddAvailability.setHorizontalAlignment(JTextField.CENTER);
 
         viewAdditionalInfo = new JButton("See More");
 
@@ -880,6 +1033,10 @@ public class FactoryView extends JFrame{
         container.add(displayViewItemInfoS, "16");
      }
 
+     /**
+     * Contains the contents of the panel to view additional item info(calories and availability) of customizable ingredients
+     * under the Special vending machine, stored in container 17. Contains a button to go back to the item select interface.
+     */
      public void buildViewAdditionalItemsS(){
         background_image_plain = new ImageIcon("viewadditionalitemmenu.png");
         Image img6 = background_image_plain.getImage();
@@ -892,17 +1049,29 @@ public class FactoryView extends JFrame{
         layoutViewAdditionalItemInfoS.setOpaque(false);
 
         hamAddAvailability = new JTextField();
+        hamAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         cheeseAddAvailability = new JTextField();
+        cheeseAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         chickenAddAvailability = new JTextField();
+        chickenAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         tunaAddAvailability = new JTextField();
+        tunaAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         eggAddAvailability = new JTextField();
+        eggAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         mayoAddAvailability = new JTextField();
+        mayoAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         tomatoAddAvailability = new JTextField();
+        tomatoAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         lettuceAddAvailability = new JTextField();
+        lettuceAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         pickleAddAvailability = new JTextField();
+        pickleAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         peanutBAddAvailability = new JTextField();
+        peanutBAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         strawberryJAddAvailability = new JTextField();
+        strawberryJAddAvailability.setHorizontalAlignment(JTextField.CENTER);
         nutellaAddAvailability = new JTextField();
+        nutellaAddAvailability.setHorizontalAlignment(JTextField.CENTER);
 
         goBackFromViewAdditionalItemInfoS = new JButton("Go Back");
 
@@ -926,6 +1095,10 @@ public class FactoryView extends JFrame{
 
      }
 
+     /**
+     * Contains the contents of the panel to view the select item interface under the Regular vending machine, stored in container 5.
+     * Contains interactables(buttons) to select a product and purchase, view item info, and cancel transaction.
+     */
      public void buildRegularVM(){
 
         background_image_RVM = new ImageIcon("selectitem.png");
@@ -999,6 +1172,10 @@ public class FactoryView extends JFrame{
         container.add(displayFieldRVM, "5");
      }
 
+     /**
+     * Contains the contents of the panel to view the select item interface under the Special vending machine, stored in container 6.
+     * Contains interactables(buttons) to select a product and purchase, view item info, and cancel transaction.
+     */
      public void buildSpecialVM(){
         background_image_SVM = new ImageIcon("selectitem.png");
         Image img5 = background_image_SVM.getImage();
@@ -1071,6 +1248,10 @@ public class FactoryView extends JFrame{
         container.add(displayFieldSVM, "6");
      }
 
+     /**
+     * Contains the contents of the panel to view the customize item interface under the Special vending machine, stored in container 14.
+     * Contains interactables(buttons) to add additional ingredients to the user's chosen base product, and confirm customization.
+     */
      public void buildCustomizeItemSVM(){
         background_image_plain = new ImageIcon("plainbg.png");
         Image img6 = background_image_plain.getImage();
@@ -1179,7 +1360,11 @@ public class FactoryView extends JFrame{
         container.add(displayCustomizeItemSVM, "14");
      }
 
-
+     /**
+     * Contains the contents of the panel to view the item preparation interface after item customization,
+     * under the Special vending machine, stored in container 18. Contains interactables(buttons) to select
+     * a product and purchase, view item info, and cancel transaction.
+     */
     public void buildItemPreparationSVM(){
         background_image_plain = new ImageIcon("plainbg.png");
         Image img6 = background_image_plain.getImage();
@@ -1273,8 +1458,11 @@ public class FactoryView extends JFrame{
         container.add(displayItemPreparation, "18");
      }
 
-
-     
+     /**
+     * Contains the contents of the panel to the print receipt interface under the Regular or Special vending machine
+     * (depending on which variant of the machine is being tested on), stored in container 15.
+     * Contains interactables(buttons) to finish transaction.
+     */
      public void buildDispenseItemAndChange(){  //basically creates a receipt
         background_image_plain = new ImageIcon("plainbg.png");
         Image img6 = background_image_plain.getImage();
@@ -1288,9 +1476,9 @@ public class FactoryView extends JFrame{
         layoutDispenseItemSubPanel3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         receiptTransaction = new JLabel("Your Transaction:");
-        showReceiptTransaction = new JTextArea("LALALALALALLALAA");
+        showReceiptTransaction = new JTextArea();
         receiptProductPurchased = new JLabel("Product Purchased:");
-        showReceiptProductPurchased = new JTextArea("WILL THIS SHOW IT MUSH SHOW RYT");
+        showReceiptProductPurchased = new JTextArea();
         receiptProducedChange = new JLabel("Your Change:");
         showReceiptProducedChange = new JTextField();
         receiptGoBackToMenu = new JButton("Finish");
@@ -1298,6 +1486,8 @@ public class FactoryView extends JFrame{
         showReceiptTransaction.setEditable(false);
         showReceiptProductPurchased.setEditable(false);
         showReceiptProducedChange.setEditable(false);
+        showReceiptProducedChange.setOpaque(false);
+        showReceiptProducedChange.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 
         layoutDispenseItemSubPanel1.add(receiptTransaction);
         layoutDispenseItemSubPanel1.add(showReceiptTransaction);
@@ -1323,6 +1513,13 @@ public class FactoryView extends JFrame{
      }
 
     //MAINTENANCE FEATURES ---------------------------------------------------------------------------------------------------------------------
+     
+    /**
+     * Contains the contents of the panel to view the Maintenance Mode interface under the Regular or Special vending machine
+     * (depending on which variant of the machine is being tested on), stored in container 7.
+     * Contains interactables(buttons) to restock items, restock sandwiches, set item price, collect user payments,
+     * collect stored machine money, replenish machine money, view transaction history, and view inventory history.
+     */
      public void buildMaintenanceMode(){
         background_image_Maintenance = new ImageIcon("maintenancemodemenu.png");
         Image img5 = background_image_Maintenance.getImage();
@@ -1361,6 +1558,10 @@ public class FactoryView extends JFrame{
         container.add(displayFieldMaintenance, "7");
      }
 
+     /**
+     * Contains the contents of the panel to view the Restock Items interface under the Regular vending machine stored in container 8.
+     * Contains interactables(buttons) to increase current item stocks and go back to the maintenance menu interface.
+     */
      public void buildRestockItemsRVM(){
         background_image_plain = new ImageIcon("plainbg.png");
         Image img6 = background_image_plain.getImage();
@@ -1457,6 +1658,10 @@ public class FactoryView extends JFrame{
         container.add(displayBlank1, "8");
      }
 
+     /**
+     * Contains the contents of the panel to view the Restock Items interface under the Special vending machine stored in container 9.
+     * Contains interactables(buttons) to increase current item stocks and go back to the maintenance menu interface.
+     */
     public void buildRestockItemsSVM(){
         background_image_plain = new ImageIcon("plainbg.png");
         Image img6 = background_image_plain.getImage();
@@ -1573,6 +1778,11 @@ public class FactoryView extends JFrame{
         container.add(displayBlank2, "9");
      }
 
+     /**
+     * Contains the contents of the panel to view the Restock Sandwiches interface under the Regular or Special vending machine
+     * (depending on which variant of the machine is being tested on), stored in container 10.
+     * Contains interactables(buttons) to increase current sandwich stocks and go back to the maintenance menu interface.
+     */
      public void buildRestockSandwich(){
         background_image_plain = new ImageIcon("plainbg.png");
         Image img6 = background_image_plain.getImage();
@@ -1651,6 +1861,12 @@ public class FactoryView extends JFrame{
         container.add(displayBlank3, "10");
      }
 
+     /**
+     * Contains the contents of the panel to view the Set Item Price interface under the Regular or Special vending machine
+     * (depending on which variant of the machine is being tested on), stored in container 11.
+     * Contains interactables(text fields and buttons) to set the current product price, confirm and save changes,
+     * and go back (discard changes) to the maintenance menu interface.
+     */
      public void buildSetItemPrice(){                                                       
         Image img6 = background_image_plain.getImage();
         Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
@@ -1712,6 +1928,14 @@ public class FactoryView extends JFrame{
         container.add(displayBlank4, "11");
      }
 
+     /**
+      * Creates the pop-up window that allows the user to collect and empty the user payments in the
+      * Regular or Special vending machine (depends on which vending machine variant is being tested on).
+      * 
+      * @param message is a String value containing the amount of user payments collected by the machine.
+      * @return true is a Boolean value returned when the user chooses the yes option in the pop-up window.
+      * @return false is a Boolean value returned when the user chooses the no option in the pop-up window.
+      */
      public boolean buildCollectPayment(String message){
         int resultSelectItem = JOptionPane.showConfirmDialog(null, message, "Collect Payment", JOptionPane.YES_NO_OPTION);
 
@@ -1722,10 +1946,24 @@ public class FactoryView extends JFrame{
         return false;
      }
 
+     /**
+      * Confirms the collection of the user payments in the Regular or Special vending machine
+      * (depends on which vending machine variant is being tested on).
+      * 
+      * @param message is a String value containing the amount of user payments collected by the machine.
+      */
      public void confirmCollectPayment(String message)  {
         JOptionPane.showMessageDialog(null, message, "Payment Collected", JOptionPane.INFORMATION_MESSAGE);
      }
 
+     /**
+      * Creates the pop-up window that allows the user to collect and empty the machine monet in the
+      * Regular or Special vending machine (depends on which vending machine variant is being tested on).
+      * 
+      * @param message is a String value containing the amount of money stored in the machine.
+      * @return true is a Boolean value returned when the user chooses the yes option in the pop-up window.
+      * @return false is a Boolean value returned when the user chooses the no option in the pop-up window.
+      */
      public boolean buildCollectMachineMoney(String message){
         int resultSelectItem = JOptionPane.showConfirmDialog(null, message, "Collect Vending Machine Money", JOptionPane.YES_NO_OPTION);
 
@@ -1736,11 +1974,22 @@ public class FactoryView extends JFrame{
         return false;
      }
 
+     /**
+      * Confirms the collection of the machine money in the Regular or Special vending machine
+      * (depends on which vending machine variant is being tested on).
+      * 
+      * @param message is a String value containing the amount of money stored in the machine.
+      */
      public void confirmCollectVMMoney(String message)  {
         JOptionPane.showMessageDialog(null, message, "Vending Machine Money Collected", JOptionPane.INFORMATION_MESSAGE);
      }
 
-
+     /**
+      * Contains the contents to the panel that allows the user to replenish or add more to the money that is stored
+      * inside the Regular or Special vending machine (depends on which vending machine variant is being tested on).
+      * Includes interactables like buttons to increase the amount of bills stored in the machine and a go back button
+      * that takes the user back to the maintenance mode menu.
+      */
      public void buildReplenishMoney(){
         Image img6 = background_image_plain.getImage();
         Image temp_img6 = img6.getScaledInstance(550, 700, Image.SCALE_SMOOTH);
@@ -1833,6 +2082,12 @@ public class FactoryView extends JFrame{
         container.add(displayBlank5, "12");
      }
 
+     /**
+      * Contains the contents to the panel that allows the user to view the transaction history that is stored
+      * in the Regular or Special vending machine (depends on which vending machine variant is being tested on).
+      * Includes interactables like a scroll panel to allow viewing of numerous transaction entries and a go back button
+      * that takes the user back to the maintenance mode menu.
+      */
      public void buildViewTransactionHistory() {
         background_image_plain = new ImageIcon("plainbg.png");
         Image img6 = background_image_plain.getImage();
@@ -1866,6 +2121,12 @@ public class FactoryView extends JFrame{
         container.add(displayViewTransactionHistory, "19");
     }
 
+    /**
+      * Contains the contents to the panel that allows the user to view the inventory history that is stored
+      * in the Regular or Special vending machine (depends on which vending machine variant is being tested on).
+      * Includes interactables like a scroll panel to allow viewing of numerous inventory entries and a go back button
+      * that takes the user back to the maintenance mode menu.
+      */
     public void buildViewInventoryHistory() {
         background_image_plain = new ImageIcon("plainbg.png");
         Image img6 = background_image_plain.getImage();
@@ -1924,11 +2185,6 @@ public class FactoryView extends JFrame{
         
      }
 
-     public void dispMoneyReplenished(){
-        moneyReplenished = new JOptionPane();
-        JOptionPane.showMessageDialog(null, "Vending Machine Money Replenished!");
-     }
-
      public void dispErrorTestVM(){
         JOptionPane.showMessageDialog(null, "No Vending Machine Created!", "Error", JOptionPane.ERROR_MESSAGE);
         
@@ -1960,11 +2216,11 @@ public class FactoryView extends JFrame{
         JOptionPane.showMessageDialog(null, containPriceList, "View Price List", JOptionPane.PLAIN_MESSAGE);
      }
 
-     public void dispViewItemInfo(){
-        containItemPriceR = new JTextArea(1, 1);
-        String longText2 = "Ham Sandwich\nP\n\nCheese Sandwich\nP\n\nChicken Sandwich\nP\n\nTuna Sandwich\nP\n\nEgg Salad Sandwich\nP\n\nPeanut Butter Sandwich\nP\n\nStrawberry Jam Sandwich\nP\n\nNutella Sandwich\nP";
+    //  public void dispViewItemInfo(){
+    //     containItemPriceR = new JTextArea(1, 1);
+    //     String longText2 = "Ham Sandwich\nP\n\nCheese Sandwich\nP\n\nChicken Sandwich\nP\n\nTuna Sandwich\nP\n\nEgg Salad Sandwich\nP\n\nPeanut Butter Sandwich\nP\n\nStrawberry Jam Sandwich\nP\n\nNutella Sandwich\nP";
 
-     }
+    //  }
 
     //button listeners
     public void setCreateVMListener(ActionListener actnListener)    {
@@ -2294,691 +2550,1452 @@ public class FactoryView extends JFrame{
         this.confirmRestockItemsR.addActionListener(actnListener);
     }
 
+    /**
+     * 
+     * @param actnListener 
+     */
     public void setConfirmRestockItemsS(ActionListener actnListener)    {
         this.confirmRestockItemsS.addActionListener(actnListener);
     }
 
     // getters and setters for TextFields of Restock Items SVM
+
+    /**
+     * Gets the String value for the quantity of the bread in stock, under the Regular vending machine.
+     * @return breadQuantR.getText() String value containing the quantity of the bread in stock.
+     */
     public String getBreadQuantR() {
         return breadQuantR.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the bread in stock, under the Regular vending machine.
+     */
     public void setBreadQuantR(String breadQuantR) {
         this.breadQuantR.setText(breadQuantR);
     }
 
+    /**
+     * Gets the String value for the quantity of the ham in stock, under the Regular vending machine.
+     * @return hamQuantR.getText() is a String value containing the quantity of the ham in stock.
+     */
     public String getHamQuantR() {
         return hamQuantR.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the ham in stock, under the Regular vending machine.
+     */
     public void setHamQuantR(String hamQuantR) {
         this.hamQuantR.setText(hamQuantR);;
     }
 
+    /**
+     * Gets the String value for the quantity of the cheese in stock, under the Regular vending machine.
+     * @return cheeseQuantR.getText() is a String value containing the quantity of the cheese in stock.
+     */
     public String getCheeseQuantR() {
         return cheeseQuantR.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the cheese in stock, under the Regular vending machine.
+     */
     public void setCheeseQuantR(String cheeseQuantR) {
         this.cheeseQuantR.setText(cheeseQuantR);;
     }
 
+    /**
+     * Gets the String value for the quantity of the chicken in stock, under the Regular vending machine.
+     * @return chickenQuantR.getText() is a String value containing the quantity of the chicken in stock.
+     */
     public String getChickenQuantR() {
         return chickenQuantR.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the chicken in stock, under the Regular vending machine.
+     */
     public void setChickenQuantR(String chickenQuantR) {
         this.chickenQuantR.setText(chickenQuantR);;
     }
 
+    /**
+     * Gets the String value for the quantity of the tuna in stock, under the Regular vending machine.
+     * @return tunaQuantR.getText() is a String value containing the quantity of the tuna in stock.
+     */
     public String getTunaQuantR() {
         return tunaQuantR.getText();
     }   
 
+    /**
+     * Sets the String value for the quantity of the tuna in stock, under the Regular vending machine.
+     */
     public void setTunaQuantR(String tunaQuantR) {
         this.tunaQuantR.setText(tunaQuantR);
     }
 
+    /**
+     * Gets the String value for the quantity of the egg in stock, under the Regular vending machine.
+     * @return eggQuantR.getText() is a String value containing the quantity of the egg in stock.
+     */
     public String getEggQuantR() {
         return eggQuantR.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the egg in stock, under the Regular vending machine.
+     */
     public void setEggQuantR(String eggQuantR) {
         this.eggQuantR.setText(eggQuantR);;
     }
 
+    /**
+     * Gets the String value for the quantity of the mayo in stock, under the Regular vending machine.
+     * @return mayoQuantR.getText() is a String value containing the quantity of the mayo in stock.
+     */
     public String getMayoQuantR() {
         return mayoQuantR.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the mayo in stock, under the Regular vending machine.
+     */
     public void setMayoQuantR(String mayoQuantR) {
         this.mayoQuantR.setText(mayoQuantR);
     }
 
+    /**
+     * Gets the String value for the quantity of the peanut butter in stock, under the Regular vending machine.
+     * @return peanutBQuantR.getText() is a String value containing the quantity of the peanut butter in stock.
+     */
     public String getPeanutBQuantR() {
         return peanutBQuantR.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the peanut butter in stock, under the Regular vending machine.
+     */
     public void setPeanutBQuantR(String peanutBQuantR) {
         this.peanutBQuantR.setText(peanutBQuantR);;
     }
 
+    /**
+     * Gets the String value for the quantity of the strawberry jam in stock, under the Regular vending machine.
+     * @return strawberryJQuantR.getText() is a String value containing the quantity of the strawberry jam in stock.
+     */
     public String getStrawberryJQuantR() {
         return strawberryJQuantR.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the strawberry jam in stock, under the Regular vending machine.
+     */
     public void setStrawberryJQuantR(String strawberryJQuantR) {
         this.strawberryJQuantR.setText(strawberryJQuantR);;
     }
 
+    /**
+     * Gets the String value for the quantity of the nutella in stock, under the Regular vending machine.
+     * @return nutellaQuantR.getText() is a String value containing the quantity of the nutella in stock.
+     */
     public String getNutellaQuantR() {
         return nutellaQuantR.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the nutella in stock, under the Regular vending machine.
+     */
     public void setNutellaQuantR(String nutellaQuantR) {
         this.nutellaQuantR.setText(nutellaQuantR);
     }
 
 
     // getters and setters for TextFields of Restock Items SVM
+
+    /**
+     * Gets the String value for the quantity of the bread in stock, under the Special vending machine.
+     * @return breadQuantS.getText() is a String value containing the quantity of the bread in stock.
+     */
     public String getBreadQuantS() {
         return breadQuantS.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the bread in stock, under the Special vending machine.
+     */
     public void setBreadQuantS(String breadQuantS) {
         this.breadQuantS.setText(breadQuantS);
     }
 
+    /**
+     * Gets the String value for the quantity of the ham in stock, under the Special vending machine.
+     * @return hamQuantS.getText() is a String value containing the quantity of the ham in stock.
+     */
     public String getHamQuantS() {
         return hamQuantS.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the ham in stock, under the Special vending machine.
+     */
     public void setHamQuantS(String hamQuantS) {
         this.hamQuantS.setText(hamQuantS);;
     }
 
+    /**
+     * Gets the String value for the quantity of the cheese in stock, under the Special vending machine.
+     * @return cheeseQuantS.getText() is a String value containing the quantity of the cheese in stock.
+     */
     public String getCheeseQuantS() {
         return cheeseQuantS.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the cheese in stock, under the Special vending machine.
+     */
     public void setCheeseQuantS(String cheeseQuantS) {
         this.cheeseQuantS.setText(cheeseQuantS);;
     }
 
+    /**
+     * Gets the String value for the quantity of the chicken in stock, under the Special vending machine.
+     * @return chickenQuantS.getText() is a String value containing the quantity of the chicken in stock.
+     */
     public String getChickenQuantS() {
         return chickenQuantS.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the chicken in stock, under the Special vending machine.
+     */
     public void setChickenQuantS(String chickenQuantS) {
         this.chickenQuantS.setText(chickenQuantS);;
     }
 
+    /**
+     * Gets the String value for the quantity of the tuna in stock, under the Special vending machine.
+     * @return tunaQuantS.getText() is a String value containing the quantity of the tuna in stock.
+     */
     public String getTunaQuantS() {
         return tunaQuantS.getText();
     }   
 
+    /**
+     * Sets the String value for the quantity of the tuna in stock, under the Special vending machine.
+     */
     public void setTunaQuantS(String tunaQuantS) {
         this.tunaQuantS.setText(tunaQuantS);
     }
 
+    /**
+     * Gets the String value for the quantity of the egg in stock, under the Special vending machine.
+     * @return eggQuantS.getText() is a String value containing the quantity of the egg in stock.
+     */
     public String getEggQuantS() {
         return eggQuantS.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the egg in stock, under the Special vending machine.
+     */
     public void setEggQuantS(String eggQuantS) {
         this.eggQuantS.setText(eggQuantS);;
     }
 
+    /**
+     * Gets the String value for the quantity of the mayo in stock, under the Special vending machine.
+     * @return mayoQuantS.getText() is a String value containing the quantity of the mayo in stock.
+     */
     public String getMayoQuantS() {
         return mayoQuantS.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the mayo in stock, under the Special vending machine.
+     */
     public void setMayoQuantS(String mayoQuantS) {
         this.mayoQuantS.setText(mayoQuantS);
     }
 
+    /**
+     * Gets the String value for the quantity of the peanut butter in stock, under the Special vending machine.
+     * @return peanutBQuantS.getText() is a String value containing the quantity of the peanut butter in stock.
+     */
     public String getPeanutBQuantS() {
         return peanutBQuantS.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the peanut butter in stock, under the Special vending machine.
+     */
     public void setPeanutBQuantS(String peanutBQuantS) {
         this.peanutBQuantS.setText(peanutBQuantS);;
     }
 
+    /**
+     * Gets the String value for the quantity of the strawberry jam in stock, under the Special vending machine.
+     * @return strawberryJQuantS.getText() is a String value containing the quantity of the strawberry jam in stock.
+     */
     public String getStrawberryJQuantS() {
         return strawberryJQuantS.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the strawberry jam in stock, under the Special vending machine.
+     */
     public void setStrawberryJQuantS(String strawberryJQuantS) {
         this.strawberryJQuantS.setText(strawberryJQuantS);;
     }
 
+    /**
+     * Gets the String value for the quantity of the nutella in stock, under the Special vending machine.
+     * @return nutellaQuantS.getText() is a String value containing the quantity of the nutella in stock.
+     */
     public String getNutellaQuantS() {
         return nutellaQuantS.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the nutella in stock, under the Special vending machine.
+     */
     public void setNutellaQuantS(String nutellaQuantS) {
         this.nutellaQuantS.setText(nutellaQuantS);
     }
-
+    /**
+     * Gets the String value for the quantity of the lettuce in stock, under the Special vending machine.
+     * @return lettuceQuantS.getText() is a String value containing the quantity of the lettuce in stock.
+     */
     public String getLettuceQuantS() {
         return lettuceQuantS.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the lettuce in stock, under the Special vending machine.
+     */
     public void setLettuceQuantS(String lettuceQuantS) {
         this.lettuceQuantS.setText(lettuceQuantS);;
     }
 
+    /**
+     * Gets the String value for the quantity of the tomato in stock, under the Special vending machine.
+     * @return tomatoQuantS.getText() is a String value containing the quantity of the tomato in stock.
+     */
     public String getTomatoQuantS() {
         return tomatoQuantS.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the tomato in stock, under the Special vending machine.
+     */
     public void setTomatoQuantS(String tomatoQuantS) {
         this.tomatoQuantS.setText(tomatoQuantS);;
     }
 
+    /**
+     * Gets the String value for the quantity of the pickle in stock, under the Special vending machine.
+     * @return pickleQuantS.getText() is a String value containing the quantity of the pickle in stock.
+     */
     public String getPickleQuantS() {
         return pickleQuantS.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the pickle in stock, under the Special vending machine.
+     */
     public void setPickleQuantS(String pickleQuantS) {
         this.pickleQuantS.setText(pickleQuantS);;
     }
 
     // Restock Sandwich Getters and setters
 
+    /**
+     * Gets the String value for the quantity of the ham sandwich in stock.
+     * @return hamSandwichQuant.getText() is a String value containing the quantity of the ham in stock.
+     */
     public String getHamSandwichQuant() {
         return hamSandwichQuant.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the ham sandwich in stock.
+     */
     public void setHamSandwichQuant(String hamSandwichQuant) {
         this.hamSandwichQuant.setText(hamSandwichQuant);
     }
 
+    /**
+     * Gets the String value for the quantity of the cheese sandwich in stock.
+     * @return cheeseSandwichQuant.getText() is a String value containing the quantity of the cheese in stock.
+     */
     public String getCheeseSandwichQuant() {
         return cheeseSandwichQuant.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the cheese sandwich in stock.
+     */
     public void setCheeseSandwichQuant(String cheeseSandwichQuant) {
         this.cheeseSandwichQuant.setText(cheeseSandwichQuant);
     }
 
+    /**
+     * Gets the String value for the quantity of the chicken sandwich in stock.
+     */
     public String getChickenSandwichQuant() {
         return chickenSandwichQuant.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the chicken salad sandwich in stock.
+     */
     public void setChickenSandwichQuant(String chickenSandwichQuant) {
         this.chickenSandwichQuant.setText(chickenSandwichQuant);
     }
 
+    /**
+     * Gets the String value for the quantity of the tuna sandwich in stock.
+     */
     public String getTunaSandwichQuant() {
         return tunaSandwichQuant.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the tuna sandwich in stock.
+     */
     public void setTunaSandwichQuant(String tunaSandwichQuant) {
         this.tunaSandwichQuant.setText(tunaSandwichQuant);
     }
 
+    /**
+     * Gets the String value for the quantity of the egg salad sandwich in stock.
+     */
     public String getEggSandwichQuant() {
         return eggSandwichQuant.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the egg salad sandwich in stock.
+     */
     public void setEggSandwichQuant(String eggSandwichQuant) {
         this.eggSandwichQuant.setText(eggSandwichQuant);
     }
 
+    /**
+     * Gets the String value for the quantity of the peanut butter sandwich in stock.
+     */
     public String getPeanutBSandwichQuant() {
         return peanutBSandwichQuant.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the peanut butter sandwich in stock.
+     */
     public void setPeanutBSandwichQuant(String peanutBSandwichQuant) {
         this.peanutBSandwichQuant.setText(peanutBSandwichQuant);
     }
 
+    /**
+     * Gets the String value for the quantity of the strawberry jam sandwich in stock.
+     */
     public String getStrawberryJSandwichQuant() {
         return strawberryJSandwichQuant.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the strawberry jam sandwich in stock.
+     */
     public void setStrawberryJSandwichQuant(String strawberryJSandwichQuant) {
         this.strawberryJSandwichQuant.setText(strawberryJSandwichQuant);
     }
 
+    /**
+     * Gets the String value for the quantity of the nutella sandwich in stock.
+     */
     public String getNutellaSandwichQuant() {
         return nutellaSandwichQuant.getText();
     }
 
+    /**
+     * Sets the String value for the quantity of the nutella sandwich in stock.
+     */
     public void setNutellaSandwichQuant(String nutellaSandwichQuant) {
         this.nutellaSandwichQuant.setText(nutellaSandwichQuant);
     }
 
     // Restock Sandwich Listeners
 
+    /**
+     * Sets an action listener for when the "+" button is pressed in the Restock Sandwich interface.
+     * this increases the value of the ham sandwich by +1.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setPlusHamSandwichListener(ActionListener actnListener) {
         this.plusHamSandwich.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button is pressed in the Restock Sandwich interface.
+     * this increases the value of the cheese sandwich by +1.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setPlusCheeseSandwichListener(ActionListener actnListener)  {
         this.plusCheeseSandwich.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button is pressed in the Restock Sandwich interface.
+     * this increases the value of the chicken salad sandwich by +1.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setPlusChickenSandwichListener(ActionListener actnListener) {
         this.plusChickenSandwich.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button is pressed in the Restock Sandwich interface.
+     * this increases the value of the tuna sandwich by +1.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setPlusTunaSandwichListener(ActionListener actnListener)   {
         this.plusTunaSandwich.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button is pressed in the Restock Sandwich interface.
+     * this increases the value of the egg salad sandwich by +1.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setPlusEggSandwichListener(ActionListener actnListener)    {
         this.plusEggSandwich.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button is pressed in the Restock Sandwich interface.
+     * this increases the value of the nutella sandwich by +1.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setPlusPeanutBSandwichListener(ActionListener actnListener)   {
         this.plusPeanutBSandwich.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button is pressed in the Restock Sandwich interface.
+     * this increases the value of the nutella sandwich by +1.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setPlusStrawberryJSandwichListener(ActionListener actnListener) {
         this.plusStrawberryJSandwich.addActionListener(actnListener);
     }
     
+    /**
+     * Sets an action listener for when the "+" button is pressed in the Restock Sandwich interface.
+     * this increases the value of the nutella sandwich by +1.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setPlusNutellaSandwichListener(ActionListener actnListener) {
         this.plusNutellaSandwich.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "Collect Payments" button from the Maintenance Mode menu.
+     * this allows the user to collect user payments collected by the machine.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCollectPaymentsListener(ActionListener actnListener)  {
         this.collectPayments.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "Collect Machine Money" button from the Maintenance Mode menu.
+     * this allows the user to collect the money stored the machine.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCollectVMMoneyListener(ActionListener actnListener)  {
         this.collectVMMoney.addActionListener(actnListener);
     }
 
     // Set Item Price Getters and Setters
+
+    /**
+     * Sets an action listener for when the "Set Item Price" button is pressed from the Maintenance Mode menu.
+     * this takes the user to the Set Item Price interface.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setSetItemPriceListener(ActionListener actnListener)    {                      
         this.setItemPrice.addActionListener(actnListener);
     }        
 
+    /*
+     * Gets the String value for the current price of the ham sandwich.
+     */
     public String getCurHamSandwichPrice() {
         return this.curHamSandwichPrice.getText();
     }
 
+    /*
+     * Sets the String value for the current price of the ham sandwich.
+     */
     public void setCurHamSandwichPrice(String curHamSandwichPrice) {
         this.curHamSandwichPrice.setText(curHamSandwichPrice);
     }
 
+    /*
+     * Gets the String value for the current price of the cheese sandwich.
+     */
     public String getCurCheeseSandwichPrice()   {
         return this.curCheeseSandwichPrice.getText();
     }
 
+    /*
+     * Sets the String value for the current price of the cheese sandwich.
+     */
     public void setCurCheeseSandwichPrice(String curCheeseSandwichPrice) {
         this.curCheeseSandwichPrice.setText(curCheeseSandwichPrice);
     }
 
+    /*
+     * Gets the String value for the current price of the chicken salad sandwich.
+     */
     public String getCurChickenSandwichPrice()  {
         return this.curChickenSandwichPrice.getText();
     }
 
+    /*
+     * Sets the String value for the current price of the chicken salad sandwich.
+     */
     public void setCurChickenSandwichPrice(String curChickenSandwichPrice) {
         this.curChickenSandwichPrice.setText(curChickenSandwichPrice);
     }
 
+    /*
+     * Gets the String value for the current price of the tuna sandwich.
+     */
     public String getCurTunaSandwichPrice() {
         return this.curTunaSandwichPrice.getText();
     }
 
+    /*
+     * Sets the String value for the current price of the tuna sandwich.
+     */
     public void setCurTunaSandwichPrice(String curTunaSandwichPrice) {
         this.curTunaSandwichPrice.setText(curTunaSandwichPrice);
     }
 
+    /*
+     * Gets the String value for the current price of the egg salad sandwich.
+     */
     public String getCurEggSandwichPrice()  {
         return this.curEggSandwichPrice.getText();
     }
 
+    /*
+     * Sets the String value for the current price of the egg salad sandwich.
+     */
     public void setCurEggSandwichPrice(String curEggSandwichPrice) {
         this.curEggSandwichPrice.setText(curEggSandwichPrice);
     }
 
+    /*
+     * Gets the String value for the current price of the peanut butter sandwich.
+     */
     public String getCurPeanutBSandwichPrice()  {
         return this.curPeanutBSandwichPrice.getText();
     }
 
+    /*
+     * Sets the String value for the current price of the peanut butter sandwich.
+     */
     public void setCurPeanutBSandwichPrice(String curPeanutBSandwichPrice) {
         this.curPeanutBSandwichPrice.setText(curPeanutBSandwichPrice);
     }
 
+    /*
+     * Gets the String value for the current price of the strawberry jam sandwich.
+     */
     public String getCurStrawberryJSandwichPrice() {
         return this.curStrawberryJSandwichPrice.getText();
     }
 
+    /*
+     * Sets the String value for the current price of the strawberry jam sandwich.
+     */
     public void setCurStrawberryJSandwichPrice(String curStrawberryJSandwichPrice) {
         this.curStrawberryJSandwichPrice.setText(curStrawberryJSandwichPrice);
     }
 
+    /*
+     * Gets the String value of the current price of the nutella sandwich.
+     */
     public String getCurNutellaSandwichPrice()  {
         return this.curNutellaSandwichPrice.getText();
     }
 
+    /*
+     * Sets the String value for the current price of the nutella sandwich.
+     */
     public void setCurNutellaSandwichPrice(String curNutellaSandwichPrice) {
         this.curNutellaSandwichPrice.setText(curNutellaSandwichPrice);
     }
 
-    // Set Item Price Listeners
+    // Set Item Price Listeners ---------------------------------------------------------------------------------------------------
 
+    /**
+     * Sets an action listener for when the "Confirm" button is pressed on the Set Price interface.
+     * this allows the machine to save any changes made to the price values.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setConfirmItemPrice(ActionListener actnListener)   {
         this.confirmItemPrice.addActionListener(actnListener);
     }
     
+    /**
+     * Sets an action listener for when the "Go Back" button is pressed on the Set Price interface.
+     * this takes the user back to the Maintenance Mode menu and discards of any changes made to
+     * the price values.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setBackMaintenanceModeListenerFromSetPrice(ActionListener actnListener)    {    
         this.backMaintenanceModeFromSetPrice.addActionListener(actnListener);
     }
 
     //Replenish Money Listener
+
+    /**
+     * Sets an action listener for when the "Replenish Money" button is pressed on the Maintenance Mode menu.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setReplenishVMMoneyListener(ActionListener actnListener)    {    
         this.replenishVMMoney.addActionListener(actnListener);
     }
 
+    /*
+     * Sets the String value for the total amount of all currently inserted bills inside the vending machine.
+     */
     public void setShowCurVMMoney(String curVMMoney)  {
         this.showCurVMMoney.setText(curVMMoney);
     }
 
+    /*
+     * Gets the String value for the current amount of 1 bills inside the vending machine.
+     */
     public String getCur1() {
         return cur1.getText();
     }
 
+    /*
+     * Sets the String value for the current amount of 1 bills inside the vending machine.
+     */
     public void setCur1(String cur1) {
         this.cur1.setText(cur1);;
     }
 
+    /*
+     * Gets the String value for the current amount of 5 bills inside the vending machine.
+     */
     public String getCur5() {
         return cur5.getText();
     }
 
+    /*
+     * Sets the String value for the current amount of 5 bills inside the vending machine.
+     */
     public void setCur5(String cur5) {
         this.cur5.setText(cur5);;
     }
 
+    /*
+     * Gets the String value for the current amount of 10 bills inside the vending machine.
+     */
     public String getCur10() {
         return cur10.getText();
     }
 
+    /*
+     * Sets the String value for the current amount of 10 bills inside the vending machine.
+     */
     public void setCur10(String cur10) {
         this.cur10.setText(cur10);;
     }
 
+    /*
+     * Gets the String value for the current amount of 20 bills inside the vending machine.
+     */
     public String getCur20() {
         return cur20.getText();
     }
 
+    /*
+     * Sets the String value for the current amount of 20 bills inside the vending machine.
+     */
     public void setCur20(String cur20) {
         this.cur20.setText(cur20);;
     }
 
+    /*
+     * Gets the String value for the current amount of 50 bills inside the vending machine.
+     */
     public String getCur50() {
         return cur50.getText();
     }
 
+    /*
+     * Sets the String value for the current amount of 50 bills inside the vending machine.
+     */
     public void setCur50(String cur50) {
         this.cur50.setText(cur50);;
     }
 
+    /*
+     * Gets the String value for the current amount of 100 bills inside the vending machine.
+     */
     public String getCur100() {
         return cur100.getText();
     }
 
+    /*
+     * Sets the String value for the current amount of 100 bills inside the vending machine.
+     */
     public void setCur100(String cur100) {
         this.cur100.setText(cur100);;
     }
 
+    /*
+     * Gets the String value for the current amount of 200 bills inside the vending machine.
+     */
     public String getCur200() {
         return cur200.getText();
     }
 
+    /*
+     * Sets the String value for the current amount of 200 bills inside the vending machine.
+     */
     public void setCur200(String cur200) {
         this.cur200.setText(cur200);;
     }
 
+    /*
+     * Gets the String value for the current amount of 500 bills inside the vending machine.
+     */
     public String getCur500() {
         return cur500.getText();
     }
 
+    /*
+     * Sets the String value for the current amount of 500 bills inside the vending machine.
+     */
     public void setCur500(String cur500) {
         this.cur500.setText(cur500);;
     }
 
+    /*
+     * Gets the String value for the current amount of 1000 bills inside the vending machine.
+     */
     public String getCur1000() {
         return cur1000.getText();
     }
 
+    /*
+     * Sets the String value for the current amount of 1000 bills inside the vending machine.
+     */
     public void setCur1000(String cur1000) {
         this.cur1000.setText(cur1000);;
     }
 
-    // Listeners for Replenish Money
+    // Listeners for Replenish Money ---------------------------------------------------------------------------------------------------
 
+    /**
+     * Sets an action listener for when the "+" button gets pressed on the Replenish Money interface.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setReplenish1Listener(ActionListener actnListener)  {
         this.replenish1.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button gets pressed on the Replenish Money interface.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setReplenish5Listener(ActionListener actnListener)  {
         this.replenish5.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button gets pressed on the Replenish Money interface.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setReplenish10Listener(ActionListener actnListener)  {
         this.replenish10.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button gets pressed on the Replenish Money interface.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setReplenish20Listener(ActionListener actnListener)  {
         this.replenish20.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button gets pressed on the Replenish Money interface.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setReplenish50Listener(ActionListener actnListener)  {
         this.replenish50.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button gets pressed on the Replenish Money interface.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setReplenish100Listener(ActionListener actnListener)  {
         this.replenish100.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button gets pressed on the Replenish Money interface.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setReplenish200Listener(ActionListener actnListener)  {
         this.replenish200.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button gets pressed on the Replenish Money interface.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setReplenish500Listener(ActionListener actnListener)  {
         this.replenish500.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button gets pressed on the Replenish Money interface.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setReplenish1000Listener(ActionListener actnListener)  {
         this.replenish1000.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "Go Back" button from the Replenish Money interface is pressed.
+     * this takes the user back to the Maintenance Mode menu.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setGoBackFromReplenishMoneyListener(ActionListener actnListener)  {
         this.goBackFromReplenish.addActionListener(actnListener);
     }
 
-    // Getters and Setters for Customize Item
+    // Getters and Setters for Customize Item ---------------------------------------------------------------------------------------------------
 
+    /*
+     * Gets the String value of the ham's quantity in the customize item interface.
+     */
     public String getCustTextHam() {
         return custTextHam.getText();
     }
 
+    /*
+     * Sets the String value of the ham's quantity in the customize item interface.
+     */
     public void setCustTextHam(String custTextHam) {
         this.custTextHam.setText(custTextHam);
     }
 
+    /*
+     * Gets the String value of the cheese's quantity in the customize item interface.
+     */
     public String getCustTextCheese() {
         return custTextCheese.getText();
     }
 
+    /*
+     * Sets the String value of the cheese's quantity in the customize item interface.
+     */
     public void setCustTextCheese(String custTextCheese) {
         this.custTextCheese.setText(custTextCheese);;
     }
 
+    /*
+     * Gets the String value of the chicken's quantity in the customize item interface.
+     */
     public String getCustTextChicken() {
         return custTextChicken.getText();
     }
 
+    /*
+     * Sets the String value of the chicken's quantity in the customize item interface.
+     */
     public void setCustTextChicken(String custTextChicken) {
         this.custTextChicken.setText(custTextChicken);;
     }
 
+    /*
+     * Gets the String value of the tuna's quantity in the customize item interface.
+     */
     public String getCustTextTuna() {
         return custTextTuna.getText();
     }
 
+    /*
+     * Sets the String value of the tuna's quantity in the customize item interface.
+     */
     public void setCustTextTuna(String custTextTuna) {
         this.custTextTuna.setText(custTextTuna);;
     }
 
+    /*
+     * Gets the String value of the egg's quantity in the customize item interface.
+     */
     public String getCustTextEgg() {
         return custTextEgg.getText();
     }
 
+    /*
+     * Sets the String value of the egg's quantity in the customize item interface.
+     */
     public void setCustTextEgg(String custTextEgg) {
         this.custTextEgg.setText(custTextEgg);;
     }
 
+    /*
+     * Gets the String value of the mayo's quantity in the customize item interface.
+     */
     public String getCustTextMayo() {
         return custTextMayo.getText();
     }
 
+    /*
+     * Sets the String value of the mayo's quantity in the customize item interface.
+     */
     public void setCustTextMayo(String custTextMayo) {
         this.custTextMayo.setText(custTextMayo);;
     }
 
+    /*
+     * Gets the String value of the peanut butter's quantity in the customize item interface.
+     */
     public String getCustTextPeanutB() {
         return custTextPeanutB.getText();
     }
 
+    /*
+     * Sets the String value of the peanut butter's quantity in the customize item interface.
+     */
     public void setCustTextPeanutB(String custTextPeanutB) {
         this.custTextPeanutB.setText(custTextPeanutB);;
     }
 
+    /*
+     * Gets the String value of the strawberry jam's quantity in the customize item interface.
+     */
     public String getCustTextStrawberryJ() {
         return custTextStrawberryJ.getText();
     }
 
+    /*
+     * Sets the String value of the strawberry jam's quantity in the customize item interface.
+     */
     public void setCustTextStrawberryJ(String custTextStrawberryJ) {
         this.custTextStrawberryJ.setText(custTextStrawberryJ);;
     }
 
+    /*
+     * Gets the String value of the nutella's quantity in the customize item interface.
+     */
     public String getCustTextNutella() {
         return custTextNutella.getText();
     }
 
+    /*
+     * Sets the String value of the nutella's quantity in the customize item interface.
+     */
     public void setCustTextNutella(String custTextNutella) {
         this.custTextNutella.setText(custTextNutella);;
     }
 
+    /*
+     * Gets the String value of the lettuce's quantity in the customize item interface.
+     */
     public String getCustTextLettuce() {
         return custTextLettuce.getText();
     }
 
+    /*
+     * Sets the String value of the lettuce's quantity in the customize item interface.
+     */
     public void setCustTextLettuce(String custTextLettuce) {
         this.custTextLettuce.setText(custTextLettuce);;
     }
 
+    /*
+     * Gets the String value of the tomato's quantity in the customize item interface.
+     */
     public String getCustTextTomato() {
         return custTextTomato.getText();
     }
 
+    /*
+     * Sets the String value of the tomato's quantity in the customize item interface.
+     */
     public void setCustTextTomato(String custTextTomato) {
         this.custTextTomato.setText(custTextTomato);;
     }
 
+    /*
+     * Gets the String value of the pickle's quantity in the customize item interface.
+     */
     public String getCustTextPickle() {
         return custTextPickle.getText();
     }
 
+    /*
+     * Sets the String value of the pickle's quantity in the customize item interface.
+     */
     public void setCustTextPickle(String custTextPickle) {
         this.custTextPickle.setText(custTextPickle);;
     }
 
-    // Action Listeners for Customize Item\
+    // Action Listeners for Customize Item ---------------------------------------------------------------------------------------------------
 
+    /**
+     * Sets an action listener for when the "+" button was pressed on the customize item panel.
+     * this increases the default value of 0(given that the item being customized is not a ham sandwich) to +1 per press.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCustPlusHamListener(ActionListener actnListener) {
         this.custPlusHam.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button was pressed on the customize item panel.
+     * this increases the default value of 0(given that the item being customized is not a cheese sandwich) to +1 per press.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCustPlusCheeseListener(ActionListener actnListener) {
         this.custPlusCheese.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button was pressed on the customize item panel.
+     * this increases the default value of 0(given that the item being customized is not a chicken salad sandwich) to +1 per press.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCustPlusChickenListener(ActionListener actnListener) {
         this.custPlusChicken.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button was pressed on the customize item panel.
+     * this increases the default value of 0(given that the item being customized is not a tuna sandwich) to +1 per press.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCustPlusTunaListener(ActionListener actnListener) {
         this.custPlusTuna.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button was pressed on the customize item panel.
+     * this increases the default value of 0(given that the item being customized is not an egg salad sandwich) to +1 per press.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCustPlusEggListener(ActionListener actnListener) {
         this.custPlusEgg.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button was pressed on the customize item panel.
+     * this increases the default value of 0(given that the item being customized is not an egg mayo or chicken salad sandwich) to +1 per press.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCustPlusMayoListener(ActionListener actnListener) {
         this.custPlusMayo.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button was pressed on the customize item panel.
+     * this increases the default value of 0(given that the item being customized is not a peanut butter sandwich) to +1 per press.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCustPlusPeanutBListener(ActionListener actnListener) {
         this.custPlusPeanutB.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button was pressed on the customize item panel.
+     * this increases the default value of 0(given that the item being customized is not a strawberry jam sandwich) to +1 per press.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCustPlusStrawberryJListener(ActionListener actnListener) {
         this.custPlusStrawberryJ.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button was pressed on the customize item panel.
+     * this increases the default value of 0(given that the item being customized is not a nutella sandwich) to +1 per press.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCustPlusNutellaListener(ActionListener actnListener) {
         this.custPlusNutella.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button was pressed on the customize item panel.
+     * this increases the default value of 0 to +1 per press.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCustPlusLettuceListener(ActionListener actnListener) {
         this.custPlusLettuce.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button was pressed on the customize item panel.
+     * this increases the default value of 0 to +1 per press.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCustPlusTomatoListener(ActionListener actnListener) {
         this.custPlusTomato.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "+" button was pressed on the customize item panel.
+     * this increases the default value of 0 to +1 per press.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setCustPlusPickleListener(ActionListener actnListener) {
         this.custPlusPickle.addActionListener(actnListener);
     }
 
-    // view transaction history
+    //transaction & inventory history ---------------------------------------------------------------------------------------------------
 
+    /**
+     * Sets the String value for the money inserted of a transaction entry.
+     * 
+     * @param showReceiptTransaction is a String value containing the amount of money the user inputted in a transaction entry.
+     */
     public void setShowReceiptTransaction(String showReceiptTransaction) {
         this.showReceiptTransaction.setText(showReceiptTransaction);
     }
 
+    /**
+     * Sets the String value for the product purchased of a transaction entry.
+     * 
+     * @param showReceiptProductPurchases is a String value containing the details of the product purchased in a transaction entry.
+     */
     public void setShowReceiptProductPurchased(String showReceiptProductPurchased) {
         this.showReceiptProductPurchased.setText(showReceiptProductPurchased);
     }
     
+    /**
+     * Sets the String value for the produced changed of a transaction entry.
+     * 
+     * @param showReceiptProducedChange is a String value containing the amount of produced change in a transaction entry.
+     */
     public void setShowReceiptProducedChange(String showReceiptProducedChange) {
         this.showReceiptProducedChange.setText(showReceiptProducedChange);
     }
 
-    //for transaction history
+    /**
+     * Sets an action listener for when the "Transaction History" button on the Maintenance Mode menu was pressed.
+     * This takes the user to panel 19 in the container, allowing access to view the Transaction history.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setViewTransactionHistory(ActionListener actnListener) {
         this.viewTransactionHistory.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "Inventory History" button on the Maintenance Mode menu was pressed.
+     * This takes the user to panel 20 in the container, allowing access to view the Inventory history.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setViewInventoryHistory(ActionListener actnListener) {
         this.viewInventoryHistory.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "Go Back" button on the Transaction History was pressed.
+     * This takes back the user to the maintenance mode menu.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setGoBackFromTransactionHistory(ActionListener actnListener) {
         this.goBackFromTransactionHistory.addActionListener(actnListener);
     }
 
+    /**
+     * Sets an action listener for when the "Go Back" button on the Inventory History was pressed.
+     * This takes back the user to the maintenance mode menu.
+     * 
+     * @param actnListener allows the button to perform an action when interacted with.
+     */
     public void setGoBackFromInventoryHistory(ActionListener actnListener) {
         this.goBackFromInventoryHistory.addActionListener(actnListener);
     }
 
+    /**
+     * Sets the String value of the text area containing the Inventory History.
+     * 
+     * @param text is a String value containing the inventory history info.
+     */
     public void setContainTransactionHistory(String text)   {
         this.containTransactionHistory.setText(text);
     }
 
+    /**
+     * Sets the String value of the text area containing the Inventory History.
+     * 
+     * @param text is a String value containing the inventory history info.
+     */
     public void setContainInventoryHistory(String text)   {
         this.containInventoryHistory.setText(text);
+    }
+
+    public void setHamSandAvailabilityR(String hamSandAvailabilityR) {
+        this.hamSandAvailabilityR.setText(hamSandAvailabilityR);
+    }
+
+    public void setCheeseSandAvailabilityR(String cheeseSandAvailabilityR) {
+        this.cheeseSandAvailabilityR.setText(cheeseSandAvailabilityR);
+    }
+    public void setChickenSandAvailabilityR(String chickenSandAvailabilityR) {
+        this.chickenSandAvailabilityR.setText(chickenSandAvailabilityR);
+    }
+
+    public void setTunaSandAvailabilityR(String tunaSandAvailabilityR) {
+        this.tunaSandAvailabilityR.setText(tunaSandAvailabilityR);
+    }
+
+    public void setEggSandAvailabilityR(String eggSandAvailabilityR) {
+        this.eggSandAvailabilityR.setText(eggSandAvailabilityR);
+    }
+
+    public void setPeanutBSandAvailabilityR(String peanutBSandAvailabilityR) {
+        this.peanutBSandAvailabilityR.setText(peanutBSandAvailabilityR);
+    }
+
+    public void setStrawberryJSandAvailabilityR(String strawberryJSandAvailabilityR) {
+        this.strawberryJSandAvailabilityR.setText(strawberryJSandAvailabilityR);
+    }
+
+    public void setNutellaSandAvailabilityR(String nutellaSandAvailabilityR) {
+        this.nutellaSandAvailabilityR.setText(nutellaSandAvailabilityR);
+    }
+
+    public void setHamSandAvailabilityS(String hamSandAvailabilityS) {
+        this.hamSandAvailabilityS.setText(hamSandAvailabilityS);
+    }
+
+    public void setCheeseSandAvailabilityS(String cheeseSandAvailabilityS) {
+        this.cheeseSandAvailabilityS.setText(cheeseSandAvailabilityS);
+    }
+
+    public void setChickenSandAvailabilityS(String chickenSandAvailabilityS) {
+        this.chickenSandAvailabilityS.setText(chickenSandAvailabilityS);
+    }
+
+    public void setTunaSandAvailabilityS(String tunaSandAvailabilityS) {
+        this.tunaSandAvailabilityS.setText(tunaSandAvailabilityS);
+    }
+
+    public void setEggSandAvailabilityS(String eggSandAvailabilityS) {
+        this.eggSandAvailabilityS.setText(eggSandAvailabilityS);
+    }
+
+    public void setPeanutBSandAvailabilityS(String peanutBSandAvailabilityS) {
+        this.peanutBSandAvailabilityS.setText(peanutBSandAvailabilityS);
+    }
+
+    public void setStrawberryJSandAvailabilityS(String strawberryJSandAvailabilityS) {
+        this.strawberryJSandAvailabilityS.setText(strawberryJSandAvailabilityS);
+    }
+
+    public void setNutellaSandAvailabilityS(String nutellaSandAvailabilityS) {
+        this.nutellaSandAvailabilityS.setText(nutellaSandAvailabilityS);
+    }
+
+     public void setMayoAddAvailability(String mayoAddAvailability) {
+        this.mayoAddAvailability.setText(mayoAddAvailability);
+    }
+
+    public void setTomatoAddAvailability(String tomatoAddAvailability) {
+        this.tomatoAddAvailability.setText(tomatoAddAvailability);
+    }
+
+    public void setHamAddAvailability(String hamAddAvailability) {
+        this.hamAddAvailability.setText(hamAddAvailability);
+    }
+
+    public void setCheeseAddAvailability(String cheeseAddAvailability) {
+        this.cheeseAddAvailability.setText(cheeseAddAvailability);
+    }
+
+    public void setChickenAddAvailability(String chickenAddAvailability) {
+        this.chickenAddAvailability.setText(chickenAddAvailability);
+    }
+
+    public void setTunaAddAvailability(String tunaAddAvailability) {
+        this.tunaAddAvailability.setText(tunaAddAvailability);
+    }
+
+    public void setEggAddAvailability(String eggAddAvailability) {
+        this.eggAddAvailability.setText(eggAddAvailability);
+    }
+
+    public void setPeanutBAddAvailability(String peanutBAddAvailability) {
+        this.peanutBAddAvailability.setText(peanutBAddAvailability);
+    }
+
+    public void setStrawberryJAddAvailability(String strawberryJAddAvailability) {
+        this.strawberryJAddAvailability.setText(strawberryJAddAvailability);
+    }
+
+    public void setNutellaAddAvailability(String nutellaAddAvailability) {
+        this.nutellaAddAvailability.setText(nutellaAddAvailability);
+    }
+
+    public void setLettuceAddAvailability(String lettuceAddAvailability) {
+        this.lettuceAddAvailability.setText(lettuceAddAvailability);
+    }
+
+    public void setPickleAddAvailability(String pickleAddAvailability) {
+        this.pickleAddAvailability.setText(pickleAddAvailability);
     }
 }
